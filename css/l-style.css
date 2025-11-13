@@ -8,17 +8,18 @@
 }
 
 body {
-  background-color: blanchedalmond;
-  color: #2f3640;
+  height: 100vh;
   line-height: 1.6;
-  justify-content: center;
   text-align: center;
   text-decoration: none;
   align-items: center;
+  background-image: url("/images/waiting-room-with-chairs-blurred.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.heading-text {
-  text-align: center;
-  justify-content: center;
-  align-items: center;
+.container {
+  padding-top: 90px;
+  margin: 10px;
 }
