@@ -1,0 +1,106 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #f5f6fa;
+  color: #2f3640;
+  line-height: 1.6;
+}
+
+header {
+  background: #273c75;
+  color: white;
+  padding: 1.2em 2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+header h1 {
+  font-size: 1.4em;
+}
+
+nav a {
+  color: white;
+  margin-left: 15px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.3s;
+}
+
+nav a:hover {
+  opacity: 0.8;
+}
+
+#hero {
+  text-align: center;
+  padding: 3em 1em;
+  background: #dcdde1;
+}
+
+#hero h2 {
+  font-size: 1.8em;
+  margin-bottom: 0.5em;
+}
+
+#hero input {
+  margin-top: 1em;
+  padding: 10px 15px;
+  width: 80%;
+  max-width: 400px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+section {
+  padding: 2em 1em;
+}
+
+h2 {
+  text-align: center;
+  color: #192a56;
+  margin-bottom: 1em;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1em;
+}
+
+.card {
+  background: white;
+  border-radius: 8px;
+  padding: 1em;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  color: #273c75;
+  margin-bottom: 0.5em;
+}
+
+.card p {
+  font-size: 0.95em;
+  margin-bottom: 0.5em;
+}
+
+footer {
+  background: #273c75;
+  color: white;
+  text-align: center;
+  padding: 1em;
+  font-size: 0.9em;
+}
