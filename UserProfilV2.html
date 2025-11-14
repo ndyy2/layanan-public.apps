@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile - UMKM Lokal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "primary-blue": "#1E40AF", // Biru Tua (Deep Blue)
+              "accent-teal": "#14B8A6", // Teal Cerah (Bright Teal)
+              "secondary-yellow": "#FCD34D", // Kuning Terang (Bright Yellow)
+              "text-dark": "#1F2937", // Abu-abu gelap untuk teks utama
+            },
+            boxShadow: {
+              "custom-lg":
+                "0 10px 15px -3px rgba(30, 64, 175, 0.1), 0 4px 6px -2px rgba(30, 64, 175, 0.05)",
+            },
+          },
+        },
+      };
+    </script>
+    <script src="https://unpkg.com/feather-icons"></script>
+  </head>
+  <body
+    class="bg-gradient-to-br from-blue-50 via-teal-50 to-slate-100 font-sans min-h-screen flex text-text-dark"
+  >
+    <aside
+      id="sidebar"
+      class="fixed left-0 top-0 w-64 h-full bg-white/90 backdrop-blur-md shadow-2xl transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-50 border-r border-gray-100"
+    >
+      <div class="p-6 flex flex-col h-full">
+        <h1
+          class="text-3xl font-extrabold text-primary-blue mb-10 tracking-wider"
+        >
+          UMKM Lokal
+        </h1>
+        <nav class="flex-1 space-y-2">
+          <a
+            href="#"
+            class="flex items-center gap-3 p-3 rounded-xl text-gray-600 hover:bg-blue-50 hover:text-primary-blue transition duration-300 group"
+          >
+            <i
+              data-feather="home"
+              class="w-5 h-5 group-hover:stroke-primary-blue"
+            ></i>
+            Dashboard
+          </a>
+          <a
+            href="#"
+            class="flex items-center gap-3 p-3 rounded-xl bg-blue-100 font-semibold text-primary-blue transition duration-300 ring-2 ring-primary-blue/30"
+          >
+            <i data-feather="user" class="w-5 h-5 fill-current"></i> Profil
+          </a>
+          <a
+            href="#"
+            class="flex items-center gap-3 p-3 rounded-xl text-gray-600 hover:bg-blue-50 hover:text-primary-blue transition duration-300 group"
+          >
+            <i
+              data-feather="shopping-bag"
+              class="w-5 h-5 group-hover:stroke-primary-blue"
+            ></i>
+            UMKM
+          </a>
+          <a
+            href="#"
+            class="flex items-center gap-3 p-3 rounded-xl text-gray-600 hover:bg-blue-50 hover:text-primary-blue transition duration-300 group"
+          >
+            <i
+              data-feather="settings"
+              class="w-5 h-5 group-hover:stroke-primary-blue"
+            ></i>
+            Pengaturan
+          </a>
+        </nav>
+        <button
+          class="mt-auto p-3 bg-red-500 text-white rounded-xl font-medium hover:bg-red-600 active:scale-95 transition duration-300 shadow-lg shadow-red-500/30"
+        >
+          <i data-feather="log-out" class="w-4 h-4 inline mr-2"></i> Logout
+        </button>
+      </div>
+    </aside>
+
+    <button
+      id="burger"
+      class="md:hidden fixed top-4 left-4 z-50 bg-primary-blue text-white p-3 rounded-xl shadow-lg hover:scale-105 active:scale-95 transition duration-300"
+    >
+      <i data-feather="menu" class="w-5 h-5"></i>
+    </button>
+
+    <main class="flex-1 p-4 md:p-10 md:ml-64">
+      <div class="max-w-6xl mx-auto space-y-10 pt-10 md:pt-0">
+        <div class="mb-6">
+          <h1 class="text-3xl font-bold text-primary-blue">Profil Pengguna</h1>
+          <p class="text-gray-500">Kelola dan lihat detail akun UMKM Anda.</p>
+        </div>
+
+        <div
+          class="flex flex-col md:flex-row items-center md:items-start bg-white/90 backdrop-blur-lg p-8 rounded-3xl shadow-custom-lg border border-primary-blue/10"
+        >
+          <img
+            src="https://via.placeholder.com/150/1E40AF/FFFFFF?text=UMKM+User"
+            alt="Profile Picture"
+            class="w-36 h-36 rounded-full border-4 border-accent-teal object-cover ring-8 ring-accent-teal/10"
+          />
+          <div class="mt-6 md:mt-0 md:ml-8 flex-1 text-center md:text-left">
+            <h2 class="text-4xl font-extrabold text-primary-blue mb-1">
+              Nama Pengguna
+            </h2>
+            <p class="text-lg text-gray-600 font-medium">
+              Pelaku UMKM | Layanan Publik
+            </p>
+            <p class="text-sm text-gray-500 mt-2 italic">
+              Bergabung sejak Januari 2023
+            </p>
+            <div class="mt-6 flex gap-4 justify-center md:justify-start">
+              <button
+                class="px-6 py-3 bg-gradient-to-r from-primary-blue to-accent-teal text-white font-semibold rounded-xl shadow-lg shadow-primary-blue/40 hover:scale-[1.02] transition duration-300 active:scale-[0.98]"
+              >
+                <i data-feather="edit-3" class="w-4 h-4 inline mr-2"></i> Edit
+                Profil
+              </button>
+              <button
+                class="px-6 py-3 bg-secondary-yellow text-text-dark font-semibold rounded-xl shadow-lg shadow-secondary-yellow/40 hover:bg-yellow-400 hover:scale-[1.02] transition duration-300 active:scale-[0.98]"
+              >
+                <i data-feather="user-plus" class="w-4 h-4 inline mr-2"></i>
+                Follow
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div
+            class="lg:col-span-2 bg-white/90 backdrop-blur-lg p-8 rounded-3xl shadow-custom-lg border border-primary-blue/10 space-y-3"
+          >
+            <h3
+              class="text-2xl font-bold text-primary-blue mb-4 border-b pb-2 border-accent-teal/30"
+            >
+              <i
+                data-feather="info"
+                class="w-5 h-5 inline mr-2 text-accent-teal"
+              ></i>
+              Informasi Kontak & Umum
+            </h3>
+            <div class="flex items-center gap-3">
+              <i data-feather="mail" class="w-5 h-5 text-accent-teal"></i>
+              <p><span class="font-semibold">Email:</span> user@example.com</p>
+            </div>
+            <div class="flex items-center gap-3">
+              <i data-feather="phone" class="w-5 h-5 text-accent-teal"></i>
+              <p>
+                <span class="font-semibold">Telepon:</span> +62 812 3456 7890
+              </p>
+            </div>
+            <div class="flex items-start gap-3">
+              <i
+                data-feather="map-pin"
+                class="w-5 h-5 text-accent-teal mt-1"
+              ></i>
+              <p>
+                <span class="font-semibold">Alamat:</span> Jl. Contoh No. 123,
+                Kelurahan, Kecamatan, Kota, Jakarta
+              </p>
+            </div>
+            <div class="flex items-center gap-3">
+              <i data-feather="globe" class="w-5 h-5 text-accent-teal"></i>
+              <p>
+                <span class="font-semibold">Website UMKM:</span>
+                <a href="#" class="text-primary-blue hover:underline"
+                  >www.umkmlokal.com</a
+                >
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="lg:col-span-1 bg-white/90 backdrop-blur-lg p-8 rounded-3xl shadow-custom-lg border border-accent-teal/10 flex flex-col justify-between"
+          >
+            <div>
+              <h3
+                class="text-2xl font-bold text-accent-teal mb-5 border-b pb-2 border-primary-blue/30"
+              >
+                <i
+                  data-feather="bar-chart-2"
+                  class="w-5 h-5 inline mr-2 text-primary-blue"
+                ></i>
+                Statistik Kinerja
+              </h3>
+              <div class="space-y-4">
+                <div
+                  class="flex justify-between items-center p-2 bg-teal-50 rounded-lg"
+                >
+                  <span class="font-medium">Total Produk</span>
+                  <span class="text-2xl font-bold text-primary-blue">24</span>
+                </div>
+                <div
+                  class="flex justify-between items-center p-2 bg-teal-50 rounded-lg"
+                >
+                  <span class="font-medium">Pelanggan</span>
+                  <span class="text-2xl font-bold text-primary-blue">1.2K</span>
+                </div>
+                <div
+                  class="flex justify-between items-center p-2 bg-teal-50 rounded-lg"
+                >
+                  <span class="font-medium">Rating</span>
+                  <div class="flex items-center gap-1">
+                    <i
+                      data-feather="star"
+                      class="w-5 h-5 text-secondary-yellow fill-secondary-yellow"
+                    ></i>
+                    <span class="text-2xl font-bold text-primary-blue"
+                      >4.8/5</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-6">
+              <p class="text-sm text-gray-500 mb-2">Progress Target Tahunan</p>
+              <div class="h-4 bg-gray-200 rounded-full overflow-hidden">
+                <div
+                  class="h-4 w-[75%] bg-gradient-to-r from-primary-blue to-accent-teal rounded-full transition-all duration-1000"
+                  title="75% Tercapai"
+                ></div>
+              </div>
+              <p class="text-right text-xs mt-1 font-medium text-primary-blue">
+                75% Tercapai
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="bg-white/90 backdrop-blur-lg p-8 rounded-3xl shadow-custom-lg border border-accent-teal/10"
+        >
+          <h3 class="text-2xl font-bold text-primary-blue mb-6">
+            <i
+              data-feather="activity"
+              class="w-5 h-5 inline mr-2 text-accent-teal"
+            ></i>
+            Aktivitas Terbaru
+          </h3>
+          <ul class="space-y-4">
+            <li
+              class="flex flex-col md:flex-row justify-between md:items-center p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:ring-2 hover:ring-accent-teal/50 transition duration-300"
+            >
+              <div class="flex items-center gap-3">
+                <i data-feather="package" class="w-5 h-5 text-accent-teal"></i>
+                <span>Menambahkan produk baru: **Kerajinan Tangan**</span>
+              </div>
+              <span class="text-gray-500 text-sm mt-1 md:mt-0">2 jam lalu</span>
+            </li>
+            <li
+              class="flex flex-col md:flex-row justify-between md:items-center p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:ring-2 hover:ring-accent-teal/50 transition duration-300"
+            >
+              <div class="flex items-center gap-3">
+                <i data-feather="truck" class="w-5 h-5 text-accent-teal"></i>
+                <span>Menerima pesanan baru dari **Budi**</span>
+              </div>
+              <span class="text-gray-500 text-sm mt-1 md:mt-0">5 jam lalu</span>
+            </li>
+            <li
+              class="flex flex-col md:flex-row justify-between md:items-center p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:ring-2 hover:ring-accent-teal/50 transition duration-300"
+            >
+              <div class="flex items-center gap-3">
+                <i
+                  data-feather="refresh-ccw"
+                  class="w-5 h-5 text-accent-teal"
+                ></i>
+                <span>Update profil UMKM: **Mengubah Jam Buka**</span>
+              </div>
+              <span class="text-gray-500 text-sm mt-1 md:mt-0"
+                >1 hari lalu</span
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      feather.replace();
+      const burger = document.getElementById("burger");
+      const sidebar = document.getElementById("sidebar");
+      burger.addEventListener("click", () => {
+        sidebar.classList.toggle("-translate-x-full");
+      });
+    </script>
+  </body>
+</html>

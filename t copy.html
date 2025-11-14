@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile - Layanan UMKM Lokal</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+      /* Glass morphism card */
+      .glass-card {
+        backdrop-filter: blur(15px);
+        background-color: rgba(255, 255, 255, 0.7);
+      }
+      /* Smooth transitions for hover effects */
+      .transition-smooth {
+        transition: all 0.3s ease-in-out;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-gradient-to-b from-slate-50 via-blue-50 to-teal-50 font-inter min-h-screen flex"
+  >
+    <!-- Sidebar -->
+    <aside
+      id="sidebar"
+      class="fixed left-0 top-0 w-64 h-full bg-white/95 backdrop-blur-lg shadow-lg transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-50"
+    >
+      <div class="p-6 flex flex-col h-full">
+        <h1 class="text-2xl font-bold text-primary-blue mb-8">UMKM Lokal</h1>
+        <nav class="flex-1 space-y-4">
+          <a
+            href="#"
+            class="flex items-center gap-3 p-3 rounded-xl hover:bg-blue-100 transition-smooth"
+          >
+            <i data-feather="home"></i> Dashboard
+          </a>
+          <a
+            href="#"
+            class="flex items-center gap-3 p-3 rounded-xl hover:bg-blue-100 transition-smooth"
+          >
+            <i data-feather="user"></i> Profil
+          </a>
+          <a
+            href="#"
+            class="flex items-center gap-3 p-3 rounded-xl hover:bg-blue-100 transition-smooth"
+          >
+            <i data-feather="shopping-bag"></i> UMKM
+          </a>
+          <a
+            href="#"
+            class="flex items-center gap-3 p-3 rounded-xl hover:bg-blue-100 transition-smooth"
+          >
+            <i data-feather="settings"></i> Pengaturan
+          </a>
+        </nav>
+        <button
+          class="mt-auto p-3 bg-primary-blue text-white rounded-xl hover:scale-105 transition-smooth"
+        >
+          Logout
+        </button>
+      </div>
+    </aside>
+
+    <!-- Burger menu -->
+    <button
+      id="burger"
+      class="md:hidden fixed top-6 left-6 z-50 bg-primary-blue text-white p-3 rounded-lg shadow-lg"
+    >
+      <i data-feather="menu"></i>
+    </button>
+
+    <!-- Main content -->
+    <main class="flex-1 p-6 md:ml-64">
+      <div class="max-w-5xl mx-auto space-y-8">
+        <!-- Profile Header -->
+        <div
+          class="flex flex-col md:flex-row items-center md:items-start glass-card p-6 rounded-3xl shadow-lg transition-smooth hover:shadow-2xl"
+        >
+          <img
+            src="https://via.placeholder.com/120"
+            alt="Profile Picture"
+            class="w-32 h-32 rounded-full border-4 border-accent-teal object-cover"
+          />
+          <div class="mt-4 md:mt-0 md:ml-6 flex-1">
+            <h2 class="text-3xl font-bold text-primary-blue">Nama Pengguna</h2>
+            <p class="text-gray-700 mt-2">Pelaku UMKM | Layanan Publik</p>
+            <div class="mt-4 flex gap-4">
+              <button
+                class="px-4 py-2 bg-gradient-to-r from-primary-blue to-accent-teal text-white rounded-xl shadow-md hover:scale-105 transition-smooth"
+              >
+                Edit Profil
+              </button>
+              <button
+                class="px-4 py-2 bg-secondary-yellow text-white rounded-xl shadow-md hover:scale-105 transition-smooth"
+              >
+                Follow
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Profile Details -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Card: Info Umum -->
+          <div
+            class="glass-card p-6 rounded-2xl shadow-md hover:shadow-xl transition-smooth"
+          >
+            <h3 class="text-xl font-semibold text-primary-blue mb-4">
+              Informasi Umum
+            </h3>
+            <p><span class="font-semibold">Email:</span> user@example.com</p>
+            <p><span class="font-semibold">Telepon:</span> +62 812 3456 7890</p>
+            <p>
+              <span class="font-semibold">Alamat:</span> Jl. Contoh No. 123,
+              Jakarta
+            </p>
+            <p>
+              <span class="font-semibold">Website UMKM:</span> www.umkmlokal.com
+            </p>
+          </div>
+
+          <!-- Card: Statistik UMKM -->
+          <div
+            class="glass-card p-6 rounded-2xl shadow-md hover:shadow-xl transition-smooth"
+          >
+            <h3 class="text-xl font-semibold text-primary-blue mb-4">
+              Statistik UMKM
+            </h3>
+            <div class="flex justify-between items-center mb-2">
+              <span>Total Produk</span>
+              <span class="font-bold text-accent-teal">24</span>
+            </div>
+            <div class="flex justify-between items-center mb-2">
+              <span>Pelanggan</span>
+              <span class="font-bold text-accent-teal">1.2K</span>
+            </div>
+            <div class="flex justify-between items-center mb-2">
+              <span>Rating</span>
+              <span class="font-bold text-accent-teal">4.8/5</span>
+            </div>
+            <div class="mt-4 h-3 bg-gray-200 rounded-full overflow-hidden">
+              <div
+                class="h-3 w-3/4 bg-gradient-to-r from-primary-blue to-accent-teal rounded-full"
+              ></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Aktivitas Terbaru -->
+        <div
+          class="glass-card p-6 rounded-3xl shadow-md hover:shadow-xl transition-smooth"
+        >
+          <h3 class="text-xl font-semibold text-primary-blue mb-4">
+            Aktivitas Terbaru
+          </h3>
+          <ul class="space-y-3">
+            <li
+              class="flex justify-between items-center p-3 bg-white/70 rounded-xl hover:scale-105 transition-smooth"
+            >
+              <span>Menambahkan produk baru: Kerajinan Tangan</span>
+              <span class="text-gray-500 text-sm">2 jam lalu</span>
+            </li>
+            <li
+              class="flex justify-between items-center p-3 bg-white/70 rounded-xl hover:scale-105 transition-smooth"
+            >
+              <span>Menerima pesanan baru</span>
+              <span class="text-gray-500 text-sm">5 jam lalu</span>
+            </li>
+            <li
+              class="flex justify-between items-center p-3 bg-white/70 rounded-xl hover:scale-105 transition-smooth"
+            >
+              <span>Update profil UMKM</span>
+              <span class="text-gray-500 text-sm">1 hari lalu</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      feather.replace();
+
+      const burger = document.getElementById("burger");
+      const sidebar = document.getElementById("sidebar");
+
+      burger.addEventListener("click", () => {
+        sidebar.classList.toggle("-translate-x-full");
+      });
+    </script>
+  </body>
+</html>

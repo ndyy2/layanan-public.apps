@@ -3,249 +3,352 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Detail UMKM Asimetris Modern</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Profil UMKM & Layanan Masyarakat - v5</title>
+
+    <!-- Font Inter -->
     <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              // Palet Warna
-              "dark-primary": "#1A202C",
-              "brand-blue": "#3B82F6",
-              "brand-accent": "#10B981",
-              "light-gray": "#F9FAFB",
-              "medium-gray": "#6B7280",
-              "soft-blue": "#EFF6FF", // Latar belakang yang lebih lembut
-            },
-            fontFamily: {
-              sans: ["Poppins", "sans-serif"],
-            },
-            boxShadow: {
-              "custom-xl": "0 20px 40px -10px rgba(0, 0, 0, 0.08)",
-              "card-hover": "0 10px 25px -5px rgba(59, 130, 246, 0.1)",
-            },
-          },
-        },
-      };
-    </script>
+
     <style>
-      /* Keyframes untuk animasi yang lebih halus */
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      .animate-fade-in-up {
-        animation: fadeInUp 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-        opacity: 0;
-      }
-      .card-hover:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.1);
+      /* -------------------------------------------------- */
+      /* 🎨 COLOR SYSTEM + DESIGN TOKENS */
+      /* -------------------------------------------------- */
+      :root {
+        --primary: #1e40af;
+        --primary-dark: #1e3a8a;
+        --accent: #14b8a6;
+        --accent-dark: #0f766e;
+        --yellow: #fcd34d;
+
+        --success: #10b981;
+        --warning: #f59e0b;
+
+        --white: #ffffff;
+        --gray-50: #f9fafb;
+        --gray-100: #f3f4f6;
+        --gray-700: #374151;
+        --gray-900: #111827;
+
+        --bg-soft: linear-gradient(to bottom right, #f8fafc, #eff6ff, #f0fdfa);
+
+        --grad-primary: linear-gradient(to right, #1e40af, #1e3a8a);
+        --grad-primary-accent: linear-gradient(to right, #1e40af, #14b8a6);
+        --grad-accent: linear-gradient(to right, #14b8a6, #0f766e);
+
+        --blur: blur(18px);
+        --shadow-soft: 0 8px 20px rgba(0, 0, 0, 0.08);
+        --shadow-medium: 0 12px 38px rgba(0, 0, 0, 0.18);
+        --glow-accent: 0 0 20px rgba(20, 184, 166, 0.55);
+
+        --radius-xl: 20px;
+        --radius-2xl: 26px;
+
+        --transition: 300ms ease;
+        --motion-slow: 450ms ease;
       }
 
-      /* Latar belakang dengan pola geometris lembut */
-      .geometric-bg {
-        background-color: #eff6ff; /* soft-blue */
-        background-image: radial-gradient(#93c5fd 0.5px, transparent 0.5px),
-          radial-gradient(#93c5fd 0.5px, #eff6ff 0.5px);
-        background-size: 20px 20px;
-        background-position: 0 0, 10px 10px;
-        opacity: 0.6;
+      /* -------------------------------------------------- */
+      /* GLOBAL */
+      /* -------------------------------------------------- */
+      body {
+        margin: 0;
+        font-family: "Inter", sans-serif;
+        background: var(--bg-soft);
+        overflow-x: hidden;
+        color: var(--gray-900);
+      }
+
+      * {
+        transition: var(--transition);
+      }
+
+      /* -------------------------------------------------- */
+      /* 🍔 BURGER MENU */
+      /* -------------------------------------------------- */
+      .burger {
+        position: fixed;
+        top: 22px;
+        right: 22px;
+        width: 40px;
+        height: 35px;
+        cursor: pointer;
+        z-index: 100;
+      }
+
+      .burger span {
+        display: block;
+        height: 5px;
+        background: var(--primary);
+        margin: 6px 0;
+        border-radius: 5px;
+      }
+
+      .burger.active span:nth-child(1) {
+        transform: translateY(11px) rotate(45deg);
+      }
+      .burger.active span:nth-child(2) {
+        opacity: 0;
+      }
+      .burger.active span:nth-child(3) {
+        transform: translateY(-11px) rotate(-45deg);
+      }
+
+      /* -------------------------------------------------- */
+      /* 🧊 SIDEBAR GRADIENT + GLASS */
+      /* -------------------------------------------------- */
+      .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+
+        width: 260px;
+        height: 100%;
+        padding: 32px 26px;
+
+        background: linear-gradient(to bottom, #1e40af, #14b8a6);
+        backdrop-filter: blur(18px);
+
+        border-right: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow: 8px 0 25px rgba(0, 0, 0, 0.35);
+
+        transform: translateX(-100%);
+        opacity: 0;
+        visibility: hidden;
+
+        transition: var(--motion-slow);
+        z-index: 80;
+      }
+
+      .sidebar.active {
+        transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .sidebar h2 {
+        color: white;
+        margin: 0 0 20px 0;
+        font-weight: 700;
+      }
+
+      .sidebar a {
+        display: flex;
+        gap: 12px;
+        padding: 14px 0;
+        font-size: 16px;
+        color: #e0e7ff;
+        text-decoration: none;
+        opacity: 0.75;
+      }
+
+      .sidebar a:hover {
+        opacity: 1;
+        transform: translateX(8px);
+        color: var(--yellow);
+      }
+
+      /* -------------------------------------------------- */
+      /* HERO */
+      /* -------------------------------------------------- */
+      .hero {
+        max-width: 900px;
+        margin: 100px auto 25px auto;
+        padding: 32px;
+        background: var(--white);
+        border-radius: var(--radius-2xl);
+
+        backdrop-filter: blur(12px);
+        box-shadow: var(--shadow-soft);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      .hero-title {
+        font-size: 30px;
+        font-weight: 800;
+        background: var(--grad-primary-accent);
+        -webkit-background-clip: text;
+        color: transparent;
+      }
+
+      .profile-img {
+        width: 115px;
+        height: 115px;
+        border-radius: 50%;
+        object-fit: cover;
+
+        border: 4px solid var(--accent);
+      }
+
+      /* -------------------------------------------------- */
+      /* 🧱 CARD STYLING */
+      /* -------------------------------------------------- */
+      .content {
+        max-width: 1000px;
+        margin: auto;
+        padding: 10px 20px;
+
+        display: grid;
+        gap: 24px;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      }
+
+      .card {
+        padding: 26px;
+        border-radius: var(--radius-2xl);
+
+        background: rgba(255, 255, 255, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(12px);
+
+        box-shadow: var(--shadow-soft);
+
+        /* Gradient Accent Outline */
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 2px;
+        background: var(--grad-primary-accent);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0.35;
+      }
+
+      .card:hover {
+        transform: translateY(-8px) scale(1.01);
+        box-shadow: var(--shadow-medium), var(--glow-accent);
+      }
+
+      .card-title {
+        font-size: 20px;
+        font-weight: 700;
+        background: var(--grad-primary);
+        -webkit-background-clip: text;
+        color: transparent;
+      }
+
+      /* -------------------------------------------------- */
+      /* TAG */
+      .tag {
+        display: inline-block;
+        padding: 6px 14px;
+        background: var(--accent);
+        color: white;
+        font-size: 13px;
+        border-radius: 20px;
+
+        box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3);
+      }
+
+      /* -------------------------------------------------- */
+      /* ✨ SCROLL REVEAL */
+      .reveal {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      .reveal.show {
+        opacity: 1;
+        transform: translateY(0);
+        transition: 600ms ease;
       }
     </style>
   </head>
-  <body class="min-h-screen py-16 px-4 font-sans antialiased relative">
-    <div class="fixed inset-0 -z-10 geometric-bg"></div>
-    <div class="fixed inset-0 -z-10 bg-soft-blue/80 backdrop-blur-sm"></div>
 
-    <div class="max-w-6xl mx-auto">
-      <div
-        class="grid grid-cols-1 lg:grid-cols-3 gap-8 animate-fade-in-up"
-        style="animation-delay: 0.1s"
-      >
-        <div class="lg:col-span-2 space-y-8">
-          <div
-            class="bg-white rounded-3xl shadow-custom-xl overflow-hidden border border-gray-100 p-8 sm:p-10 transition-all duration-300 card-hover"
-          >
-            <header class="pb-6 border-b border-gray-100 mb-6">
-              <div class="flex items-center gap-4">
-                <div
-                  class="w-14 h-14 bg-brand-blue/10 rounded-xl flex items-center justify-center border border-brand-blue/30"
-                >
-                  <i class="fa-solid fa-mug-hot text-2xl text-brand-blue"></i>
-                </div>
-                <div>
-                  <h1
-                    class="text-3xl sm:text-4xl font-extrabold text-dark-primary tracking-tight"
-                  >
-                    Kedai Kopi Senja
-                  </h1>
-                  <div class="flex items-center gap-2 text-medium-gray mt-1">
-                    <i class="fa-solid fa-location-dot text-brand-accent"></i>
-                    <span class="font-medium text-lg">Jakarta, Indonesia</span>
-                  </div>
-                </div>
-              </div>
-            </header>
+  <body>
+    <!-- SIDEBAR -->
+    <div class="sidebar" id="sidebar">
+      <h2>Menu</h2>
+      <a href="#">🏠 Profil</a>
+      <a href="#">📋 Program Layanan</a>
+      <a href="#">🛍️ UMKM Lokal</a>
+      <a href="#">📞 Kontak Bantuan</a>
+    </div>
 
-            <div class="mb-8 animate-fade-in-up" style="animation-delay: 0.2s">
-              <img
-                src="https://tse3.mm.bing.net/th/id/OIP.43tQXRFz72TFDeLif4dnOgHaFj?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3"
-                alt="Foto Utama Kedai Kopi Senja"
-                class="w-full h-auto object-cover rounded-2xl shadow-lg border border-gray-100"
-              />
-            </div>
+    <!-- BURGER BUTTON -->
+    <div class="burger" id="burger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
 
-            <div class="mb-8 animate-fade-in-up" style="animation-delay: 0.3s">
-              <h3
-                class="flex items-center gap-3 text-2xl font-bold text-dark-primary mb-4"
-              >
-                <i class="fa-solid fa-feather-pointed text-brand-blue"></i>
-                Tentang Kami
-              </h3>
-              <p class="text-medium-gray leading-relaxed text-base">
-                Menyajikan pengalaman ngopi yang santai dengan biji kopi pilihan
-                dari berbagai daerah di Indonesia. Spesialisasi pada
-                <span class="font-bold text-brand-blue">manual brew</span>
-                dan kopi susu signature, menciptakan suasana yang hangat dan
-                ramah bagi pecinta kopi. Misi kami adalah mendukung petani lokal
-                melalui *sourcing* biji kopi yang etis.
-              </p>
-            </div>
-
-            <div
-              class="bg-brand-blue/5 p-7 rounded-2xl border-2 border-brand-blue/20 transition-all duration-300 shadow-sm animate-fade-in-up"
-              style="animation-delay: 0.4s"
-            >
-              <h3
-                class="flex items-center gap-3 text-xl font-semibold text-brand-blue mb-4"
-              >
-                <i class="fa-solid fa-handshake text-2xl"></i>
-                Peluang Kerjasama
-              </h3>
-              <p class="text-medium-gray text-sm mb-6 leading-relaxed">
-                Tertarik berinvestasi, menjadi *supplier*, atau bermitra?
-                Hubungi kami untuk mendiskusikan potensi kolaborasi jangka
-                panjang.
-              </p>
-              <div class="flex flex-wrap gap-4">
-                <button
-                  class="px-6 py-3 bg-brand-blue text-white font-semibold rounded-xl hover:bg-brand-blue/90 hover:shadow-lg transition-all duration-300 flex items-center gap-2 shadow-md"
-                >
-                  <i class="fa-solid fa-phone"></i>
-                  Hubungi Pemilik
-                </button>
-                <button
-                  class="px-6 py-3 bg-white text-brand-accent font-semibold rounded-xl border-2 border-brand-accent hover:bg-brand-accent hover:text-white hover:shadow-lg transition-all duration-300 flex items-center gap-2 shadow-md"
-                >
-                  <i class="fa-solid fa-briefcase"></i>
-                  Lihat Portofolio
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="lg:col-span-1">
-          <div
-            class="bg-white rounded-3xl shadow-custom-xl overflow-hidden border border-gray-100 p-8 sm:p-8 space-y-8 h-full transition-all duration-300 card-hover animate-fade-in-up"
-            style="animation-delay: 0.5s"
-          >
-            <section class="pb-6 border-b border-gray-100">
-              <h3
-                class="flex items-center gap-3 text-xl font-bold text-dark-primary mb-4"
-              >
-                <i class="fa-solid fa-tags text-brand-accent"></i>
-                KATEGORI BISNIS
-              </h3>
-              <div class="flex flex-wrap gap-2">
-                <span
-                  class="bg-brand-blue/10 px-4 py-1.5 rounded-full text-sm font-medium text-brand-blue border border-brand-blue/20"
-                >
-                  Makanan & Minuman
-                </span>
-                <span
-                  class="bg-brand-accent/10 px-4 py-1.5 rounded-full text-sm font-medium text-brand-accent border border-brand-accent/20"
-                >
-                  Kopi Spesialitas
-                </span>
-              </div>
-            </section>
-
-            <section>
-              <h3
-                class="flex items-center gap-3 text-xl font-bold text-dark-primary mb-5"
-              >
-                <i class="fa-solid fa-phone-volume text-brand-blue"></i>
-                INFORMASI KONTAK
-              </h3>
-              <div class="space-y-4 text-sm">
-                <div
-                  class="flex items-start gap-3 p-3 bg-light-gray rounded-xl hover:bg-gray-100 transition-colors duration-200 cursor-pointer"
-                >
-                  <i class="fa-solid fa-phone text-brand-blue mt-1 text-lg"></i>
-                  <div>
-                    <p
-                      class="text-medium-gray text-xs uppercase tracking-wider mb-0.5"
-                    >
-                      Telepon Langsung
-                    </p>
-                    <p class="font-semibold text-dark-primary">
-                      +62 812 3456 7890
-                    </p>
-                  </div>
-                </div>
-                <a
-                  href="#"
-                  class="flex items-start gap-3 p-3 bg-light-gray rounded-xl hover:bg-gray-100 transition-colors duration-200 group"
-                >
-                  <i
-                    class="fa-brands fa-instagram text-brand-accent mt-1 text-lg"
-                  ></i>
-                  <div>
-                    <p
-                      class="text-medium-gray text-xs uppercase tracking-wider mb-0.5"
-                    >
-                      Media Sosial
-                    </p>
-                    <p
-                      class="font-semibold text-dark-primary group-hover:text-brand-blue transition-colors duration-200"
-                    >
-                      @kedaikopisenja
-                    </p>
-                  </div>
-                </a>
-              </div>
-            </section>
+    <!-- HERO -->
+    <div class="hero reveal">
+      <div style="display: flex; align-items: center; gap: 22px">
+        <img src="https://via.placeholder.com/110" class="profile-img" />
+        <div>
+          <div class="hero-title">Nama Pengguna</div>
+          <div style="color: var(--gray-700)">
+            Pelaku UMKM • Warga Terdaftar
           </div>
         </div>
       </div>
+    </div>
 
-      <div
-        class="mt-12 text-center text-medium-gray text-sm animate-fade-in-up"
-        style="animation-delay: 0.6s"
-      >
-        <p class="flex items-center justify-center gap-2">
-          <span class="text-xl">✨</span>
-          Layout Asimetris Didesain dengan
-          <span class="text-brand-accent font-semibold">Tailwind CSS</span>
+    <!-- CONTENT -->
+    <div class="content">
+      <div class="card reveal">
+        <div class="card-title">Informasi UMKM</div>
+        <div class="tag">Kuliner</div>
+        <div class="tag">Lokal</div>
+        <p style="margin-top: 15px">
+          UMKM ini bergerak di bidang kuliner tradisional, mendukung produk
+          lokal dan pemberdayaan masyarakat sekitar.
+        </p>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-title">Program Layanan Masyarakat</div>
+        <ul>
+          <li>Bantuan perizinan usaha</li>
+          <li>Pelatihan digital marketing</li>
+          <li>Pendaftaran bantuan sosial UMKM</li>
+        </ul>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-title">Kontak Bantuan</div>
+        <p>
+          Email: layanan@umkm-local.id <br />
+          Telepon: 0812-3456-7890
         </p>
       </div>
     </div>
+
+    <script>
+      const burger = document.getElementById("burger");
+      const sidebar = document.getElementById("sidebar");
+
+      burger.onclick = () => {
+        burger.classList.toggle("active");
+        sidebar.classList.toggle("active");
+      };
+
+      /* SCROLL REVEAL */
+      const reveals = document.querySelectorAll(".reveal");
+      function revealOnScroll() {
+        for (let el of reveals) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight - 80) {
+            el.classList.add("show");
+          }
+        }
+      }
+      window.addEventListener("scroll", revealOnScroll);
+      window.onload = revealOnScroll;
+    </script>
   </body>
 </html>
