@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Load JSON</title>
+  </head>
+  <body>
+    <h2>Data Mahasiswa</h2>
+    <ul id="list"></ul>
+
+    <script>
+      fetch("data.json")
+        .then((response) => response.json())
+        .then((data) => {
+          const list = document.getElementById("list");
+          data.forEach((item) => {
+            const li = document.createElement("li");
+            li.textContent = `${item.nama} (${item.umur} tahun)`;
+            list.appendChild(li);
+          });
+        })
+        .catch((error) => console.error("Error:", error));
+    </script>
+  </body>
+</html>
