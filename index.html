@@ -6,108 +6,713 @@
     <title>Layanan Masyarakat & UMKM Lokal</title>
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
     />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
-    />
-
     <style>
-      body {
+      * {
         margin: 0;
         padding: 0;
-        font-family: "Inter", sans-serif;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        text-align: center;
-        overflow: hidden;
+        box-sizing: border-box;
       }
 
-      /* Background blur */
-      .bg-blur {
+      :root {
+        --primary-blue: #1e40af;
+        --accent-teal: #14b8a6;
+        --secondary-yellow: #fcd34d;
+        --success-green: #10b981;
+        --warning-yellow: #f59e0b;
+        --white: #ffffff;
+        --gray-50: #f9fafb;
+        --gray-100: #f3f4f6;
+        --gray-200: #e5e7eb;
+        --gray-300: #d1d5db;
+        --gray-400: #9ca3af;
+        --gray-500: #6b7280;
+        --gray-600: #4b5563;
+        --gray-700: #374151;
+        --gray-800: #1f2937;
+        --gray-900: #111827;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        overflow-x: hidden;
+        background: var(--gray-50);
+        color: var(--gray-800);
+      }
+
+      /* Animated gradient background */
+      .bg-animated {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: url("/assets/images/Wisata\ Kota\ Tua\ Jakarta.jpg")
-          center/cover no-repeat;
-        filter: blur(12px);
+        background: linear-gradient(
+          135deg,
+          var(--primary-blue) 0%,
+          #1e3a8a 50%,
+          var(--accent-teal) 100%
+        );
+        background-size: 400% 400%;
+        animation: gradientShift 15s ease infinite;
         z-index: -2;
       }
 
-      /* Overlay agar teks lebih jelas */
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      /* Overlay pattern */
       .bg-overlay {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.35); /* efek gelap lembut */
+        background: radial-gradient(
+            circle at 20% 50%,
+            rgba(255, 255, 255, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(255, 255, 255, 0.08) 0%,
+            transparent 50%
+          );
         z-index: -1;
       }
 
-      .container {
-        max-width: 780px;
-        padding: 20px 30px;
+      /* Floating particles */
+      .particle {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 50%;
+        animation: float 20s infinite ease-in-out;
+      }
+
+      .particle:nth-child(1) {
+        width: 80px;
+        height: 80px;
+        top: 10%;
+        left: 10%;
+        animation-delay: 0s;
+      }
+      .particle:nth-child(2) {
+        width: 60px;
+        height: 60px;
+        top: 70%;
+        left: 80%;
+        animation-delay: 2s;
+      }
+      .particle:nth-child(3) {
+        width: 100px;
+        height: 100px;
+        top: 50%;
+        left: 70%;
+        animation-delay: 4s;
+      }
+      .particle:nth-child(4) {
+        width: 50px;
+        height: 50px;
+        top: 80%;
+        left: 20%;
+        animation-delay: 6s;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 0.3;
+        }
+        50% {
+          transform: translateY(-100px) rotate(180deg);
+          opacity: 0.6;
+        }
+      }
+
+      /* Navbar */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 20px 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        animation: slideDown 0.8s ease;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      @keyframes slideDown {
+        from {
+          transform: translateY(-100px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--primary-blue);
+        letter-spacing: 1px;
+      }
+
+      .nav-buttons {
+        display: flex;
+        gap: 15px;
+      }
+
+      .btn-nav {
+        padding: 10px 25px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 2px solid transparent;
+      }
+
+      .btn-masuk {
+        color: var(--gray-700);
+        border-color: var(--gray-300);
+      }
+
+      .btn-masuk:hover {
+        background: var(--gray-100);
+        color: var(--primary-blue);
+        border-color: var(--primary-blue);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(30, 64, 175, 0.1);
+      }
+
+      .btn-daftar {
+        background: var(--primary-blue);
+        color: white;
+      }
+
+      .btn-daftar:hover {
+        background: var(--accent-teal);
+        color: white;
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: 0 10px 30px rgba(20, 184, 166, 0.4);
+      }
+
+      /* Hero Section */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 0 20px;
+        position: relative;
+        background: linear-gradient(
+          135deg,
+          var(--gray-50) 0%,
+          var(--gray-100) 100%
+        );
+      }
+
+      .hero-content {
+        max-width: 900px;
+        animation: fadeInUp 1s ease 0.3s both;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       h1 {
-        font-size: 3.4rem;
-        margin-bottom: 15px;
-        font-weight: 700;
-        font-family: "Montserrat";
-        color: #f7faff;
-        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.45);
-        line-height: 1.25;
+        font-size: 4.5rem;
+        font-weight: 900;
+        color: var(--gray-900);
+        margin-bottom: 25px;
+        line-height: 1.2;
+        text-shadow: 0 5px 30px rgba(0, 0, 0, 0.05);
+        letter-spacing: -1px;
+      }
+
+      .highlight {
+        background: linear-gradient(
+          120deg,
+          var(--primary-blue) 0%,
+          var(--accent-teal) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
       }
 
       h2 {
         font-size: 1.4rem;
-        margin-bottom: 35px;
-        font-weight: 300;
-        opacity: 0.95;
-        font-family: "Inter";
-        color: #eaf3ff;
-        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+        font-weight: 400;
+        color: var(--gray-600);
+        margin-bottom: 50px;
+        line-height: 1.8;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
       }
 
-      /* Tombol modern & elegan */
+      /* CTA Buttons */
+      .cta-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+        animation: fadeInUp 1s ease 0.6s both;
+      }
+
       .cta-btn {
-        background: linear-gradient(135deg, #4aa3ff, #0066cc);
-        color: white;
-        padding: 14px 36px;
-        font-size: 1.15rem;
-        border-radius: 10px;
+        padding: 18px 45px;
+        font-size: 1.1rem;
+        border-radius: 50px;
         text-decoration: none;
-        font-weight: 600;
-        box-shadow: 0 4px 14px rgba(0, 102, 204, 0.4);
-        transition: 0.3s;
+        font-weight: 700;
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
       }
 
-      .cta-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(0, 140, 255, 0.55);
-        background: linear-gradient(135deg, #64b5ff, #007bff);
+      .btn-primary {
+        background: linear-gradient(
+          135deg,
+          var(--primary-blue) 0%,
+          var(--accent-teal) 100%
+        );
+        color: white;
+        box-shadow: 0 10px 40px rgba(30, 64, 175, 0.3);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 60px rgba(30, 64, 175, 0.5);
+      }
+
+      .btn-primary::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+      }
+
+      .btn-primary:hover::before {
+        width: 300px;
+        height: 300px;
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.9);
+        color: var(--primary-blue);
+        border: 2px solid var(--primary-blue);
+        backdrop-filter: blur(10px);
+      }
+
+      .btn-secondary:hover {
+        background: var(--primary-blue);
+        color: white;
+        border-color: var(--primary-blue);
+        transform: translateY(-5px);
+        box-shadow: 0 20px 60px rgba(30, 64, 175, 0.3);
+      }
+
+      /* Features Section */
+      .features {
+        padding: 100px 50px;
+        animation: fadeInUp 1s ease 0.9s both;
+        background: linear-gradient(
+          135deg,
+          var(--gray-50) 0%,
+          var(--gray-100) 100%
+        );
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--gray-900);
+        margin-bottom: 60px;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .feature-card {
+        background: var(--white);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--gray-200);
+        border-radius: 20px;
+        padding: 35px;
+        text-align: center;
+        transition: all 0.4s ease;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      }
+
+      .feature-card:hover {
+        transform: translateY(-10px);
+        background: var(--white);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        border-color: var(--primary-blue);
+      }
+
+      .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 20px;
+      }
+
+      .feature-card h3 {
+        color: var(--gray-900);
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+        font-weight: 700;
+      }
+
+      .feature-card p {
+        color: var(--gray-600);
+        line-height: 1.6;
+      }
+
+      /* Testimonials Section */
+      .testimonials {
+        padding: 100px 50px;
+        background: linear-gradient(
+          135deg,
+          var(--primary-blue) 0%,
+          #1e3a8a 100%
+        );
+        color: white;
+      }
+
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .testimonial-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 30px;
+        transition: all 0.4s ease;
+      }
+
+      .testimonial-card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      .testimonial-text {
+        font-style: italic;
+        margin-bottom: 20px;
+        line-height: 1.6;
+      }
+
+      .testimonial-author {
+        display: flex;
+        align-items: center;
+      }
+
+      .author-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: var(--accent-teal);
+        margin-right: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: white;
+      }
+
+      .author-info h4 {
+        font-weight: 600;
+        margin-bottom: 5px;
+      }
+
+      .author-info p {
+        font-size: 0.9rem;
+        opacity: 0.8;
+      }
+
+      /* Footer */
+      footer {
+        background: var(--gray-900);
+        color: var(--gray-300);
+        padding: 60px 50px 30px;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 40px;
+        margin-bottom: 40px;
+      }
+
+      .footer-column h3 {
+        color: white;
+        margin-bottom: 20px;
+        font-size: 1.2rem;
+      }
+
+      .footer-column ul {
+        list-style: none;
+      }
+
+      .footer-column ul li {
+        margin-bottom: 10px;
+      }
+
+      .footer-column ul li a {
+        color: var(--gray-400);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .footer-column ul li a:hover {
+        color: var(--accent-teal);
+      }
+
+      .footer-bottom {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding-top: 30px;
+        border-top: 1px solid var(--gray-700);
+        text-align: center;
+        font-size: 0.9rem;
+        color: var(--gray-500);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 2.8rem;
+        }
+        h2 {
+          font-size: 1.1rem;
+        }
+        .section-title {
+          font-size: 2rem;
+        }
+        nav {
+          padding: 15px 20px;
+        }
+        .logo {
+          font-size: 1.2rem;
+        }
+        .cta-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+        .cta-btn {
+          width: 80%;
+          max-width: 300px;
+        }
+        .features,
+        .testimonials {
+          padding: 60px 20px;
+        }
+        footer {
+          padding: 40px 20px 20px;
+        }
       }
     </style>
   </head>
-
   <body>
-    <div class="bg-blur"></div>
+    <!-- Animated Background -->
+    <div class="bg-animated"></div>
     <div class="bg-overlay"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
 
-    <div class="container">
-      <h1>Layanan Masyarakat <br />& UMKM Lokal</h1>
-      <h2>
-        Mendukung pertumbuhan ekonomi lokal dengan layanan cepat, mudah, dan
-        terpercaya.
-      </h2>
-      <a href="landingPagesV4.html" class="cta-btn">Mulai Sekarang</a>
-    </div>
+    <!-- Navbar -->
+    <nav>
+      <div class="logo">UMKM Lokal</div>
+      <div class="nav-buttons">
+        <a href="#" class="btn-nav btn-masuk">Masuk</a>
+        <a href="#" class="btn-nav btn-daftar">Daftar</a>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>
+          Layanan <span class="highlight">Masyarakat</span><br />
+          & UMKM Lokal
+        </h1>
+        <h2>
+          Mendukung pertumbuhan ekonomi lokal dengan layanan cepat, mudah, dan
+          terpercaya. Bergabunglah dengan ribuan UMKM yang telah berkembang
+          bersama kami.
+        </h2>
+        <div class="cta-buttons">
+          <a href="#" class="cta-btn btn-primary">
+            <span style="position: relative; z-index: 1">Mulai Sekarang</span>
+          </a>
+          <a href="#features" class="cta-btn btn-secondary">Jelajahi Layanan</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+      <h2 class="section-title">Fitur Unggulan Kami</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🚀</div>
+          <h3>Cepat & Efisien</h3>
+          <p>Proses registrasi dan verifikasi hanya dalam hitungan menit</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💼</div>
+          <h3>Dukungan Penuh</h3>
+          <p>Tim kami siap membantu mengembangkan bisnis Anda 24/7</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <h3>Aman Terpercaya</h3>
+          <p>Data dan transaksi Anda dilindungi dengan teknologi terkini</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <h3>Analisis Bisnis</h3>
+          <p>Dapatkan insight mendalam untuk pengembangan bisnis Anda</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+      <h2 class="section-title" style="color: white">Apa Kata Mereka?</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-text">
+            "Platform ini sangat membantu UMKM seperti saya. Prosesnya cepat dan
+            mudah dipahami."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">AS</div>
+            <div class="author-info">
+              <h4>Ahmad Santoso</h4>
+              <p>Pemilik Toko Kerajinan</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-text">
+            "Dengan bantuan platform ini, omzet bisnis saya meningkat 40% dalam
+            3 bulan terakhir."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">SD</div>
+            <div class="author-info">
+              <h4>Sari Dewi</h4>
+              <p>Pemilik Katering</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-text">
+            "Tim support sangat responsif dan membantu menyelesaikan masalah
+            dengan cepat."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">BW</div>
+            <div class="author-info">
+              <h4>Budi Wibowo</h4>
+              <p>Pemilik Bengkel</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>UMKM Lokal</h3>
+          <p>
+            Platform terpercaya untuk mendukung pertumbuhan UMKM di Indonesia.
+          </p>
+        </div>
+        <div class="footer-column">
+          <h3>Layanan</h3>
+          <ul>
+            <li><a href="#">Pendaftaran UMKM</a></li>
+            <li><a href="#">Pelatihan Bisnis</a></li>
+            <li><a href="#">Pemasaran Digital</a></li>
+            <li><a href="#">Bantuan Hukum</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Perusahaan</h3>
+          <ul>
+            <li><a href="#">Tentang Kami</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Karir</a></li>
+            <li><a href="#">Kontak</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Bantuan</h3>
+          <ul>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Kebijakan Privasi</a></li>
+            <li><a href="#">Syarat & Ketentuan</a></li>
+            <li><a href="#">Bantuan Teknis</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2023 UMKM Lokal. Semua hak dilindungi.</p>
+      </div>
+    </footer>
   </body>
 </html>

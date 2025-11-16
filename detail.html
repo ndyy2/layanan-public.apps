@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detail UMKM - Warung Kopi Nusantara</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(
+          135deg,
+          #f8fafc 0%,
+          #e0f2fe 50%,
+          #ccfbf1 100%
+        );
+        min-height: 100vh;
+        padding: 20px;
+        scroll-behavior: smooth;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        animation: fadeIn 0.8s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Navbar */
+      .navbar {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(16px);
+        padding: 16px 24px;
+        border-radius: 24px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 24px rgba(30, 64, 175, 0.08);
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        animation: slideDown 0.6s ease;
+      }
+
+      @keyframes slideDown {
+        from {
+          transform: translateY(-100px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .back-btn {
+        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 14px;
+      }
+
+      .back-btn:hover {
+        transform: translateX(-4px);
+        box-shadow: 0 8px 24px rgba(30, 64, 175, 0.3);
+      }
+
+      .breadcrumb {
+        color: #64748b;
+        font-size: 14px;
+      }
+
+      .breadcrumb span {
+        color: #1e40af;
+        font-weight: 600;
+      }
+
+      /* Layout Grid */
+      .content-grid {
+        display: grid;
+        grid-template-columns: 320px 1fr;
+        gap: 24px;
+        animation: fadeIn 0.8s ease 0.2s both;
+      }
+
+      /* Sidebar */
+      .sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .sidebar-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(16px);
+        border-radius: 24px;
+        padding: 24px;
+        box-shadow: 0 4px 24px rgba(30, 64, 175, 0.08);
+        transition: all 0.3s ease;
+        animation: slideRight 0.6s ease;
+      }
+
+      @keyframes slideRight {
+        from {
+          transform: translateX(-50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      .sidebar-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(30, 64, 175, 0.12);
+      }
+
+      .sidebar-card h3 {
+        font-size: 18px;
+        font-weight: 700;
+        color: #1e40af;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .category-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .category-item {
+        background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+        padding: 12px 16px;
+        border-radius: 12px;
+        color: #1e40af;
+        font-weight: 600;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .category-item:hover {
+        background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+        color: white;
+        transform: translateX(8px);
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px;
+        background: linear-gradient(135deg, #f0fdfa 0%, #ecfeff 100%);
+        border-radius: 12px;
+        margin-bottom: 12px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .contact-item:hover {
+        background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+        transform: scale(1.03);
+        box-shadow: 0 8px 24px rgba(20, 184, 166, 0.2);
+      }
+
+      .contact-item:hover .contact-icon,
+      .contact-item:hover .contact-text {
+        color: white;
+      }
+
+      .contact-icon {
+        width: 40px;
+        height: 40px;
+        background: white;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        color: #14b8a6;
+        transition: all 0.3s ease;
+      }
+
+      .contact-text {
+        flex: 1;
+      }
+
+      .contact-label {
+        font-size: 12px;
+        color: #64748b;
+        font-weight: 500;
+      }
+
+      .contact-value {
+        font-size: 14px;
+        color: #1e293b;
+        font-weight: 700;
+        margin-top: 2px;
+      }
+
+      /* Main Content */
+      .main-content {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .hero-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(16px);
+        border-radius: 32px;
+        overflow: hidden;
+        box-shadow: 0 8px 32px rgba(30, 64, 175, 0.12);
+        animation: slideUp 0.8s ease;
+      }
+
+      @keyframes slideUp {
+        from {
+          transform: translateY(50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .hero-image {
+        width: 100%;
+        height: 400px;
+        background: linear-gradient(135deg, #1e40af 0%, #14b8a6 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 80px;
+        color: white;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-image::before {
+        content: "";
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.1) 0%,
+          transparent 70%
+        );
+        animation: rotate 20s linear infinite;
+      }
+
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .hero-content {
+        padding: 40px;
+      }
+
+      .hero-content h1 {
+        font-size: 36px;
+        font-weight: 900;
+        background: linear-gradient(135deg, #1e40af 0%, #14b8a6 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 16px;
+        line-height: 1.2;
+      }
+
+      .rating {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 24px;
+      }
+
+      .stars {
+        color: #fcd34d;
+        font-size: 20px;
+        letter-spacing: 2px;
+      }
+
+      .rating-text {
+        color: #64748b;
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      .description {
+        color: #475569;
+        line-height: 1.8;
+        font-size: 16px;
+        font-weight: 400;
+      }
+
+      /* Gallery */
+      .gallery-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(16px);
+        border-radius: 24px;
+        padding: 32px;
+        box-shadow: 0 4px 24px rgba(30, 64, 175, 0.08);
+        animation: fadeIn 0.8s ease 0.4s both;
+      }
+
+      .gallery-card h2 {
+        font-size: 24px;
+        font-weight: 800;
+        color: #1e40af;
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 16px;
+      }
+
+      .gallery-item {
+        aspect-ratio: 1;
+        background: linear-gradient(135deg, #e0f2fe 0%, #ccfbf1 100%);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 48px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .gallery-item::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(30, 64, 175, 0) 0%,
+          rgba(20, 184, 166, 0.1) 100%
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .gallery-item:hover {
+        transform: scale(1.05) rotate(2deg);
+        box-shadow: 0 12px 32px rgba(30, 64, 175, 0.2);
+      }
+
+      .gallery-item:hover::before {
+        opacity: 1;
+      }
+
+      /* Info Cards */
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 16px;
+        animation: fadeIn 0.8s ease 0.6s both;
+      }
+
+      .info-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(16px);
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 4px 16px rgba(30, 64, 175, 0.06);
+        transition: all 0.3s ease;
+      }
+
+      .info-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 32px rgba(30, 64, 175, 0.12);
+      }
+
+      .info-card .icon {
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin-bottom: 16px;
+        color: white;
+      }
+
+      .info-card h3 {
+        font-size: 14px;
+        color: #64748b;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+
+      .info-card p {
+        font-size: 18px;
+        color: #1e293b;
+        font-weight: 700;
+      }
+
+      /* Responsive */
+      @media (max-width: 1024px) {
+        .content-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+          order: 2;
+        }
+
+        .main-content {
+          order: 1;
+        }
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 12px;
+        }
+
+        .hero-content h1 {
+          font-size: 28px;
+        }
+
+        .hero-image {
+          height: 300px;
+          font-size: 60px;
+        }
+
+        .gallery-grid {
+          grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Navbar -->
+      <div class="navbar">
+        <button class="back-btn" onclick="history.back()">← Kembali</button>
+        <div class="breadcrumb">Beranda / UMKM / <span>Detail</span></div>
+      </div>
+
+      <!-- Content Grid -->
+      <div class="content-grid">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+          <!-- Category Card -->
+          <div class="sidebar-card">
+            <h3>📂 Kategori</h3>
+            <div class="category-list">
+              <div class="category-item">☕ Kuliner</div>
+              <div class="category-item">🍰 Kafe & Resto</div>
+              <div class="category-item">🌿 Ramah Lingkungan</div>
+              <div class="category-item">⭐ Terpopuler</div>
+            </div>
+          </div>
+
+          <!-- Contact Card -->
+          <div class="sidebar-card">
+            <h3>📞 Hubungi Kami</h3>
+            <div class="contact-item">
+              <div class="contact-icon">📱</div>
+              <div class="contact-text">
+                <div class="contact-label">WhatsApp</div>
+                <div class="contact-value">+62 812-3456-7890</div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">📷</div>
+              <div class="contact-text">
+                <div class="contact-label">Instagram</div>
+                <div class="contact-value">@warungkopinusantara</div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">📧</div>
+              <div class="contact-text">
+                <div class="contact-label">Email</div>
+                <div class="contact-value">info@kopinusantara.id</div>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+          <!-- Hero Card -->
+          <div class="hero-card">
+            <div class="hero-image">
+              <img src="gambar.jpg" alt="foto tempat" />
+            </div>
+            <div class="hero-content">
+              <h1>Warung Kopi Nusantara</h1>
+              <div class="rating">
+                <span class="stars">★★★★★</span>
+                <span class="rating-text">4.9 (2,847 ulasan)</span>
+              </div>
+              <p class="description">
+                Warung Kopi Nusantara adalah destinasi kopi artisan terbaik di
+                kota dengan suasana tradisional Indonesia yang hangat. Kami
+                menyajikan berbagai pilihan kopi lokal berkualitas tinggi yang
+                dipilih langsung dari petani lokal di berbagai daerah di
+                Indonesia. Setiap cangkir kopi diseduh dengan penuh perhatian
+                oleh barista profesional kami yang berpengalaman lebih dari 10
+                tahun di industri kopi.
+                <br /><br />
+                Tempat kami dirancang untuk memberikan pengalaman yang nyaman
+                baik untuk bekerja, bersantai, atau mengadakan pertemuan
+                informal. Dengan WiFi cepat, colokan listrik di setiap meja, dan
+                playlist musik yang dipilih dengan cermat, kami menciptakan
+                atmosfer yang sempurna untuk produktivitas dan relaksasi.
+                <br /><br />
+                Kami juga menyediakan berbagai makanan ringan tradisional dan
+                modern yang sempurna menemani kopi Anda. Komitmen kami adalah
+                mendukung ekonomi lokal dengan bermitra langsung dengan petani
+                kopi dan pengrajin makanan lokal.
+              </p>
+            </div>
+          </div>
+
+          <!-- Info Grid -->
+          <div class="info-grid">
+            <div class="info-card">
+              <div class="icon">🕐</div>
+              <h3>Jam Operasional</h3>
+              <p>08:00 - 22:00 WIB</p>
+            </div>
+            <div class="info-card">
+              <div class="icon">📍</div>
+              <h3>Lokasi</h3>
+              <p>Jl. Merdeka No. 45, Surabaya</p>
+            </div>
+            <div class="info-card">
+              <div class="icon">💰</div>
+              <h3>Kisaran Harga</h3>
+              <p>Rp 15.000 - Rp 50.000</p>
+            </div>
+            <div class="info-card">
+              <div class="icon">🚗</div>
+              <h3>Parkir</h3>
+              <p>Tersedia Gratis</p>
+            </div>
+          </div>
+
+          <!-- Gallery -->
+          <div class="gallery-card">
+            <h2>🖼️ Galeri Foto</h2>
+            <div class="gallery-grid">
+              <div class="gallery-item">☕</div>
+              <div class="gallery-item">🍰</div>
+              <div class="gallery-item">🏠</div>
+              <div class="gallery-item">🌿</div>
+              <div class="gallery-item">👥</div>
+              <div class="gallery-item">🎨</div>
+              <div class="gallery-item">🍪</div>
+              <div class="gallery-item">💡</div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>
