@@ -188,6 +188,8 @@
         font-size: 0.95rem;
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         border: 2px solid transparent;
+        cursor: pointer;
+        background: none;
       }
 
       .btn-masuk {
@@ -206,6 +208,7 @@
       .btn-daftar {
         background: var(--primary-blue);
         color: white;
+        border: none;
       }
 
       .btn-daftar:hover {
@@ -298,6 +301,8 @@
         position: relative;
         overflow: hidden;
         display: inline-block;
+        cursor: pointer;
+        border: none;
       }
 
       .btn-primary {
@@ -526,6 +531,183 @@
         color: var(--gray-500);
       }
 
+      /* Modal Styles */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(5px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .modal {
+        background: white;
+        border-radius: 24px;
+        padding: 40px;
+        max-width: 500px;
+        width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        transform: scale(0.9) translateY(20px);
+        transition: all 0.3s ease;
+      }
+
+      .modal-overlay.active .modal {
+        transform: scale(1) translateY(0);
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+      }
+
+      .modal-header h2 {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--gray-900);
+        margin: 0;
+      }
+
+      .close-btn {
+        background: none;
+        border: none;
+        font-size: 2rem;
+        color: var(--gray-400);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+      }
+
+      .close-btn:hover {
+        background: var(--gray-100);
+        color: var(--gray-900);
+        transform: rotate(90deg);
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        font-weight: 600;
+        color: var(--gray-700);
+        margin-bottom: 8px;
+        font-size: 0.95rem;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 14px 18px;
+        border: 2px solid var(--gray-200);
+        border-radius: 12px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        font-family: "Inter", sans-serif;
+      }
+
+      .form-group input:focus {
+        outline: none;
+        border-color: var(--primary-blue);
+        box-shadow: 0 0 0 4px rgba(30, 64, 175, 0.1);
+      }
+
+      .form-group input::placeholder {
+        color: var(--gray-400);
+      }
+
+      .alert {
+        padding: 14px 18px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        font-weight: 600;
+        display: none;
+        animation: slideDown 0.3s ease;
+      }
+
+      .alert.show {
+        display: block;
+      }
+
+      .alert-error {
+        background: #fee;
+        color: #c33;
+        border: 2px solid #fcc;
+      }
+
+      .alert-success {
+        background: #efe;
+        color: #3c3;
+        border: 2px solid #cfc;
+      }
+
+      .submit-btn {
+        width: 100%;
+        padding: 16px;
+        background: linear-gradient(
+          135deg,
+          var(--primary-blue),
+          var(--accent-teal)
+        );
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 10px;
+      }
+
+      .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(30, 64, 175, 0.3);
+      }
+
+      .submit-btn:active {
+        transform: translateY(0);
+      }
+
+      .form-footer {
+        text-align: center;
+        margin-top: 20px;
+        color: var(--gray-600);
+      }
+
+      .form-footer a {
+        color: var(--primary-blue);
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: color 0.3s ease;
+      }
+
+      .form-footer a:hover {
+        color: var(--accent-teal);
+      }
+
       /* Responsive */
       @media (max-width: 768px) {
         h1 {
@@ -558,6 +740,9 @@
         footer {
           padding: 40px 20px 20px;
         }
+        .modal {
+          padding: 30px 20px;
+        }
       }
     </style>
   </head>
@@ -574,8 +759,12 @@
     <nav>
       <div class="logo">UMKM Lokal</div>
       <div class="nav-buttons">
-        <a href="#" class="btn-nav btn-masuk">Masuk</a>
-        <a href="#" class="btn-nav btn-daftar">Daftar</a>
+        <button class="btn-nav btn-masuk" onclick="openLoginModal()">
+          Masuk
+        </button>
+        <button class="btn-nav btn-daftar" onclick="openRegisterModal()">
+          Daftar
+        </button>
       </div>
     </nav>
 
@@ -592,10 +781,12 @@
           bersama kami.
         </h2>
         <div class="cta-buttons">
-          <a href="landingPagesV4.html" class="cta-btn btn-primary">
+          <button class="cta-btn btn-primary" onclick="openRegisterModal()">
             <span style="position: relative; z-index: 1">Mulai Sekarang</span>
-          </a>
-          <a href="#features" class="cta-btn btn-secondary">Jelajahi Layanan</a>
+          </button>
+          <button class="cta-btn btn-secondary" onclick="scrollToFeatures()">
+            Jelajahi Layanan
+          </button>
         </div>
       </div>
     </section>
@@ -711,8 +902,413 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2023 UMKM Lokal. Semua hak dilindungi.</p>
+        <p>&copy; 2025 UMKM Lokal. Semua hak dilindungi.</p>
       </div>
     </footer>
+
+    <!-- Login Modal -->
+    <div class="modal-overlay" id="loginModal">
+      <div class="modal">
+        <div class="modal-header">
+          <h2>Masuk</h2>
+          <button class="close-btn" onclick="closeLoginModal()">&times;</button>
+        </div>
+        <div class="alert alert-error" id="loginAlert"></div>
+        <form onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label for="loginEmail">Email</label>
+            <input
+              type="email"
+              id="loginEmail"
+              placeholder="nama@email.com"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <input
+              type="password"
+              id="loginPassword"
+              placeholder="Masukkan password"
+              required
+            />
+          </div>
+          <button type="submit" class="submit-btn">Masuk</button>
+        </form>
+        <div class="form-footer">
+          Belum punya akun? <a onclick="switchToRegister()">Daftar sekarang</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal-overlay" id="registerModal">
+      <div class="modal">
+        <div class="modal-header">
+          <h2>Daftar</h2>
+          <button class="close-btn" onclick="closeRegisterModal()">
+            &times;
+          </button>
+        </div>
+        <div class="alert alert-error" id="registerAlert"></div>
+        <div class="alert alert-success" id="registerSuccess"></div>
+        <form onsubmit="handleRegister(event)">
+          <div class="form-group">
+            <label for="registerName">Nama Lengkap</label>
+            <input
+              type="text"
+              id="registerName"
+              placeholder="Masukkan nama lengkap"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="registerEmail">Email</label>
+            <input
+              type="email"
+              id="registerEmail"
+              placeholder="nama@email.com"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="registerPhone">Nomor Telepon</label>
+            <input
+              type="tel"
+              id="registerPhone"
+              placeholder="+62 xxx-xxxx-xxxx"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="registerPassword">Password</label>
+            <input
+              type="password"
+              id="registerPassword"
+              placeholder="Minimal 6 karakter"
+              required
+              minlength="6"
+            />
+          </div>
+          <div class="form-group">
+            <label for="registerConfirmPassword">Konfirmasi Password</label>
+            <input
+              type="password"
+              id="registerConfirmPassword"
+              placeholder="Ulangi password"
+              required
+              minlength="6"
+            />
+          </div>
+          <button type="submit" class="submit-btn">Daftar</button>
+        </form>
+        <div class="form-footer">
+          Sudah punya akun? <a onclick="switchToLogin()">Masuk di sini</a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // ========================
+      // USER DATABASE MANAGER
+      // ========================
+      const UserDB = {
+        // Initialize database
+        init() {
+          if (!localStorage.getItem("usersDB")) {
+            localStorage.setItem("usersDB", JSON.stringify([]));
+          }
+        },
+
+        // Get all users
+        getAllUsers() {
+          return JSON.parse(localStorage.getItem("usersDB") || "[]");
+        },
+
+        // Find user by email
+        findUserByEmail(email) {
+          const users = this.getAllUsers();
+          return users.find(
+            (user) => user.email.toLowerCase() === email.toLowerCase()
+          );
+        },
+
+        // Check if email exists
+        emailExists(email) {
+          return this.findUserByEmail(email) !== undefined;
+        },
+
+        // Add new user
+        addUser(userData) {
+          const users = this.getAllUsers();
+          const newUser = {
+            id: Date.now().toString(),
+            name: userData.name,
+            email: userData.email.toLowerCase(),
+            phone: userData.phone,
+            password: userData.password, // In production, this should be hashed
+            registeredAt: new Date().toISOString(),
+            profile: {
+              position: "Pengguna",
+              address: "",
+              about: "",
+              photo: null,
+            },
+          };
+          users.push(newUser);
+          localStorage.setItem("usersDB", JSON.stringify(users));
+          return newUser;
+        },
+
+        // Validate login
+        validateLogin(email, password) {
+          const user = this.findUserByEmail(email);
+          if (!user)
+            return {
+              success: false,
+              message: "Email tidak terdaftar. Silakan daftar terlebih dahulu.",
+            };
+          if (user.password !== password)
+            return {
+              success: false,
+              message: "Password salah. Silakan coba lagi.",
+            };
+          return { success: true, user: user };
+        },
+
+        // Update user data
+        updateUser(userId, updates) {
+          const users = this.getAllUsers();
+          const userIndex = users.findIndex((u) => u.id === userId);
+          if (userIndex !== -1) {
+            users[userIndex] = { ...users[userIndex], ...updates };
+            localStorage.setItem("usersDB", JSON.stringify(users));
+            return users[userIndex];
+          }
+          return null;
+        },
+      };
+
+      // ========================
+      // SESSION MANAGER
+      // ========================
+      const SessionManager = {
+        // Set current session
+        setSession(user) {
+          localStorage.setItem(
+            "currentSession",
+            JSON.stringify({
+              userId: user.id,
+              email: user.email,
+              name: user.name,
+              loginTime: new Date().toISOString(),
+            })
+          );
+        },
+
+        // Get current session
+        getSession() {
+          const session = localStorage.getItem("currentSession");
+          return session ? JSON.parse(session) : null;
+        },
+
+        // Clear session (logout)
+        clearSession() {
+          localStorage.removeItem("currentSession");
+        },
+
+        // Check if logged in
+        isLoggedIn() {
+          return this.getSession() !== null;
+        },
+      };
+
+      // ========================
+      // INITIALIZATION
+      // ========================
+      document.addEventListener("DOMContentLoaded", function () {
+        UserDB.init();
+
+        // Check if already logged in
+        if (SessionManager.isLoggedIn()) {
+          window.location.href = "dashboard.html";
+        }
+      });
+
+      // ========================
+      // MODAL FUNCTIONS
+      // ========================
+      function openLoginModal() {
+        document.getElementById("loginModal").classList.add("active");
+        document.getElementById("loginAlert").classList.remove("show");
+        document.getElementById("loginEmail").value = "";
+        document.getElementById("loginPassword").value = "";
+      }
+
+      function closeLoginModal() {
+        document.getElementById("loginModal").classList.remove("active");
+      }
+
+      function openRegisterModal() {
+        document.getElementById("registerModal").classList.add("active");
+        document.getElementById("registerAlert").classList.remove("show");
+        document.getElementById("registerSuccess").classList.remove("show");
+        // Clear form
+        document.getElementById("registerName").value = "";
+        document.getElementById("registerEmail").value = "";
+        document.getElementById("registerPhone").value = "";
+        document.getElementById("registerPassword").value = "";
+        document.getElementById("registerConfirmPassword").value = "";
+      }
+
+      function closeRegisterModal() {
+        document.getElementById("registerModal").classList.remove("active");
+      }
+
+      function switchToRegister() {
+        closeLoginModal();
+        setTimeout(() => openRegisterModal(), 300);
+      }
+
+      function switchToLogin() {
+        closeRegisterModal();
+        setTimeout(() => openLoginModal(), 300);
+      }
+
+      // Close modals when clicking outside
+      document
+        .getElementById("loginModal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) closeLoginModal();
+        });
+
+      document
+        .getElementById("registerModal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) closeRegisterModal();
+        });
+
+      // ========================
+      // AUTHENTICATION FUNCTIONS
+      // ========================
+      function handleLogin(event) {
+        event.preventDefault();
+
+        const email = document.getElementById("loginEmail").value.trim();
+        const password = document.getElementById("loginPassword").value;
+        const alertDiv = document.getElementById("loginAlert");
+
+        // Validate login
+        const result = UserDB.validateLogin(email, password);
+
+        if (result.success) {
+          // Set session
+          SessionManager.setSession(result.user);
+
+          // Show success message
+          alertDiv.className = "alert alert-success show";
+          alertDiv.textContent = "Login berhasil! Mengalihkan ke dashboard...";
+
+          // Redirect to dashboard
+          setTimeout(() => {
+            window.location.href = "dashboard.html";
+          }, 1000);
+        } else {
+          // Show error message
+          alertDiv.className = "alert alert-error show";
+          alertDiv.textContent = result.message;
+        }
+      }
+
+      function handleRegister(event) {
+        event.preventDefault();
+
+        const name = document.getElementById("registerName").value.trim();
+        const email = document.getElementById("registerEmail").value.trim();
+        const phone = document.getElementById("registerPhone").value.trim();
+        const password = document.getElementById("registerPassword").value;
+        const confirmPassword = document.getElementById(
+          "registerConfirmPassword"
+        ).value;
+
+        const alertDiv = document.getElementById("registerAlert");
+        const successDiv = document.getElementById("registerSuccess");
+
+        // Hide previous alerts
+        alertDiv.classList.remove("show");
+        successDiv.classList.remove("show");
+
+        // Validation
+        if (password !== confirmPassword) {
+          alertDiv.textContent =
+            "Password dan konfirmasi password tidak cocok!";
+          alertDiv.classList.add("show");
+          return;
+        }
+
+        if (password.length < 6) {
+          alertDiv.textContent = "Password harus minimal 6 karakter!";
+          alertDiv.classList.add("show");
+          return;
+        }
+
+        // Check if email already exists
+        if (UserDB.emailExists(email)) {
+          alertDiv.textContent =
+            "Email sudah terdaftar. Silakan gunakan email lain atau login.";
+          alertDiv.classList.add("show");
+          return;
+        }
+
+        // Register user
+        try {
+          const newUser = UserDB.addUser({
+            name: name,
+            email: email,
+            phone: phone,
+            password: password,
+          });
+
+          // Show success message
+          successDiv.textContent =
+            "Pendaftaran berhasil! Silakan login dengan akun Anda.";
+          successDiv.classList.add("show");
+
+          // Clear form
+          event.target.reset();
+
+          // Auto switch to login after 2 seconds
+          setTimeout(() => {
+            switchToLogin();
+          }, 2000);
+        } catch (error) {
+          alertDiv.textContent = "Terjadi kesalahan. Silakan coba lagi.";
+          alertDiv.classList.add("show");
+        }
+      }
+
+      // ========================
+      // UTILITY FUNCTIONS
+      // ========================
+      function scrollToFeatures() {
+        document
+          .getElementById("features")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      // Console branding
+      console.log(
+        "%c🚀 UMKM Lokal - Landing Page",
+        "color: #1E40AF; font-size: 24px; font-weight: bold;"
+      );
+      console.log(
+        "%c✨ Platform Terpadu untuk Layanan Publik & UMKM",
+        "color: #14B8A6; font-size: 14px;"
+      );
+      console.log(
+        "%c🔐 Authentication System Active",
+        "color: #059669; font-size: 12px;"
+      );
+    </script>
   </body>
 </html>

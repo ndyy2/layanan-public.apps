@@ -3,12 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Direktori Layanan Publik & UMKM Lokal | Platform Terpadu</title>
-    <meta
-      name="description"
-      content="Platform terpadu untuk mengakses layanan publik dan menemukan UMKM lokal terbaik."
-    />
-
+    <title>Dashboard - Direktori Layanan Publik & UMKM Lokal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,6 +14,14 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <script>
+      // Check authentication before page loads
+      (function () {
+        const session = localStorage.getItem("currentSession");
+        if (!session) {
+          window.location.href = "index.html";
+        }
+      })();
+
       tailwind.config = {
         darkMode: "class",
         theme: {
@@ -452,13 +455,17 @@
               class="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center"
               id="sidebar-avatar"
             >
-              <span class="text-white font-bold text-sm">AD</span>
+              <span class="text-white font-bold text-sm" id="sidebar-initials"
+                >AD</span
+              >
             </div>
             <div class="flex-1 min-w-0">
               <p class="text-white font-semibold truncate" id="sidebar-name">
                 Admin Direktori
               </p>
-              <p class="text-gray-400 text-sm truncate">Administrator</p>
+              <p class="text-gray-400 text-sm truncate" id="sidebar-position">
+                Administrator
+              </p>
             </div>
             <div class="relative">
               <i
@@ -647,7 +654,10 @@
                 >
                   Admin Direktori
                 </p>
-                <p class="text-xs text-gray-500 dark:text-gray-400">
+                <p
+                  class="text-xs text-gray-500 dark:text-gray-400"
+                  id="header-position"
+                >
                   Administrator
                 </p>
               </div>
@@ -656,7 +666,9 @@
                 onclick="switchPage('profil')"
                 id="header-avatar"
               >
-                <span class="text-white font-bold text-sm">AD</span>
+                <span class="text-white font-bold text-sm" id="header-initials"
+                  >AD</span
+                >
               </div>
             </div>
           </div>
@@ -671,7 +683,7 @@
         <section id="dashboard-page" class="page-content active p-6">
           <div class="mb-8 reveal">
             <h1 class="text-3xl font-black text-gray-900 dark:text-white mb-2">
-              Selamat Datang, Admin! 👋
+              Selamat Datang, <span id="dashboard-username">User</span>! 👋
             </h1>
             <p class="text-gray-600 dark:text-gray-400">
               Kelola dan pantau layanan publik & UMKM lokal dalam satu platform
@@ -821,67 +833,18 @@
             </p>
           </div>
 
-          <!-- Filter Buttons -->
-          <div
-            class="flex flex-wrap gap-3 mb-8 reveal"
-            style="animation-delay: 0.2s"
-          >
-            <button
-              class="filter-btn active px-6 py-3 bg-white dark:bg-gray-800 rounded-xl text-gray-700 dark:text-gray-300 font-semibold shadow-sm hover:shadow-md transition-all duration-300"
-              data-filter="all"
-              data-section="layanan"
-            >
-              Semua
-            </button>
-            <button
-              class="filter-btn px-6 py-3 bg-white dark:bg-gray-800 rounded-xl text-gray-700 dark:text-gray-300 font-semibold shadow-sm hover:shadow-md transition-all duration-300"
-              data-filter="pendidikan"
-              data-section="layanan"
-            >
-              <i data-lucide="graduation-cap" class="w-4 h-4 inline mr-2"></i
-              >Pendidikan
-            </button>
-            <button
-              class="filter-btn px-6 py-3 bg-white dark:bg-gray-800 rounded-xl text-gray-700 dark:text-gray-300 font-semibold shadow-sm hover:shadow-md transition-all duration-300"
-              data-filter="administrasi"
-              data-section="layanan"
-            >
-              <i data-lucide="file-text" class="w-4 h-4 inline mr-2"></i
-              >Administrasi
-            </button>
-            <button
-              class="filter-btn px-6 py-3 bg-white dark:bg-gray-800 rounded-xl text-gray-700 dark:text-gray-300 font-semibold shadow-sm hover:shadow-md transition-all duration-300"
-              data-filter="keamanan"
-              data-section="layanan"
-            >
-              <i data-lucide="shield" class="w-4 h-4 inline mr-2"></i>Keamanan
-            </button>
-            <button
-              class="filter-btn px-6 py-3 bg-white dark:bg-gray-800 rounded-xl text-gray-700 dark:text-gray-300 font-semibold shadow-sm hover:shadow-md transition-all duration-300"
-              data-filter="sosial"
-              data-section="layanan"
-            >
-              <i data-lucide="heart" class="w-4 h-4 inline mr-2"></i>Sosial
-            </button>
-            <button
-              class="filter-btn px-6 py-3 bg-white dark:bg-gray-800 rounded-xl text-gray-700 dark:text-gray-300 font-semibold shadow-sm hover:shadow-md transition-all duration-300"
-              data-filter="transportasi"
-              data-section="layanan"
-            >
-              <i data-lucide="bus" class="w-4 h-4 inline mr-2"></i>Transportasi
-            </button>
+          <div class="glass rounded-2xl p-6 text-center">
+            <i
+              data-lucide="building-2"
+              class="w-16 h-16 text-gray-400 mx-auto mb-4"
+            ></i>
+            <p class="text-gray-500 dark:text-gray-400 text-lg mb-4">
+              Halaman Layanan Publik
+            </p>
+            <p class="text-gray-400 text-sm">
+              Fitur ini sedang dalam pengembangan
+            </p>
           </div>
-
-          <!-- Loading Spinner -->
-          <div id="loading-layanan" class="flex justify-center py-12">
-            <div class="spinner"></div>
-          </div>
-
-          <!-- Layanan List -->
-          <div
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-            id="layanan-list"
-          ></div>
         </section>
 
         <!-- UMKM Lokal Page -->
@@ -895,72 +858,18 @@
             </p>
           </div>
 
-          <!-- Filter Buttons -->
-          <div
-            class="flex flex-wrap gap-3 mb-8 reveal"
-            style="animation-delay: 0.2s"
-          >
-            <button
-              class="filter-btn active px-6 py-3 bg-white dark:bg-gray-800 rounded-xl text-gray-700 dark:text-gray-300 font-semibold shadow-sm hover:shadow-md transition-all duration-300"
-              data-filter="all"
-              data-section="umkm"
-            >
-              Semua
-            </button>
-            <button
-              class="filter-btn px-6 py-3 bg-white dark:bg-gray-800 rounded-xl text-gray-700 dark:text-gray-300 font-semibold shadow-sm hover:shadow-md transition-all duration-300"
-              data-filter="makanan"
-              data-section="umkm"
-            >
-              <i data-lucide="utensils" class="w-4 h-4 inline mr-2"></i>Makanan
-            </button>
-            <button
-              class="filter-btn px-6 py-3 bg-white dark:bg-gray-800 rounded-xl text-gray-700 dark:text-gray-300 font-semibold shadow-sm hover:shadow-md transition-all duration-300"
-              data-filter="kerajinan"
-              data-section="umkm"
-            >
-              <i data-lucide="palette" class="w-4 h-4 inline mr-2"></i>Kerajinan
-            </button>
-            <button
-              class="filter-btn px-6 py-3 bg-white dark:bg-gray-800 rounded-xl text-gray-700 dark:text-gray-300 font-semibold shadow-sm hover:shadow-md transition-all duration-300"
-              data-filter="fashion"
-              data-section="umkm"
-            >
-              <i data-lucide="shirt" class="w-4 h-4 inline mr-2"></i>Fashion
-            </button>
-            <button
-              class="filter-btn px-6 py-3 bg-white dark:bg-gray-800 rounded-xl text-gray-700 dark:text-gray-300 font-semibold shadow-sm hover:shadow-md transition-all duration-300"
-              data-filter="elektronik"
-              data-section="umkm"
-            >
-              <i data-lucide="zap" class="w-4 h-4 inline mr-2"></i>Elektronik
-            </button>
-            <button
-              class="filter-btn px-6 py-3 bg-white dark:bg-gray-800 rounded-xl text-gray-700 dark:text-gray-300 font-semibold shadow-sm hover:shadow-md transition-all duration-300"
-              data-filter="jasa"
-              data-section="umkm"
-            >
-              <i data-lucide="wrench" class="w-4 h-4 inline mr-2"></i>Jasa
-            </button>
-            <button
-              class="filter-btn px-6 py-3 bg-white dark:bg-gray-800 rounded-xl text-gray-700 dark:text-gray-300 font-semibold shadow-sm hover:shadow-md transition-all duration-300"
-              data-filter="pertanian"
-              data-section="umkm"
-            >
-              <i data-lucide="leaf" class="w-4 h-4 inline mr-2"></i>Pertanian
-            </button>
+          <div class="glass rounded-2xl p-6 text-center">
+            <i
+              data-lucide="shopping-basket"
+              class="w-16 h-16 text-gray-400 mx-auto mb-4"
+            ></i>
+            <p class="text-gray-500 dark:text-gray-400 text-lg mb-4">
+              Halaman UMKM Lokal
+            </p>
+            <p class="text-gray-400 text-sm">
+              Fitur ini sedang dalam pengembangan
+            </p>
           </div>
-
-          <!-- Loading Spinner -->
-          <div id="loading-umkm" class="flex justify-center py-12">
-            <div class="spinner"></div>
-          </div>
-
-          <!-- UMKM List -->
-          <div
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-            id="umkm-list"
-          ></div>
         </section>
 
         <!-- Peta Interaktif Page -->
@@ -980,7 +889,7 @@
           >
             <div class="rounded-2xl overflow-hidden shadow-2xl">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.888953053354!2d107.608545!3d-6.902429!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e639b0d07a5f%3A0x7c5a5b5b5b5b5b5b!2sBandung%2C%20Kota%20Bandung%2C%20Jawa%20Barat!5e0!3m2!1sid!2sid!4v1620000000000!5m2!1sid!2sid"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.5285423097947!2d112.73137631477497!3d-7.289169394718896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fbf8381ac47f%3A0x3027a76e352be40!2sSurabaya%2C%20Kota%20SBY%2C%20Jawa%20Timur!5e0!3m2!1sid!2sid!4v1620000000000!5m2!1sid!2sid"
                 width="100%"
                 height="500"
                 style="border: 0"
@@ -1033,10 +942,106 @@
             </p>
           </div>
 
-          <div
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-            id="testimonials-list"
-          ></div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="glass rounded-2xl p-6 card-enhanced reveal">
+              <div class="flex items-center space-x-3 mb-4">
+                <div
+                  class="w-12 h-12 bg-gradient-to-br from-primary to-blue-600 rounded-full flex items-center justify-center"
+                >
+                  <span class="text-white font-bold">AS</span>
+                </div>
+                <div>
+                  <h4 class="font-bold text-gray-900 dark:text-white">
+                    Ahmad Santoso
+                  </h4>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">
+                    Pemilik Toko Kerajinan
+                  </p>
+                </div>
+              </div>
+              <div class="flex mb-3">
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+              </div>
+              <p
+                class="text-gray-700 dark:text-gray-300 text-sm leading-relaxed"
+              >
+                "Platform ini sangat membantu UMKM seperti saya. Prosesnya cepat
+                dan mudah dipahami."
+              </p>
+            </div>
+
+            <div
+              class="glass rounded-2xl p-6 card-enhanced reveal"
+              style="animation-delay: 0.1s"
+            >
+              <div class="flex items-center space-x-3 mb-4">
+                <div
+                  class="w-12 h-12 bg-gradient-to-br from-accent to-teal-600 rounded-full flex items-center justify-center"
+                >
+                  <span class="text-white font-bold">SD</span>
+                </div>
+                <div>
+                  <h4 class="font-bold text-gray-900 dark:text-white">
+                    Sari Dewi
+                  </h4>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">
+                    Pemilik Katering
+                  </p>
+                </div>
+              </div>
+              <div class="flex mb-3">
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star">★</span>
+              </div>
+              <p
+                class="text-gray-700 dark:text-gray-300 text-sm leading-relaxed"
+              >
+                "Dengan bantuan platform ini, omzet bisnis saya meningkat 40%
+                dalam 3 bulan terakhir."
+              </p>
+            </div>
+
+            <div
+              class="glass rounded-2xl p-6 card-enhanced reveal"
+              style="animation-delay: 0.2s"
+            >
+              <div class="flex items-center space-x-3 mb-4">
+                <div
+                  class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-full flex items-center justify-center"
+                >
+                  <span class="text-white font-bold">BW</span>
+                </div>
+                <div>
+                  <h4 class="font-bold text-gray-900 dark:text-white">
+                    Budi Wibowo
+                  </h4>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">
+                    Pemilik Bengkel
+                  </p>
+                </div>
+              </div>
+              <div class="flex mb-3">
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+              </div>
+              <p
+                class="text-gray-700 dark:text-gray-300 text-sm leading-relaxed"
+              >
+                "Tim support sangat responsif dan membantu menyelesaikan masalah
+                dengan cepat."
+              </p>
+            </div>
+          </div>
         </section>
 
         <!-- Penilaian Page -->
@@ -1066,7 +1071,44 @@
                     <span class="text-gray-600 dark:text-gray-400">/5.0</span>
                   </div>
                 </div>
-                <div class="space-y-2" id="rating-breakdown"></div>
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                      <span class="text-sm text-gray-600 dark:text-gray-400"
+                        >5 bintang</span
+                      >
+                      <div class="flex">
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                      </div>
+                    </div>
+                    <span
+                      class="text-sm font-semibold text-gray-700 dark:text-gray-300"
+                      >128</span
+                    >
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                      <span class="text-sm text-gray-600 dark:text-gray-400"
+                        >4 bintang</span
+                      >
+                      <div class="flex">
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star">★</span>
+                      </div>
+                    </div>
+                    <span
+                      class="text-sm font-semibold text-gray-700 dark:text-gray-300"
+                      >45</span
+                    >
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -1077,285 +1119,29 @@
               <h3 class="text-xl font-black text-gray-900 dark:text-white mb-6">
                 Penilaian Terbaru
               </h3>
-              <div class="space-y-4" id="recent-ratings"></div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Profil Page -->
-        <section id="profil-page" class="page-content p-6 hidden">
-          <div class="mb-8 reveal">
-            <h1 class="text-3xl font-black text-gray-900 dark:text-white mb-2">
-              Profil Pengguna
-            </h1>
-            <p class="text-gray-600 dark:text-gray-400">
-              Kelola informasi profil dan pengaturan akun Anda
-            </p>
-          </div>
-
-          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-1">
-              <div class="glass rounded-2xl p-6 text-center reveal">
+              <div class="space-y-4">
                 <div
-                  class="profile-photo-container mb-4 inline-block relative cursor-pointer"
-                  onclick="document.getElementById('photo-upload').click()"
+                  class="flex items-start space-x-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
                 >
-                  <div
-                    id="profile-photo"
-                    class="w-32 h-32 rounded-full mx-auto flex items-center justify-center text-white text-4xl font-bold bg-gradient-to-br from-primary to-accent"
-                  >
-                    AD
-                  </div>
-                  <div
-                    class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-full opacity-0 hover:opacity-100 transition-opacity duration-300"
-                  >
-                    <i data-lucide="camera" class="w-6 h-6 text-white"></i>
-                  </div>
-                  <input
-                    type="file"
-                    id="photo-upload"
-                    accept="image/*"
-                    class="hidden"
-                    onchange="handlePhotoUpload(event)"
-                  />
-                </div>
-                <h3
-                  class="text-xl font-black text-gray-900 dark:text-white mb-2"
-                  id="profile-name"
-                >
-                  Admin Direktori
-                </h3>
-                <p class="text-accent font-semibold mb-4">Administrator</p>
-                <div class="flex justify-center space-x-2 mb-6">
-                  <span
-                    class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-primary text-xs font-semibold rounded-full"
-                    >Super Admin</span
-                  >
-                  <span
-                    class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 text-xs font-semibold rounded-full"
-                    >Aktif</span
-                  >
-                </div>
-                <button
-                  class="w-full px-4 py-2 bg-primary text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 mb-3"
-                  onclick="openEditProfileModal()"
-                >
-                  <i data-lucide="edit" class="w-4 h-4 inline mr-2"></i>Edit
-                  Profil
-                </button>
-                <button
-                  class="w-full px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-semibold rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300"
-                  onclick="document.getElementById('photo-upload').click()"
-                >
-                  <i data-lucide="camera" class="w-4 h-4 inline mr-2"></i>Ubah
-                  Foto
-                </button>
-              </div>
-
-              <div
-                class="glass rounded-2xl p-6 mt-6 reveal"
-                style="animation-delay: 0.2s"
-              >
-                <h4 class="font-semibold text-gray-900 dark:text-white mb-4">
-                  Statistik Akun
-                </h4>
-                <div class="space-y-3">
-                  <div class="flex justify-between items-center">
-                    <span class="text-gray-600 dark:text-gray-400"
-                      >Bergabung</span
-                    >
-                    <span class="font-semibold text-gray-900 dark:text-white"
-                      >15 Jan 2024</span
-                    >
-                  </div>
-                  <div class="flex justify-between items-center">
-                    <span class="text-gray-600 dark:text-gray-400"
-                      >Layanan Ditambahkan</span
-                    >
-                    <span class="font-semibold text-primary">12</span>
-                  </div>
-                  <div class="flex justify-between items-center">
-                    <span class="text-gray-600 dark:text-gray-400"
-                      >UMKM Diverifikasi</span
-                    >
-                    <span class="font-semibold text-accent">28</span>
-                  </div>
-                  <div class="flex justify-between items-center">
-                    <span class="text-gray-600 dark:text-gray-400"
-                      >Aktivitas Bulan Ini</span
-                    >
-                    <span class="font-semibold text-amber-600">156</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="lg:col-span-2">
-              <div class="glass rounded-2xl p-6 reveal">
-                <h3
-                  class="text-xl font-black text-gray-900 dark:text-white mb-6"
-                >
-                  Informasi Profil
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                  <div>
-                    <label
-                      class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
-                      >Nama Lengkap</label
-                    >
-                    <div
-                      class="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
-                    >
-                      <span
-                        class="text-gray-900 dark:text-white"
-                        id="display-nama"
-                        >Admin Direktori</span
+                  <div class="flex-1">
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="font-semibold text-gray-900 dark:text-white"
+                        >Puskesmas Sehat Sentosa</span
                       >
+                      <div class="flex">
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                      </div>
                     </div>
-                  </div>
-                  <div>
-                    <label
-                      class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
-                      >Email</label
+                    <p class="text-sm text-gray-600 dark:text-gray-400">
+                      "Pelayanan sangat memuaskan dan cepat"
+                    </p>
+                    <span class="text-xs text-gray-500"
+                      >- Sari, 2 jam lalu</span
                     >
-                    <div
-                      class="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
-                    >
-                      <span
-                        class="text-gray-900 dark:text-white"
-                        id="display-email"
-                        >admin@direktorilayanan.id</span
-                      >
-                    </div>
-                  </div>
-                  <div>
-                    <label
-                      class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
-                      >Telepon</label
-                    >
-                    <div
-                      class="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
-                    >
-                      <span
-                        class="text-gray-900 dark:text-white"
-                        id="display-telepon"
-                        >+62 812-3456-7890</span
-                      >
-                    </div>
-                  </div>
-                  <div>
-                    <label
-                      class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
-                      >Jabatan</label
-                    >
-                    <div
-                      class="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
-                    >
-                      <span
-                        class="text-gray-900 dark:text-white"
-                        id="display-jabatan"
-                        >Administrator Sistem</span
-                      >
-                    </div>
-                  </div>
-                </div>
-
-                <div class="mb-6">
-                  <label
-                    class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
-                    >Alamat</label
-                  >
-                  <div
-                    class="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
-                  >
-                    <span
-                      class="text-gray-900 dark:text-white"
-                      id="display-alamat"
-                      >Jl. Inovasi Digital No. 123, Jakarta Pusat, DKI Jakarta
-                      10110</span
-                    >
-                  </div>
-                </div>
-
-                <div class="mb-6">
-                  <label
-                    class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
-                    >Tentang Saya</label
-                  >
-                  <div
-                    class="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
-                  >
-                    <span
-                      class="text-gray-900 dark:text-white"
-                      id="display-tentang"
-                      >Administrator bertanggung jawab untuk mengelola dan
-                      memantau semua layanan publik dan UMKM yang terdaftar
-                      dalam platform Direktori Layanan.</span
-                    >
-                  </div>
-                </div>
-
-                <div class="flex space-x-3">
-                  <button
-                    class="px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 flex items-center"
-                    onclick="openEditProfileModal()"
-                  >
-                    <i data-lucide="edit" class="w-4 h-4 mr-2"></i>Edit Profil
-                  </button>
-                  <button
-                    class="px-6 py-3 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-semibold rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 flex items-center"
-                    onclick="openChangePasswordModal()"
-                  >
-                    <i data-lucide="key" class="w-4 h-4 mr-2"></i>Ubah Password
-                  </button>
-                </div>
-              </div>
-
-              <div
-                class="glass rounded-2xl p-6 mt-6 reveal"
-                style="animation-delay: 0.2s"
-              >
-                <h3
-                  class="text-xl font-black text-gray-900 dark:text-white mb-6"
-                >
-                  Pengaturan Keamanan
-                </h3>
-                <div class="space-y-4">
-                  <div
-                    class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-800 rounded-lg"
-                  >
-                    <div>
-                      <h4 class="font-semibold text-gray-900 dark:text-white">
-                        Verifikasi 2 Faktor
-                      </h4>
-                      <p class="text-sm text-gray-600 dark:text-gray-400">
-                        Tambah lapisan keamanan ekstra untuk akun Anda
-                      </p>
-                    </div>
-                    <button
-                      class="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300"
-                      onclick="enable2FA()"
-                    >
-                      Aktifkan
-                    </button>
-                  </div>
-                  <div
-                    class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-800 rounded-lg"
-                  >
-                    <div>
-                      <h4 class="font-semibold text-gray-900 dark:text-white">
-                        Sesi Aktif
-                      </h4>
-                      <p class="text-sm text-gray-600 dark:text-gray-400">
-                        1 perangkat aktif
-                      </p>
-                    </div>
-                    <button
-                      class="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm font-semibold rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300"
-                      onclick="manageSessions()"
-                    >
-                      Kelola
-                    </button>
                   </div>
                 </div>
               </div>
@@ -1451,11 +1237,7 @@
                 >
                   Kirim Pesan
                 </h3>
-                <form
-                  class="space-y-4"
-                  id="contactForm"
-                  onsubmit="handleContactSubmit(event)"
-                >
+                <form class="space-y-4" onsubmit="handleContactSubmit(event)">
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label
@@ -1517,150 +1299,290 @@
             </div>
           </div>
         </section>
+
+        <!-- Profil Page -->
+        <section id="profil-page" class="page-content p-6 hidden">
+          <div class="mb-8 reveal">
+            <h1 class="text-3xl font-black text-gray-900 dark:text-white mb-2">
+              Profil Pengguna
+            </h1>
+            <p class="text-gray-600 dark:text-gray-400">
+              Kelola informasi profil dan pengaturan akun Anda
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-1">
+              <div class="glass rounded-2xl p-6 text-center reveal">
+                <div
+                  class="profile-photo-container mb-4 inline-block relative cursor-pointer"
+                  onclick="document.getElementById('photo-upload').click()"
+                >
+                  <div
+                    id="profile-photo"
+                    class="w-32 h-32 rounded-full mx-auto flex items-center justify-center text-white text-4xl font-bold bg-gradient-to-br from-primary to-accent"
+                  >
+                    AD
+                  </div>
+                  <div
+                    class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-full opacity-0 hover:opacity-100 transition-opacity duration-300"
+                  >
+                    <i data-lucide="camera" class="w-6 h-6 text-white"></i>
+                  </div>
+                  <input
+                    type="file"
+                    id="photo-upload"
+                    accept="image/*"
+                    class="hidden"
+                    onchange="handlePhotoUpload(event)"
+                  />
+                </div>
+                <h3
+                  class="text-xl font-black text-gray-900 dark:text-white mb-2"
+                  id="profile-name"
+                >
+                  Admin Direktori
+                </h3>
+                <p class="text-accent font-semibold mb-4" id="profile-position">
+                  Administrator
+                </p>
+                <div class="flex justify-center space-x-2 mb-6">
+                  <span
+                    class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-primary text-xs font-semibold rounded-full"
+                    >Pengguna</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 text-xs font-semibold rounded-full"
+                    >Aktif</span
+                  >
+                </div>
+                <button
+                  class="w-full px-4 py-2 bg-primary text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 mb-3"
+                  onclick="openEditProfileModal()"
+                >
+                  <i data-lucide="edit" class="w-4 h-4 inline mr-2"></i>Edit
+                  Profil
+                </button>
+                <button
+                  class="w-full px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-semibold rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300"
+                  onclick="document.getElementById('photo-upload').click()"
+                >
+                  <i data-lucide="camera" class="w-4 h-4 inline mr-2"></i>Ubah
+                  Foto
+                </button>
+              </div>
+
+              <div
+                class="glass rounded-2xl p-6 mt-6 reveal"
+                style="animation-delay: 0.2s"
+              >
+                <h4 class="font-semibold text-gray-900 dark:text-white mb-4">
+                  Statistik Akun
+                </h4>
+                <div class="space-y-3">
+                  <div class="flex justify-between items-center">
+                    <span class="text-gray-600 dark:text-gray-400"
+                      >Bergabung</span
+                    >
+                    <span
+                      class="font-semibold text-gray-900 dark:text-white"
+                      id="profile-joined"
+                      >-</span
+                    >
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-gray-600 dark:text-gray-400"
+                      >Layanan Ditambahkan</span
+                    >
+                    <span class="font-semibold text-primary">0</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-gray-600 dark:text-gray-400"
+                      >UMKM Diverifikasi</span
+                    >
+                    <span class="font-semibold text-accent">0</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-gray-600 dark:text-gray-400"
+                      >Aktivitas Bulan Ini</span
+                    >
+                    <span class="font-semibold text-amber-600">0</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lg:col-span-2">
+              <div class="glass rounded-2xl p-6 reveal">
+                <h3
+                  class="text-xl font-black text-gray-900 dark:text-white mb-6"
+                >
+                  Informasi Profil
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <div>
+                    <label
+                      class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
+                      >Nama Lengkap</label
+                    >
+                    <div
+                      class="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+                    >
+                      <span
+                        class="text-gray-900 dark:text-white"
+                        id="display-nama"
+                        >Admin Direktori</span
+                      >
+                    </div>
+                  </div>
+                  <div>
+                    <label
+                      class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
+                      >Email</label
+                    >
+                    <div
+                      class="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+                    >
+                      <span
+                        class="text-gray-900 dark:text-white"
+                        id="display-email"
+                        >admin@direktorilayanan.id</span
+                      >
+                    </div>
+                  </div>
+                  <div>
+                    <label
+                      class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
+                      >Telepon</label
+                    >
+                    <div
+                      class="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+                    >
+                      <span
+                        class="text-gray-900 dark:text-white"
+                        id="display-telepon"
+                        >+62 812-3456-7890</span
+                      >
+                    </div>
+                  </div>
+                  <div>
+                    <label
+                      class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
+                      >Jabatan</label
+                    >
+                    <div
+                      class="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+                    >
+                      <span
+                        class="text-gray-900 dark:text-white"
+                        id="display-jabatan"
+                        >Pengguna</span
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mb-6">
+                  <label
+                    class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
+                    >Alamat</label
+                  >
+                  <div
+                    class="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+                  >
+                    <span
+                      class="text-gray-900 dark:text-white"
+                      id="display-alamat"
+                      >-</span
+                    >
+                  </div>
+                </div>
+
+                <div class="mb-6">
+                  <label
+                    class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
+                    >Tentang Saya</label
+                  >
+                  <div
+                    class="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+                  >
+                    <span
+                      class="text-gray-900 dark:text-white"
+                      id="display-tentang"
+                      >-</span
+                    >
+                  </div>
+                </div>
+
+                <div class="flex space-x-3">
+                  <button
+                    class="px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 flex items-center"
+                    onclick="openEditProfileModal()"
+                  >
+                    <i data-lucide="edit" class="w-4 h-4 mr-2"></i>Edit Profil
+                  </button>
+                  <button
+                    class="px-6 py-3 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-semibold rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 flex items-center"
+                    onclick="openChangePasswordModal()"
+                  >
+                    <i data-lucide="key" class="w-4 h-4 mr-2"></i>Ubah Password
+                  </button>
+                </div>
+              </div>
+
+              <div
+                class="glass rounded-2xl p-6 mt-6 reveal"
+                style="animation-delay: 0.2s"
+              >
+                <h3
+                  class="text-xl font-black text-gray-900 dark:text-white mb-6"
+                >
+                  Pengaturan Keamanan
+                </h3>
+                <div class="space-y-4">
+                  <div
+                    class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-800 rounded-lg"
+                  >
+                    <div>
+                      <h4 class="font-semibold text-gray-900 dark:text-white">
+                        Verifikasi 2 Faktor
+                      </h4>
+                      <p class="text-sm text-gray-600 dark:text-gray-400">
+                        Tambah lapisan keamanan ekstra untuk akun Anda
+                      </p>
+                    </div>
+                    <button
+                      class="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300"
+                      onclick="enable2FA()"
+                    >
+                      Aktifkan
+                    </button>
+                  </div>
+                  <div
+                    class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-800 rounded-lg"
+                  >
+                    <div>
+                      <h4 class="font-semibold text-gray-900 dark:text-white">
+                        Sesi Aktif
+                      </h4>
+                      <p class="text-sm text-gray-600 dark:text-gray-400">
+                        1 perangkat aktif
+                      </p>
+                    </div>
+                    <button
+                      class="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm font-semibold rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300"
+                      onclick="manageSessions()"
+                    >
+                      Kelola
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </main>
-
-    <!-- Floating Action Buttons -->
-    <div class="fixed bottom-8 right-8 space-y-4 z-50">
-      <a
-        href="https://wa.me/6281234567890"
-        target="_blank"
-        class="fab w-14 h-14 bg-green-500 text-white rounded-full shadow-lg flex items-center justify-center"
-      >
-        <i data-lucide="message-circle" class="w-6 h-6"></i>
-      </a>
-      <button
-        id="back-to-top"
-        class="fab w-14 h-14 bg-gradient-to-br from-primary to-accent text-white rounded-full shadow-lg opacity-0 invisible transition-all duration-300"
-        onclick="scrollToTop()"
-      >
-        <i data-lucide="arrow-up" class="w-6 h-6"></i>
-      </button>
-    </div>
-
-    <!-- Add/Edit Modal -->
-    <div
-      id="add-modal"
-      class="fixed inset-0 modal-overlay flex items-center justify-center z-50 hidden"
-    >
-      <div
-        class="form-card rounded-2xl p-8 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto shadow-2xl"
-      >
-        <div class="flex justify-between items-center mb-6">
-          <h3
-            class="text-2xl font-black text-gray-900 dark:text-white"
-            id="modal-title"
-          >
-            Tambah Data
-          </h3>
-          <button
-            onclick="closeAddModal()"
-            class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
-          >
-            <i data-lucide="x" class="w-6 h-6"></i>
-          </button>
-        </div>
-        <form id="add-form" class="space-y-6" onsubmit="handleAddSubmit(event)">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label
-                class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
-                >Nama <span class="text-red-500">*</span></label
-              >
-              <input
-                type="text"
-                id="add-nama"
-                class="w-full px-4 py-3 form-input rounded-lg"
-                placeholder="Masukkan nama"
-                required
-              />
-            </div>
-            <div>
-              <label
-                class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
-                >Kategori <span class="text-red-500">*</span></label
-              >
-              <select
-                id="add-kategori"
-                class="w-full px-4 py-3 form-input rounded-lg"
-                required
-              >
-                <option value="">Pilih Kategori</option>
-              </select>
-            </div>
-          </div>
-          <div>
-            <label
-              class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
-              >Deskripsi <span class="text-red-500">*</span></label
-            >
-            <textarea
-              id="add-deskripsi"
-              class="w-full px-4 py-3 form-input rounded-lg"
-              rows="4"
-              placeholder="Masukkan deskripsi lengkap"
-              required
-            ></textarea>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label
-                class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
-                >Lokasi <span class="text-red-500">*</span></label
-              >
-              <input
-                type="text"
-                id="add-lokasi"
-                class="w-full px-4 py-3 form-input rounded-lg"
-                placeholder="Alamat lengkap"
-                required
-              />
-            </div>
-            <div>
-              <label
-                class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
-                >Telepon <span class="text-red-500">*</span></label
-              >
-              <input
-                type="tel"
-                id="add-telepon"
-                class="w-full px-4 py-3 form-input rounded-lg"
-                placeholder="+62 xxx-xxxx-xxxx"
-                required
-              />
-            </div>
-          </div>
-          <div id="add-extra-fields"></div>
-          <div>
-            <label
-              class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
-              >URL Gambar</label
-            >
-            <input
-              type="url"
-              id="add-image"
-              class="w-full px-4 py-3 form-input rounded-lg"
-              placeholder="https://example.com/image.jpg"
-            />
-          </div>
-          <div class="flex space-x-3 pt-4">
-            <button
-              type="button"
-              onclick="closeAddModal()"
-              class="flex-1 px-6 py-3 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-semibold rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300"
-            >
-              Batal
-            </button>
-            <button
-              type="submit"
-              class="flex-1 px-6 py-3 bg-gradient-to-r from-primary to-accent text-white font-semibold rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-300"
-            >
-              <i data-lucide="save" class="w-4 h-4 inline mr-2"></i>Simpan
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
 
     <!-- Edit Profile Modal -->
     <div
@@ -1702,18 +1624,6 @@
             <div>
               <label
                 class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
-                >Email</label
-              >
-              <input
-                type="email"
-                id="edit-email"
-                class="w-full px-4 py-3 form-input rounded-lg"
-                required
-              />
-            </div>
-            <div>
-              <label
-                class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
                 >Telepon</label
               >
               <input
@@ -1723,7 +1633,7 @@
                 required
               />
             </div>
-            <div>
+            <div class="md:col-span-2">
               <label
                 class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
                 >Jabatan</label
@@ -1858,222 +1768,75 @@
       </div>
     </div>
 
-    <!-- Detail Modal -->
-    <div
-      id="detail-modal"
-      class="fixed inset-0 modal-overlay flex items-center justify-center z-50 hidden"
-    >
-      <div
-        class="form-card rounded-2xl p-8 max-w-3xl w-full mx-4 max-h-[90vh] overflow-y-auto shadow-2xl"
-      >
-        <div class="flex justify-between items-center mb-6">
-          <h3
-            class="text-2xl font-black text-gray-900 dark:text-white"
-            id="detail-title"
-          >
-            Detail
-          </h3>
-          <button
-            onclick="closeDetailModal()"
-            class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
-          >
-            <i data-lucide="x" class="w-6 h-6"></i>
-          </button>
-        </div>
-        <div id="detail-content" class="space-y-6"></div>
-        <div class="flex space-x-3 pt-6">
-          <button
-            onclick="closeDetailModal()"
-            class="flex-1 px-6 py-3 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-semibold rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300"
-          >
-            Tutup
-          </button>
-          <button
-            onclick="editCurrentItem()"
-            class="flex-1 px-6 py-3 bg-gradient-to-r from-primary to-accent text-white font-semibold rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-300"
-          >
-            <i data-lucide="edit" class="w-4 h-4 inline mr-2"></i>Edit
-          </button>
-        </div>
-      </div>
-    </div>
-
     <script>
       // ========================
-      // DATABASE JSON (Simulasi)
+      // USER DATABASE MANAGER
       // ========================
-      const DATABASE = {
-        layanan: [
-          {
-            id: 1,
-            nama: "Puskesmas Sehat Sentosa",
-            deskripsi:
-              "Memberikan pelayanan kesehatan dasar dan rujukan untuk masyarakat. Tersedia layanan rawat jalan, imunisasi, dan pemeriksaan kesehatan gratis.",
-            kategori: "kesehatan",
-            lokasi: "Jl. Kesehatan No. 123, Jakarta Pusat",
-            telepon: "(021) 555-1234",
-            image:
-              "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=600&h=400&fit=crop",
-          },
-          {
-            id: 2,
-            nama: "Kantor Kelurahan Harmoni",
-            deskripsi:
-              "Melayani administrasi kependudukan seperti pembuatan KTP, KK, akta kelahiran, dan surat keterangan lainnya.",
-            kategori: "administrasi",
-            lokasi: "Jl. Administrasi No. 456, Jakarta Selatan",
-            telepon: "(021) 555-5678",
-            image:
-              "https://images.unsplash.com/photo-1563453392212-326f5e854473?w=600&h=400&fit=crop",
-          },
-          {
-            id: 3,
-            nama: "Perpustakaan Daerah Jakarta",
-            deskripsi:
-              "Menyediakan koleksi buku untuk semua usia. Juga mengadakan kegiatan literasi dan bimbingan belajar gratis untuk pelajar.",
-            kategori: "pendidikan",
-            lokasi: "Jl. Pendidikan No. 789, Jakarta Timur",
-            telepon: "(021) 555-9012",
-            image:
-              "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=600&h=400&fit=crop",
-          },
-          {
-            id: 4,
-            nama: "Polsek Jakarta Barat",
-            deskripsi:
-              "Melayani keamanan dan ketertiban masyarakat serta pembuatan SKCK dan laporan kehilangan.",
-            kategori: "keamanan",
-            lokasi: "Jl. Keamanan No. 111, Jakarta Barat",
-            telepon: "(021) 555-2222",
-            image:
-              "https://images.unsplash.com/photo-1582139329536-e7284fece509?w=600&h=400&fit=crop",
-          },
-          {
-            id: 5,
-            nama: "Dinas Sosial Jakarta",
-            deskripsi:
-              "Memberikan bantuan sosial dan program pemberdayaan masyarakat untuk warga kurang mampu.",
-            kategori: "sosial",
-            lokasi: "Jl. Sosial No. 333, Jakarta Selatan",
-            telepon: "(021) 555-4444",
-            image:
-              "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=600&h=400&fit=crop",
-          },
-          {
-            id: 6,
-            nama: "Terminal Kampung Rambutan",
-            deskripsi:
-              "Terminal bus antar kota antar provinsi yang melayani berbagai rute perjalanan ke seluruh Indonesia.",
-            kategori: "transportasi",
-            lokasi: "Jl. Raya Bogor KM 23, Jakarta Timur",
-            telepon: "(021) 555-7777",
-            image:
-              "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&h=400&fit=crop",
-          },
-        ],
-        umkm: [
-          {
-            id: 1,
-            nama: "Kerajinan Tangan Bu Rini",
-            deskripsi:
-              "Menjual berbagai kerajinan tangan seperti tas anyaman, hiasan dinding, dan aksesoris dari bahan alami dengan kualitas terbaik.",
-            kategori: "kerajinan",
-            lokasi: "Jl. Kerajinan No. 123, Jakarta Barat",
-            telepon: "0812-3456-7890",
-            instagram: "@kerajinan_burini",
-            image:
-              "https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?w=600&h=400&fit=crop",
-          },
-          {
-            id: 2,
-            nama: "Warung Makan Sederhana",
-            deskripsi:
-              "Menyajikan masakan rumahan dengan cita rasa autentik. Menu andalan: nasi campur, soto ayam, dan gado-gado.",
-            kategori: "makanan",
-            lokasi: "Jl. Kuliner No. 456, Jakarta Utara",
-            telepon: "0813-4567-8901",
-            instagram: "@warung_sederhana",
-            image:
-              "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&h=400&fit=crop",
-          },
-          {
-            id: 3,
-            nama: "Toko Baju Ananda",
-            deskripsi:
-              "Menjual pakaian berkualitas dengan harga terjangkau. Tersedia berbagai model baju muslim, casual, dan aksesoris.",
-            kategori: "fashion",
-            lokasi: "Jl. Fashion No. 789, Jakarta Pusat",
-            telepon: "0814-5678-9012",
-            instagram: "@toko_bajuananda",
-            image:
-              "https://images.unsplash.com/photo-1445205170230-053b83016050?w=600&h=400&fit=crop",
-          },
-          {
-            id: 4,
-            nama: "Servis Elektronik Jaya",
-            deskripsi:
-              "Melayani perbaikan berbagai peralatan elektronik seperti TV, kulkas, AC, dan mesin cuci dengan teknisi berpengalaman.",
-            kategori: "jasa",
-            lokasi: "Jl. Teknologi No. 222, Jakarta Selatan",
-            telepon: "0815-9999-1111",
-            instagram: "@servis_jaya",
-            image:
-              "https://images.unsplash.com/photo-1581092918484-8313e1f7e8c4?w=600&h=400&fit=crop",
-          },
-          {
-            id: 5,
-            nama: "Toko Komputer Mandiri",
-            deskripsi:
-              "Menjual berbagai komputer, laptop, dan aksesoris IT dengan harga kompetitif dan garansi resmi.",
-            kategori: "elektronik",
-            lokasi: "Jl. Digital No. 888, Jakarta Barat",
-            telepon: "0816-2222-3333",
-            instagram: "@komputer_mandiri",
-            image:
-              "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=600&h=400&fit=crop",
-          },
-          {
-            id: 6,
-            nama: "Sayur Organik Pak Budi",
-            deskripsi:
-              "Menyediakan sayuran organik segar langsung dari kebun sendiri tanpa pestisida kimia.",
-            kategori: "pertanian",
-            lokasi: "Jl. Hijau No. 999, Jakarta Timur",
-            telepon: "0817-4444-5555",
-            instagram: "@sayur_pakbudi",
-            image:
-              "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=600&h=400&fit=crop",
-          },
-        ],
-        testimonials: [
-          {
-            id: 1,
-            nama: "Rina Santoso",
-            role: "Ibu Rumah Tangga",
-            rating: 5,
-            komentar:
-              "Sangat membantu menemukan layanan kesehatan terdekat. Platformnya mudah digunakan dan informasinya akurat!",
-            avatar: "RS",
-          },
-          {
-            id: 2,
-            nama: "Budi Setiawan",
-            role: "Pengusaha UMKM",
-            rating: 4,
-            komentar:
-              "Sejak mendaftarkan usaha saya di sini, penjualan meningkat drastis. Terima kasih Direktori Layanan!",
-            avatar: "BS",
-          },
-          {
-            id: 3,
-            nama: "Ani Lestari",
-            role: "Mahasiswa",
-            rating: 5,
-            komentar:
-              "Aplikasi yang sangat berguna untuk mahasiswa seperti saya. Bisa menemukan segala kebutuhan dalam satu platform.",
-            avatar: "AL",
-          },
-        ],
+      const UserDB = {
+        getAllUsers() {
+          return JSON.parse(localStorage.getItem("usersDB") || "[]");
+        },
+
+        findUserById(userId) {
+          const users = this.getAllUsers();
+          return users.find((user) => user.id === userId);
+        },
+
+        updateUser(userId, updates) {
+          const users = this.getAllUsers();
+          const userIndex = users.findIndex((u) => u.id === userId);
+          if (userIndex !== -1) {
+            users[userIndex] = { ...users[userIndex], ...updates };
+            localStorage.setItem("usersDB", JSON.stringify(users));
+            return users[userIndex];
+          }
+          return null;
+        },
+
+        updateUserProfile(userId, profileUpdates) {
+          const users = this.getAllUsers();
+          const userIndex = users.findIndex((u) => u.id === userId);
+          if (userIndex !== -1) {
+            users[userIndex].profile = {
+              ...users[userIndex].profile,
+              ...profileUpdates,
+            };
+            localStorage.setItem("usersDB", JSON.stringify(users));
+            return users[userIndex];
+          }
+          return null;
+        },
+
+        updateUserPassword(userId, newPassword) {
+          const users = this.getAllUsers();
+          const userIndex = users.findIndex((u) => u.id === userId);
+          if (userIndex !== -1) {
+            users[userIndex].password = newPassword;
+            localStorage.setItem("usersDB", JSON.stringify(users));
+            return true;
+          }
+          return false;
+        },
+      };
+
+      // ========================
+      // SESSION MANAGER
+      // ========================
+      const SessionManager = {
+        getSession() {
+          const session = localStorage.getItem("currentSession");
+          return session ? JSON.parse(session) : null;
+        },
+
+        clearSession() {
+          localStorage.removeItem("currentSession");
+        },
+
+        getCurrentUser() {
+          const session = this.getSession();
+          if (!session) return null;
+          return UserDB.findUserById(session.userId);
+        },
       };
 
       // ========================
@@ -2082,20 +1845,7 @@
       const APP_STATE = {
         currentPage: "dashboard",
         theme: localStorage.getItem("theme") || "light",
-        currentFilter: { layanan: "all", umkm: "all" },
-        currentEditId: null,
-        currentEditType: null,
-        profile: {
-          name: "Admin Direktori",
-          email: "admin@direktorilayanan.id",
-          phone: "+62 812-3456-7890",
-          position: "Administrator Sistem",
-          address:
-            "Jl. Inovasi Digital No. 123, Jakarta Pusat, DKI Jakarta 10110",
-          about:
-            "Administrator bertanggung jawab untuk mengelola dan memantau semua layanan publik dan UMKM yang terdaftar dalam platform Direktori Layanan.",
-          photo: null,
-        },
+        currentUser: null,
       };
 
       // ========================
@@ -2106,12 +1856,18 @@
       });
 
       function initializeApp() {
+        // Load current user
+        APP_STATE.currentUser = SessionManager.getCurrentUser();
+
+        if (!APP_STATE.currentUser) {
+          window.location.href = "index.html";
+          return;
+        }
+
         lucide.createIcons();
-        loadData();
         initTheme();
-        initEventListeners();
+        loadUserProfile();
         initScrollAnimations();
-        initBackToTop();
         updateCounts();
         loadDashboard();
       }
@@ -2131,418 +1887,201 @@
         lucide.createIcons();
       }
 
-      function initEventListeners() {
-        window.addEventListener("scroll", handleScroll);
+      // ========================
+      // USER PROFILE FUNCTIONS
+      // ========================
+      function loadUserProfile() {
+        const user = APP_STATE.currentUser;
+        if (!user) return;
 
-        // Filter buttons
-        document.querySelectorAll(".filter-btn").forEach((btn) => {
-          btn.addEventListener("click", function () {
-            handleFilter(this);
+        // Get initials
+        const initials = user.name
+          .split(" ")
+          .map((n) => n[0])
+          .join("")
+          .toUpperCase()
+          .slice(0, 2);
+
+        // Update all user name displays
+        document.getElementById("sidebar-name").textContent = user.name;
+        document.getElementById("sidebar-initials").textContent = initials;
+        document.getElementById("sidebar-position").textContent =
+          user.profile.position || "Pengguna";
+        document.getElementById("header-name").textContent = user.name;
+        document.getElementById("header-initials").textContent = initials;
+        document.getElementById("header-position").textContent =
+          user.profile.position || "Pengguna";
+        document.getElementById("dashboard-username").textContent =
+          user.name.split(" ")[0];
+
+        // Profile page
+        document.getElementById("profile-name").textContent = user.name;
+        document.getElementById("profile-position").textContent =
+          user.profile.position || "Pengguna";
+        document.getElementById("profile-photo").textContent = initials;
+
+        // Display fields
+        document.getElementById("display-nama").textContent = user.name;
+        document.getElementById("display-email").textContent = user.email;
+        document.getElementById("display-telepon").textContent = user.phone;
+        document.getElementById("display-jabatan").textContent =
+          user.profile.position || "Pengguna";
+        document.getElementById("display-alamat").textContent =
+          user.profile.address || "-";
+        document.getElementById("display-tentang").textContent =
+          user.profile.about || "-";
+
+        // Join date
+        const joinDate = new Date(user.registeredAt).toLocaleDateString(
+          "id-ID",
+          {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+          }
+        );
+        document.getElementById("profile-joined").textContent = joinDate;
+
+        // Load photo if exists
+        if (user.profile.photo) {
+          const photoElements = [
+            document.getElementById("profile-photo"),
+            document.getElementById("sidebar-avatar").querySelector("span"),
+            document.getElementById("header-avatar").querySelector("span"),
+          ];
+
+          photoElements.forEach((el) => {
+            if (el && el.parentElement) {
+              el.parentElement.style.backgroundImage = `url(${user.profile.photo})`;
+              el.parentElement.style.backgroundSize = "cover";
+              el.parentElement.style.backgroundPosition = "center";
+              el.style.display = "none";
+            }
           });
-        });
+        }
       }
 
-      // ========================
-      // DATA MANAGEMENT
-      // ========================
-      function loadData() {
-        displayLayananData(DATABASE.layanan);
-        displayUMKMData(DATABASE.umkm);
-        displayTestimonials();
-        document.getElementById("loading-layanan").classList.add("hidden");
-        document.getElementById("loading-umkm").classList.add("hidden");
-      }
+      function openEditProfileModal() {
+        const user = APP_STATE.currentUser;
+        if (!user) return;
 
-      function updateCounts() {
-        document.getElementById("layanan-count").textContent =
-          DATABASE.layanan.length;
-        document.getElementById("umkm-count").textContent =
-          DATABASE.umkm.length;
-      }
+        document.getElementById("edit-nama").value = user.name;
+        document.getElementById("edit-telepon").value = user.phone;
+        document.getElementById("edit-jabatan").value =
+          user.profile.position || "";
+        document.getElementById("edit-alamat").value =
+          user.profile.address || "";
+        document.getElementById("edit-tentang").value =
+          user.profile.about || "";
 
-      function loadDashboard() {
-        // Recent Activities
-        const activities = document.getElementById("recent-activities");
-        activities.innerHTML = `
-        <div class="flex items-center space-x-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-xl">
-          <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-            <i data-lucide="plus" class="w-5 h-5 text-white"></i>
-          </div>
-          <div class="flex-1">
-            <p class="font-semibold text-gray-900 dark:text-white">Layanan baru ditambahkan</p>
-            <p class="text-sm text-gray-600 dark:text-gray-400">${DATABASE.layanan[0].nama}</p>
-          </div>
-          <span class="text-xs text-gray-500">2 jam lalu</span>
-        </div>
-        <div class="flex items-center space-x-4 p-3 bg-teal-50 dark:bg-teal-900/20 rounded-xl">
-          <div class="w-10 h-10 bg-accent rounded-full flex items-center justify-center">
-            <i data-lucide="store" class="w-5 h-5 text-white"></i>
-          </div>
-          <div class="flex-1">
-            <p class="font-semibold text-gray-900 dark:text-white">UMKM baru terdaftar</p>
-            <p class="text-sm text-gray-600 dark:text-gray-400">${DATABASE.umkm[0].nama}</p>
-          </div>
-          <span class="text-xs text-gray-500">5 jam lalu</span>
-        </div>
-      `;
-
-        // Popular Categories
-        const categories = document.getElementById("popular-categories");
-        const categoryStats = getCategoryStats();
-        categories.innerHTML = categoryStats
-          .map(
-            (cat) => `
-        <div class="flex items-center justify-between p-3 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors cursor-pointer">
-          <div class="flex items-center space-x-3">
-            <div class="w-8 h-8 bg-${cat.color}-100 dark:bg-${cat.color}-900/30 rounded-lg flex items-center justify-center">
-              <i data-lucide="${cat.icon}" class="w-4 h-4 text-${cat.color}-600"></i>
-            </div>
-            <span class="font-medium text-gray-900 dark:text-white">${cat.name}</span>
-          </div>
-          <span class="text-sm text-gray-600 dark:text-gray-400">${cat.count} items</span>
-        </div>
-      `
-          )
-          .join("");
-
+        document
+          .getElementById("edit-profile-modal")
+          .classList.remove("hidden");
         lucide.createIcons();
       }
 
-      function getCategoryStats() {
-        const layananCategories = {};
-        DATABASE.layanan.forEach((item) => {
-          layananCategories[item.kategori] =
-            (layananCategories[item.kategori] || 0) + 1;
+      function closeEditProfileModal() {
+        document.getElementById("edit-profile-modal").classList.add("hidden");
+      }
+
+      function handleEditProfileSubmit(event) {
+        event.preventDefault();
+
+        const updatedUser = UserDB.updateUser(APP_STATE.currentUser.id, {
+          name: document.getElementById("edit-nama").value,
+          phone: document.getElementById("edit-telepon").value,
         });
 
-        const categoryIcons = {
-          kesehatan: { icon: "heart-pulse", color: "red" },
-          pendidikan: { icon: "graduation-cap", color: "blue" },
-          administrasi: { icon: "file-text", color: "green" },
-          keamanan: { icon: "shield", color: "purple" },
-          sosial: { icon: "heart", color: "pink" },
-          transportasi: { icon: "bus", color: "orange" },
-        };
+        UserDB.updateUserProfile(APP_STATE.currentUser.id, {
+          position: document.getElementById("edit-jabatan").value,
+          address: document.getElementById("edit-alamat").value,
+          about: document.getElementById("edit-tentang").value,
+        });
 
-        return Object.entries(layananCategories).map(([key, count]) => ({
-          name: key.charAt(0).toUpperCase() + key.slice(1),
-          count,
-          icon: categoryIcons[key]?.icon || "circle",
-          color: categoryIcons[key]?.color || "gray",
-        }));
+        APP_STATE.currentUser = UserDB.findUserById(APP_STATE.currentUser.id);
+        loadUserProfile();
+        closeEditProfileModal();
+        showToast("success", "Profil berhasil diperbarui!");
       }
 
-      // ========================
-      // DISPLAY FUNCTIONS
-      // ========================
-      function displayLayananData(data) {
-        const container = document.getElementById("layanan-list");
-        if (!data || data.length === 0) {
-          container.innerHTML = `
-          <div class="col-span-full text-center py-12">
-            <i data-lucide="inbox" class="w-16 h-16 text-gray-400 mx-auto mb-4"></i>
-            <p class="text-gray-500 dark:text-gray-400 text-lg">Belum ada data layanan</p>
-          </div>
-        `;
-          lucide.createIcons();
-          return;
-        }
+      function handlePhotoUpload(event) {
+        const file = event.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            const photoData = e.target.result;
 
-        container.innerHTML = data
-          .map((item, index) => createLayananCard(item, index))
-          .join("");
-        lucide.createIcons();
-        initScrollAnimations();
-      }
+            UserDB.updateUserProfile(APP_STATE.currentUser.id, {
+              photo: photoData,
+            });
 
-      function createLayananCard(item, index) {
-        const categoryColors = {
-          kesehatan:
-            "bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300",
-          pendidikan:
-            "bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300",
-          administrasi:
-            "bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300",
-          keamanan:
-            "bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300",
-          sosial:
-            "bg-pink-100 dark:bg-pink-900/30 text-pink-800 dark:text-pink-300",
-          transportasi:
-            "bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-300",
-        };
+            APP_STATE.currentUser = UserDB.findUserById(
+              APP_STATE.currentUser.id
+            );
 
-        return `
-        <div class="enhanced-card reveal" style="animation-delay: ${
-          index * 0.1
-        }s" data-kategori="${item.kategori}">
-          <div class="card-image" style="background-image: url('${
-            item.image
-          }')">
-            <div class="card-overlay">
-              <h3 class="text-xl font-bold text-white">${item.nama}</h3>
-            </div>
-            <div class="category-badge ${
-              categoryColors[item.kategori] || "bg-gray-100 text-gray-800"
-            }">
-              ${item.kategori.charAt(0).toUpperCase() + item.kategori.slice(1)}
-            </div>
-          </div>
-          <div class="p-6">
-            <p class="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed line-clamp-3">${
-              item.deskripsi
-            }</p>
-            <div class="space-y-2 mb-4">
-              <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                <i data-lucide="map-pin" class="w-4 h-4 mr-2 text-primary"></i>
-                <span>${item.lokasi}</span>
-              </div>
-              <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                <i data-lucide="phone" class="w-4 h-4 mr-2 text-primary"></i>
-                <span>${item.telepon}</span>
-              </div>
-            </div>
-            <div class="flex space-x-2">
-              <button class="flex-1 px-4 py-2 bg-primary text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300" onclick="showDetail(${
-                item.id
-              }, 'layanan')">
-                Lihat Detail
-              </button>
-              <button class="px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300" onclick="editItem(${
-                item.id
-              }, 'layanan')">
-                <i data-lucide="edit" class="w-4 h-4"></i>
-              </button>
-              <button class="px-4 py-2 bg-red-100 dark:bg-red-900/30 text-red-600 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/50 transition-all duration-300" onclick="deleteItem(${
-                item.id
-              }, 'layanan')">
-                <i data-lucide="trash-2" class="w-4 h-4"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      `;
-      }
+            const photoElements = [
+              document.getElementById("profile-photo"),
+              document.getElementById("sidebar-avatar").querySelector("span"),
+              document.getElementById("header-avatar").querySelector("span"),
+            ];
 
-      function displayUMKMData(data) {
-        const container = document.getElementById("umkm-list");
-        if (!data || data.length === 0) {
-          container.innerHTML = `
-          <div class="col-span-full text-center py-12">
-            <i data-lucide="inbox" class="w-16 h-16 text-gray-400 mx-auto mb-4"></i>
-            <p class="text-gray-500 dark:text-gray-400 text-lg">Belum ada data UMKM</p>
-          </div>
-        `;
-          lucide.createIcons();
-          return;
-        }
-
-        container.innerHTML = data
-          .map((item, index) => createUMKMCard(item, index))
-          .join("");
-        lucide.createIcons();
-        initScrollAnimations();
-      }
-
-      function createUMKMCard(item, index) {
-        const categoryColors = {
-          makanan:
-            "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300",
-          kerajinan:
-            "bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300",
-          fashion:
-            "bg-pink-100 dark:bg-pink-900/30 text-pink-800 dark:text-pink-300",
-          elektronik:
-            "bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300",
-          jasa: "bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300",
-          pertanian:
-            "bg-lime-100 dark:bg-lime-900/30 text-lime-800 dark:text-lime-300",
-        };
-
-        return `
-        <div class="enhanced-card reveal" style="animation-delay: ${
-          index * 0.1
-        }s" data-kategori="${item.kategori}">
-          <div class="card-image" style="background-image: url('${
-            item.image
-          }')">
-            <div class="card-overlay">
-              <h3 class="text-xl font-bold text-white">${item.nama}</h3>
-            </div>
-            <div class="category-badge ${
-              categoryColors[item.kategori] || "bg-gray-100 text-gray-800"
-            }">
-              ${item.kategori.charAt(0).toUpperCase() + item.kategori.slice(1)}
-            </div>
-          </div>
-          <div class="p-6">
-            <p class="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed line-clamp-3">${
-              item.deskripsi
-            }</p>
-            <div class="space-y-2 mb-4">
-              <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                <i data-lucide="map-pin" class="w-4 h-4 mr-2 text-accent"></i>
-                <span>${item.lokasi}</span>
-              </div>
-              <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                <i data-lucide="phone" class="w-4 h-4 mr-2 text-accent"></i>
-                <span>${item.telepon}</span>
-              </div>
-              ${
-                item.instagram
-                  ? `
-              <div class="flex items-center text-sm text-accent font-medium">
-                <i data-lucide="instagram" class="w-4 h-4 mr-2"></i>
-                <span>${item.instagram}</span>
-              </div>
-              `
-                  : ""
+            photoElements.forEach((el) => {
+              if (el && el.parentElement) {
+                el.parentElement.style.backgroundImage = `url(${photoData})`;
+                el.parentElement.style.backgroundSize = "cover";
+                el.parentElement.style.backgroundPosition = "center";
+                el.style.display = "none";
               }
-            </div>
-            <div class="flex space-x-2">
-              <button class="flex-1 px-4 py-2 bg-accent text-white font-semibold rounded-lg hover:bg-teal-700 transition-all duration-300" onclick="showDetail(${
-                item.id
-              }, 'umkm')">
-                Lihat Detail
-              </button>
-              <button class="px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300" onclick="editItem(${
-                item.id
-              }, 'umkm')">
-                <i data-lucide="edit" class="w-4 h-4"></i>
-              </button>
-              <button class="px-4 py-2 bg-red-100 dark:bg-red-900/30 text-red-600 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/50 transition-all duration-300" onclick="deleteItem(${
-                item.id
-              }, 'umkm')">
-                <i data-lucide="trash-2" class="w-4 h-4"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      `;
+            });
+
+            showToast("success", "Foto profil berhasil diubah!");
+          };
+          reader.readAsDataURL(file);
+        }
       }
 
-      function displayTestimonials() {
-        const container = document.getElementById("testimonials-list");
-        const avatarColors = [
-          "from-primary to-blue-600",
-          "from-accent to-teal-600",
-          "from-yellow-500 to-amber-600",
-        ];
+      function openChangePasswordModal() {
+        document
+          .getElementById("change-password-modal")
+          .classList.remove("hidden");
+      }
 
-        container.innerHTML = DATABASE.testimonials
-          .map(
-            (item, index) => `
-        <div class="glass rounded-2xl p-6 card-enhanced reveal" style="animation-delay: ${
-          index * 0.1
-        }s">
-          <div class="flex items-center space-x-3 mb-4">
-            <div class="w-12 h-12 bg-gradient-to-br ${
-              avatarColors[index % 3]
-            } rounded-full flex items-center justify-center">
-              <span class="text-white font-bold">${item.avatar}</span>
-            </div>
-            <div>
-              <h4 class="font-bold text-gray-900 dark:text-white">${
-                item.nama
-              }</h4>
-              <p class="text-sm text-gray-600 dark:text-gray-400">${
-                item.role
-              }</p>
-            </div>
-          </div>
-          <div class="flex mb-3">
-            ${Array(5)
-              .fill(0)
-              .map(
-                (_, i) =>
-                  `<span class="star ${
-                    i < item.rating ? "filled" : ""
-                  }">★</span>`
-              )
-              .join("")}
-          </div>
-          <p class="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">${
-            item.komentar
-          }</p>
-        </div>
-      `
-          )
-          .join("");
+      function closeChangePasswordModal() {
+        document
+          .getElementById("change-password-modal")
+          .classList.add("hidden");
+        document.getElementById("change-password-form").reset();
+      }
 
-        // Rating Breakdown
-        const ratingBreakdown = document.getElementById("rating-breakdown");
-        ratingBreakdown.innerHTML = `
-        <div class="flex items-center justify-between">
-          <div class="flex items-center space-x-2">
-            <span class="text-sm text-gray-600 dark:text-gray-400">5 bintang</span>
-            <div class="flex">${Array(5)
-              .fill(0)
-              .map(() => '<span class="star filled">★</span>')
-              .join("")}</div>
-          </div>
-          <span class="text-sm font-semibold text-gray-700 dark:text-gray-300">128</span>
-        </div>
-        <div class="flex items-center justify-between">
-          <div class="flex items-center space-x-2">
-            <span class="text-sm text-gray-600 dark:text-gray-400">4 bintang</span>
-            <div class="flex">${Array(4)
-              .fill(0)
-              .map(() => '<span class="star filled">★</span>')
-              .join("")}<span class="star">★</span></div>
-          </div>
-          <span class="text-sm font-semibold text-gray-700 dark:text-gray-300">45</span>
-        </div>
-        <div class="flex items-center justify-between">
-          <div class="flex items-center space-x-2">
-            <span class="text-sm text-gray-600 dark:text-gray-400">3 bintang</span>
-            <div class="flex">${Array(3)
-              .fill(0)
-              .map(() => '<span class="star filled">★</span>')
-              .join("")}${Array(2)
-          .fill(0)
-          .map(() => '<span class="star">★</span>')
-          .join("")}</div>
-          </div>
-          <span class="text-sm font-semibold text-gray-700 dark:text-gray-300">12</span>
-        </div>
-      `;
+      function handleChangePasswordSubmit(event) {
+        event.preventDefault();
 
-        // Recent Ratings
-        const recentRatings = document.getElementById("recent-ratings");
-        recentRatings.innerHTML = `
-        <div class="flex items-start space-x-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-          <div class="flex-1">
-            <div class="flex items-center justify-between mb-2">
-              <span class="font-semibold text-gray-900 dark:text-white">${
-                DATABASE.layanan[0].nama
-              }</span>
-              <div class="flex">${Array(5)
-                .fill(0)
-                .map(() => '<span class="star filled">★</span>')
-                .join("")}</div>
-            </div>
-            <p class="text-sm text-gray-600 dark:text-gray-400">"Pelayanan sangat memuaskan dan cepat"</p>
-            <span class="text-xs text-gray-500">- Sari, 2 jam lalu</span>
-          </div>
-        </div>
-        <div class="flex items-start space-x-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-          <div class="flex-1">
-            <div class="flex items-center justify-between mb-2">
-              <span class="font-semibold text-gray-900 dark:text-white">${
-                DATABASE.umkm[0].nama
-              }</span>
-              <div class="flex">${Array(4)
-                .fill(0)
-                .map(() => '<span class="star filled">★</span>')
-                .join("")}<span class="star">★</span></div>
-            </div>
-            <p class="text-sm text-gray-600 dark:text-gray-400">"Produk berkualitas, pengiriman tepat waktu"</p>
-            <span class="text-xs text-gray-500">- Andi, 5 jam lalu</span>
-          </div>
-        </div>
-      `;
+        const currentPassword =
+          document.getElementById("current-password").value;
+        const newPassword = document.getElementById("new-password").value;
+        const confirmPassword =
+          document.getElementById("confirm-password").value;
 
-        lucide.createIcons();
-        initScrollAnimations();
+        if (APP_STATE.currentUser.password !== currentPassword) {
+          showToast("error", "Password saat ini salah!");
+          return;
+        }
+
+        if (newPassword !== confirmPassword) {
+          showToast("error", "Konfirmasi password tidak cocok!");
+          return;
+        }
+
+        if (newPassword.length < 6) {
+          showToast("error", "Password harus minimal 6 karakter!");
+          return;
+        }
+
+        UserDB.updateUserPassword(APP_STATE.currentUser.id, newPassword);
+        APP_STATE.currentUser = UserDB.findUserById(APP_STATE.currentUser.id);
+
+        closeChangePasswordModal();
+        showToast("success", "Password berhasil diubah!");
       }
 
       // ========================
@@ -2571,443 +2110,6 @@
       }
 
       // ========================
-      // FILTER & SEARCH
-      // ========================
-      function handleFilter(button) {
-        const section = button.dataset.section;
-        const filter = button.dataset.filter;
-
-        document
-          .querySelectorAll(`button[data-section="${section}"]`)
-          .forEach((btn) => {
-            btn.classList.remove("active");
-          });
-        button.classList.add("active");
-
-        APP_STATE.currentFilter[section] = filter;
-
-        const data = DATABASE[section];
-        const filteredData =
-          filter === "all"
-            ? data
-            : data.filter((item) => item.kategori === filter);
-
-        if (section === "layanan") {
-          displayLayananData(filteredData);
-        } else if (section === "umkm") {
-          displayUMKMData(filteredData);
-        }
-      }
-
-      function handleSearch() {
-        const searchTerm = document
-          .getElementById("search")
-          .value.toLowerCase();
-
-        if (APP_STATE.currentPage === "layanan") {
-          const filtered = DATABASE.layanan.filter(
-            (item) =>
-              item.nama.toLowerCase().includes(searchTerm) ||
-              item.deskripsi.toLowerCase().includes(searchTerm) ||
-              item.kategori.toLowerCase().includes(searchTerm) ||
-              item.lokasi.toLowerCase().includes(searchTerm)
-          );
-          displayLayananData(filtered);
-        } else if (APP_STATE.currentPage === "umkm") {
-          const filtered = DATABASE.umkm.filter(
-            (item) =>
-              item.nama.toLowerCase().includes(searchTerm) ||
-              item.deskripsi.toLowerCase().includes(searchTerm) ||
-              item.kategori.toLowerCase().includes(searchTerm) ||
-              item.lokasi.toLowerCase().includes(searchTerm)
-          );
-          displayUMKMData(filtered);
-        }
-      }
-
-      // ========================
-      // MODAL FUNCTIONS
-      // ========================
-      function showAddModal(type) {
-        const modal = document.getElementById("add-modal");
-        const title = document.getElementById("modal-title");
-        const form = document.getElementById("add-form");
-        const categorySelect = document.getElementById("add-kategori");
-        const extraFields = document.getElementById("add-extra-fields");
-
-        title.textContent = `Tambah ${
-          type === "layanan" ? "Layanan Publik" : "UMKM Lokal"
-        }`;
-        form.dataset.type = type;
-
-        // Set categories
-        categorySelect.innerHTML = '<option value="">Pilih Kategori</option>';
-        const categories =
-          type === "layanan"
-            ? [
-                "kesehatan",
-                "pendidikan",
-                "administrasi",
-                "keamanan",
-                "sosial",
-                "transportasi",
-              ]
-            : [
-                "makanan",
-                "kerajinan",
-                "fashion",
-                "elektronik",
-                "jasa",
-                "pertanian",
-              ];
-
-        categories.forEach((cat) => {
-          const option = document.createElement("option");
-          option.value = cat;
-          option.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
-          categorySelect.appendChild(option);
-        });
-
-        // Extra fields for UMKM
-        if (type === "umkm") {
-          extraFields.innerHTML = `
-          <div>
-            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Instagram</label>
-            <input type="text" id="add-instagram" class="w-full px-4 py-3 form-input rounded-lg" placeholder="@username" />
-          </div>
-        `;
-        } else {
-          extraFields.innerHTML = "";
-        }
-
-        modal.classList.remove("hidden");
-        lucide.createIcons();
-      }
-
-      function closeAddModal() {
-        document.getElementById("add-modal").classList.add("hidden");
-        document.getElementById("add-form").reset();
-      }
-
-      function handleAddSubmit(event) {
-        event.preventDefault();
-        const form = event.target;
-        const type = form.dataset.type;
-
-        const newItem = {
-          id: Date.now(),
-          nama: document.getElementById("add-nama").value,
-          kategori: document.getElementById("add-kategori").value,
-          deskripsi: document.getElementById("add-deskripsi").value,
-          lokasi: document.getElementById("add-lokasi").value,
-          telepon: document.getElementById("add-telepon").value,
-          image:
-            document.getElementById("add-image").value ||
-            "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=400&fit=crop",
-        };
-
-        if (type === "umkm") {
-          newItem.instagram =
-            document.getElementById("add-instagram")?.value || "";
-        }
-
-        DATABASE[type].push(newItem);
-
-        if (type === "layanan") {
-          displayLayananData(DATABASE.layanan);
-        } else {
-          displayUMKMData(DATABASE.umkm);
-        }
-
-        updateCounts();
-        loadDashboard();
-        closeAddModal();
-        showToast(
-          "success",
-          `${type === "layanan" ? "Layanan" : "UMKM"} berhasil ditambahkan!`
-        );
-      }
-
-      function showDetail(id, type) {
-        const item = DATABASE[type].find((i) => i.id === id);
-        if (!item) return;
-
-        const modal = document.getElementById("detail-modal");
-        const title = document.getElementById("detail-title");
-        const content = document.getElementById("detail-content");
-
-        title.textContent = item.nama;
-        content.innerHTML = `
-        <div class="rounded-2xl overflow-hidden mb-6">
-          <img src="${item.image}" alt="${
-          item.nama
-        }" class="w-full h-64 object-cover" />
-        </div>
-        <div class="space-y-4">
-          <div>
-            <h4 class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-1">Kategori</h4>
-            <p class="text-gray-900 dark:text-white font-medium">${
-              item.kategori.charAt(0).toUpperCase() + item.kategori.slice(1)
-            }</p>
-          </div>
-          <div>
-            <h4 class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-1">Deskripsi</h4>
-            <p class="text-gray-900 dark:text-white">${item.deskripsi}</p>
-          </div>
-          <div>
-            <h4 class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-1">Lokasi</h4>
-            <p class="text-gray-900 dark:text-white flex items-center">
-              <i data-lucide="map-pin" class="w-4 h-4 mr-2 text-primary"></i>${
-                item.lokasi
-              }
-            </p>
-          </div>
-          <div>
-            <h4 class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-1">Telepon</h4>
-            <p class="text-gray-900 dark:text-white flex items-center">
-              <i data-lucide="phone" class="w-4 h-4 mr-2 text-primary"></i>${
-                item.telepon
-              }
-            </p>
-          </div>
-          ${
-            item.instagram
-              ? `
-          <div>
-            <h4 class="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-1">Instagram</h4>
-            <p class="text-accent font-medium flex items-center">
-              <i data-lucide="instagram" class="w-4 h-4 mr-2"></i>${item.instagram}
-            </p>
-          </div>
-          `
-              : ""
-          }
-        </div>
-      `;
-
-        APP_STATE.currentEditId = id;
-        APP_STATE.currentEditType = type;
-
-        modal.classList.remove("hidden");
-        lucide.createIcons();
-      }
-
-      function closeDetailModal() {
-        document.getElementById("detail-modal").classList.add("hidden");
-        APP_STATE.currentEditId = null;
-        APP_STATE.currentEditType = null;
-      }
-
-      function editCurrentItem() {
-        if (APP_STATE.currentEditId && APP_STATE.currentEditType) {
-          closeDetailModal();
-          editItem(APP_STATE.currentEditId, APP_STATE.currentEditType);
-        }
-      }
-
-      function editItem(id, type) {
-        const item = DATABASE[type].find((i) => i.id === id);
-        if (!item) return;
-
-        showAddModal(type);
-        document.getElementById("modal-title").textContent = `Edit ${
-          type === "layanan" ? "Layanan" : "UMKM"
-        }`;
-
-        document.getElementById("add-nama").value = item.nama;
-        document.getElementById("add-kategori").value = item.kategori;
-        document.getElementById("add-deskripsi").value = item.deskripsi;
-        document.getElementById("add-lokasi").value = item.lokasi;
-        document.getElementById("add-telepon").value = item.telepon;
-        document.getElementById("add-image").value = item.image;
-
-        if (type === "umkm" && item.instagram) {
-          document.getElementById("add-instagram").value = item.instagram;
-        }
-
-        const form = document.getElementById("add-form");
-        form.dataset.editId = id;
-        form.onsubmit = function (e) {
-          e.preventDefault();
-          const index = DATABASE[type].findIndex((i) => i.id === id);
-          if (index !== -1) {
-            DATABASE[type][index] = {
-              ...DATABASE[type][index],
-              nama: document.getElementById("add-nama").value,
-              kategori: document.getElementById("add-kategori").value,
-              deskripsi: document.getElementById("add-deskripsi").value,
-              lokasi: document.getElementById("add-lokasi").value,
-              telepon: document.getElementById("add-telepon").value,
-              image: document.getElementById("add-image").value,
-            };
-
-            if (type === "umkm") {
-              DATABASE[type][index].instagram =
-                document.getElementById("add-instagram")?.value || "";
-            }
-
-            if (type === "layanan") {
-              displayLayananData(DATABASE.layanan);
-            } else {
-              displayUMKMData(DATABASE.umkm);
-            }
-
-            loadDashboard();
-            closeAddModal();
-            showToast(
-              "success",
-              `${type === "layanan" ? "Layanan" : "UMKM"} berhasil diperbarui!`
-            );
-          }
-          form.onsubmit = handleAddSubmit;
-        };
-      }
-
-      function deleteItem(id, type) {
-        if (
-          !confirm(
-            `Apakah Anda yakin ingin menghapus ${
-              type === "layanan" ? "layanan" : "UMKM"
-            } ini?`
-          )
-        )
-          return;
-
-        const index = DATABASE[type].findIndex((i) => i.id === id);
-        if (index !== -1) {
-          DATABASE[type].splice(index, 1);
-
-          if (type === "layanan") {
-            displayLayananData(DATABASE.layanan);
-          } else {
-            displayUMKMData(DATABASE.umkm);
-          }
-
-          updateCounts();
-          loadDashboard();
-          showToast(
-            "success",
-            `${type === "layanan" ? "Layanan" : "UMKM"} berhasil dihapus!`
-          );
-        }
-      }
-
-      // ========================
-      // PROFILE FUNCTIONS
-      // ========================
-      function openEditProfileModal() {
-        const modal = document.getElementById("edit-profile-modal");
-        document.getElementById("edit-nama").value = APP_STATE.profile.name;
-        document.getElementById("edit-email").value = APP_STATE.profile.email;
-        document.getElementById("edit-telepon").value = APP_STATE.profile.phone;
-        document.getElementById("edit-jabatan").value =
-          APP_STATE.profile.position;
-        document.getElementById("edit-alamat").value =
-          APP_STATE.profile.address;
-        document.getElementById("edit-tentang").value = APP_STATE.profile.about;
-        modal.classList.remove("hidden");
-      }
-
-      function closeEditProfileModal() {
-        document.getElementById("edit-profile-modal").classList.add("hidden");
-      }
-
-      function handleEditProfileSubmit(event) {
-        event.preventDefault();
-        APP_STATE.profile.name = document.getElementById("edit-nama").value;
-        APP_STATE.profile.email = document.getElementById("edit-email").value;
-        APP_STATE.profile.phone = document.getElementById("edit-telepon").value;
-        APP_STATE.profile.position =
-          document.getElementById("edit-jabatan").value;
-        APP_STATE.profile.address =
-          document.getElementById("edit-alamat").value;
-        APP_STATE.profile.about = document.getElementById("edit-tentang").value;
-
-        updateProfileUI();
-        closeEditProfileModal();
-        showToast("success", "Profil berhasil diperbarui!");
-      }
-
-      function updateProfileUI() {
-        document.getElementById("profile-name").textContent =
-          APP_STATE.profile.name;
-        document.getElementById("display-nama").textContent =
-          APP_STATE.profile.name;
-        document.getElementById("display-email").textContent =
-          APP_STATE.profile.email;
-        document.getElementById("display-telepon").textContent =
-          APP_STATE.profile.phone;
-        document.getElementById("display-jabatan").textContent =
-          APP_STATE.profile.position;
-        document.getElementById("display-alamat").textContent =
-          APP_STATE.profile.address;
-        document.getElementById("display-tentang").textContent =
-          APP_STATE.profile.about;
-        document.getElementById("sidebar-name").textContent =
-          APP_STATE.profile.name;
-        document.getElementById("header-name").textContent =
-          APP_STATE.profile.name;
-      }
-
-      function handlePhotoUpload(event) {
-        const file = event.target.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = function (e) {
-            APP_STATE.profile.photo = e.target.result;
-            const photoElements = [
-              document.getElementById("profile-photo"),
-              document.getElementById("sidebar-avatar"),
-              document.getElementById("header-avatar"),
-            ];
-            photoElements.forEach((el) => {
-              if (el) {
-                el.innerHTML = "";
-                el.style.backgroundImage = `url(${e.target.result})`;
-                el.style.backgroundSize = "cover";
-                el.style.backgroundPosition = "center";
-              }
-            });
-            showToast("success", "Foto profil berhasil diubah!");
-          };
-          reader.readAsDataURL(file);
-        }
-      }
-
-      function openChangePasswordModal() {
-        document
-          .getElementById("change-password-modal")
-          .classList.remove("hidden");
-      }
-
-      function closeChangePasswordModal() {
-        document
-          .getElementById("change-password-modal")
-          .classList.add("hidden");
-        document.getElementById("change-password-form").reset();
-      }
-
-      function handleChangePasswordSubmit(event) {
-        event.preventDefault();
-        const newPassword = document.getElementById("new-password").value;
-        const confirmPassword =
-          document.getElementById("confirm-password").value;
-
-        if (newPassword !== confirmPassword) {
-          showToast("error", "Konfirmasi password tidak cocok!");
-          return;
-        }
-
-        if (newPassword.length < 6) {
-          showToast("error", "Password harus minimal 6 karakter!");
-          return;
-        }
-
-        closeChangePasswordModal();
-        showToast("success", "Password berhasil diubah!");
-      }
-
-      // ========================
       // UTILITY FUNCTIONS
       // ========================
       function toggleTheme() {
@@ -3032,12 +2134,6 @@
         showToast("success", "Anda memiliki 3 notifikasi baru!");
       }
 
-      function handleContactSubmit(event) {
-        event.preventDefault();
-        event.target.reset();
-        showToast("success", "Pesan Anda telah berhasil dikirim!");
-      }
-
       function enable2FA() {
         showToast("success", "Verifikasi 2 faktor berhasil diaktifkan!");
       }
@@ -3048,9 +2144,76 @@
 
       function logout() {
         if (confirm("Apakah Anda yakin ingin keluar?")) {
+          SessionManager.clearSession();
           showToast("success", "Anda telah berhasil keluar.");
-          setTimeout(() => location.reload(), 1500);
+          setTimeout(() => {
+            window.location.href = "index.html";
+          }, 1000);
         }
+      }
+
+      function updateCounts() {
+        document.getElementById("layanan-count").textContent = 6;
+        document.getElementById("umkm-count").textContent = 6;
+      }
+
+      function loadDashboard() {
+        const activities = document.getElementById("recent-activities");
+        activities.innerHTML = `
+          <div class="flex items-center space-x-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-xl">
+            <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+              <i data-lucide="user-check" class="w-5 h-5 text-white"></i>
+            </div>
+            <div class="flex-1">
+              <p class="font-semibold text-gray-900 dark:text-white">Anda berhasil login</p>
+              <p class="text-sm text-gray-600 dark:text-gray-400">Selamat datang kembali!</p>
+            </div>
+            <span class="text-xs text-gray-500">Baru saja</span>
+          </div>
+          <div class="flex items-center space-x-4 p-3 bg-teal-50 dark:bg-teal-900/20 rounded-xl">
+            <div class="w-10 h-10 bg-accent rounded-full flex items-center justify-center">
+              <i data-lucide="shield-check" class="w-5 h-5 text-white"></i>
+            </div>
+            <div class="flex-1">
+              <p class="font-semibold text-gray-900 dark:text-white">Akun terverifikasi</p>
+              <p class="text-sm text-gray-600 dark:text-gray-400">Sistem keamanan aktif</p>
+            </div>
+            <span class="text-xs text-gray-500">1 menit lalu</span>
+          </div>
+        `;
+
+        const categories = document.getElementById("popular-categories");
+        categories.innerHTML = `
+          <div class="flex items-center justify-between p-3 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors cursor-pointer">
+            <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                <i data-lucide="heart-pulse" class="w-4 h-4 text-blue-600"></i>
+              </div>
+              <span class="font-medium text-gray-900 dark:text-white">Kesehatan</span>
+            </div>
+            <span class="text-sm text-gray-600 dark:text-gray-400">3 items</span>
+          </div>
+          <div class="flex items-center justify-between p-3 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors cursor-pointer">
+            <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg flex items-center justify-center">
+                <i data-lucide="utensils" class="w-4 h-4 text-yellow-600"></i>
+              </div>
+              <span class="font-medium text-gray-900 dark:text-white">Makanan</span>
+            </div>
+            <span class="text-sm text-gray-600 dark:text-gray-400">4 items</span>
+          </div>
+          <div class="flex items-center justify-between p-3 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors cursor-pointer">
+            <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center">
+                <i data-lucide="palette" class="w-4 h-4 text-purple-600"></i>
+              </div>
+              <span class="font-medium text-gray-900 dark:text-white">Kerajinan</span>
+            </div>
+            <span class="text-sm text-gray-600 dark:text-gray-400">2 items</span>
+          </div>
+        `;
+
+        lucide.createIcons();
       }
 
       function initScrollAnimations() {
@@ -3070,36 +2233,36 @@
           .forEach((el) => observer.observe(el));
       }
 
-      function initBackToTop() {
-        handleScroll();
-      }
-
-      function handleScroll() {
-        const backToTop = document.getElementById("back-to-top");
-        if (window.pageYOffset > 300) {
-          backToTop.classList.remove("opacity-0", "invisible");
-          backToTop.classList.add("opacity-100", "visible");
-        } else {
-          backToTop.classList.add("opacity-0", "invisible");
-          backToTop.classList.remove("opacity-100", "visible");
+      function handleSearch() {
+        const searchTerm = document
+          .getElementById("search")
+          .value.toLowerCase();
+        if (searchTerm) {
+          showToast("success", `Mencari: "${searchTerm}"`);
         }
       }
 
-      function scrollToTop() {
-        window.scrollTo({ top: 0, behavior: "smooth" });
+      function handleContactSubmit(event) {
+        event.preventDefault();
+        event.target.reset();
+        showToast("success", "Pesan Anda telah berhasil dikirim!");
+      }
+
+      function showAddModal(type) {
+        showToast("success", `Fitur tambah ${type} sedang dalam pengembangan`);
       }
 
       function showToast(type, message) {
         const toast = document.createElement("div");
         toast.className = `toast ${type}`;
         toast.innerHTML = `
-        <div class="flex items-center space-x-3">
-          <i data-lucide="${
-            type === "success" ? "check-circle" : "alert-circle"
-          }" class="w-5 h-5"></i>
-          <span>${message}</span>
-        </div>
-      `;
+          <div class="flex items-center space-x-3">
+            <i data-lucide="${
+              type === "success" ? "check-circle" : "alert-circle"
+            }" class="w-5 h-5"></i>
+            <span>${message}</span>
+          </div>
+        `;
         document.body.appendChild(toast);
         lucide.createIcons();
 
@@ -3111,7 +2274,7 @@
 
       // Console branding
       console.log(
-        "%c🚀 Direktori Layanan - Enhanced Platform",
+        "%c🚀 Direktori Layanan - Dashboard",
         "color: #1E40AF; font-size: 24px; font-weight: bold;"
       );
       console.log(
@@ -3119,9 +2282,10 @@
         "color: #14B8A6; font-size: 14px;"
       );
       console.log(
-        "%c✅ Semua sistem berjalan dengan baik!",
+        "%c🔐 User Authenticated:",
         "color: #059669; font-size: 12px;"
       );
+      console.log(APP_STATE.currentUser);
     </script>
   </body>
 </html>
