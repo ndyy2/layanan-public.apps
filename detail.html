@@ -45,8 +45,8 @@
         border-radius: 50%;
         background: linear-gradient(
           135deg,
-          rgba(30, 64, 175, 0.05) 0%,
-          rgba(20, 184, 166, 0.03) 100%
+          rgba(13, 148, 136, 0.05) 0%,
+          rgba(15, 118, 110, 0.03) 100%
         );
         animation: float 15s infinite ease-in-out;
       }
@@ -94,13 +94,13 @@
       }
 
       .category-item:hover {
-        background: linear-gradient(135deg, #1e40af 0%, #14b8a6 100%);
+        background: linear-gradient(to right, #0d9488, #0f766e);
         color: white;
         transform: translateX(8px);
       }
 
       .category-item.active {
-        background: linear-gradient(135deg, #1e40af 0%, #14b8a6 100%);
+        background: linear-gradient(to right, #0d9488, #0f766e);
         color: white;
         transform: translateX(8px);
       }
@@ -110,7 +110,7 @@
       }
 
       .contact-item:hover {
-        background: linear-gradient(135deg, #1e40af 0%, #14b8a6 100%);
+        background: linear-gradient(to right, #0d9488, #0f766e);
         transform: scale(1.03);
       }
 
@@ -129,8 +129,8 @@
         inset: 0;
         background: linear-gradient(
           135deg,
-          rgba(30, 64, 175, 0) 0%,
-          rgba(20, 184, 166, 0.1) 100%
+          rgba(13, 148, 136, 0) 0%,
+          rgba(15, 118, 110, 0.1) 100%
         );
         opacity: 0;
         transition: opacity 0.3s ease;
@@ -300,12 +300,12 @@
         width: 60px;
         height: 60px;
         border-radius: 50%;
-        background: linear-gradient(135deg, #1e40af 0%, #14b8a6 100%);
+        background: linear-gradient(to right, #0d9488, #0f766e);
         display: flex;
         align-items: center;
         justify-content: center;
         color: white;
-        box-shadow: 0 10px 25px rgba(30, 64, 175, 0.3);
+        box-shadow: 0 10px 25px rgba(13, 148, 136, 0.3);
         cursor: pointer;
         z-index: 100;
         transition: all 0.3s ease;
@@ -313,7 +313,7 @@
 
       .fab:hover {
         transform: scale(1.1);
-        box-shadow: 0 15px 30px rgba(30, 64, 175, 0.4);
+        box-shadow: 0 15px 30px rgba(13, 148, 136, 0.4);
       }
 
       /* Back to top button */
@@ -324,12 +324,12 @@
         width: 50px;
         height: 50px;
         border-radius: 50%;
-        background: linear-gradient(135deg, #1e40af 0%, #14b8a6 100%);
+        background: linear-gradient(to right, #0d9488, #0f766e);
         display: flex;
         align-items: center;
         justify-content: center;
         color: white;
-        box-shadow: 0 5px 15px rgba(30, 64, 175, 0.3);
+        box-shadow: 0 5px 15px rgba(13, 148, 136, 0.3);
         cursor: pointer;
         z-index: 100;
         transition: all 0.3s ease;
@@ -344,7 +344,7 @@
 
       .back-to-top:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(30, 64, 175, 0.4);
+        box-shadow: 0 10px 20px rgba(13, 148, 136, 0.4);
       }
 
       /* Enhanced info cards */
@@ -389,23 +389,294 @@
           height: 45px;
         }
       }
+
+      /* UMKM Specific Styles */
+      .umkm-gradient {
+        background: linear-gradient(to right, #0d9488, #0f766e);
+      }
+
+      .umkm-gradient-light {
+        background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+      }
+
+      .umkm-gradient-card {
+        background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+      }
+
+      .umkm-text-gradient {
+        background: linear-gradient(to right, #0d9488, #0f766e);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .umkm-badge {
+        background: linear-gradient(to right, #0d9488, #0f766e);
+        color: white;
+      }
+
+      .umkm-badge-accent {
+        background: linear-gradient(to right, #14b8a6, #0f766e);
+        color: white;
+      }
+
+      .umkm-badge-secondary {
+        background: linear-gradient(to right, #a855f7, #9333ea);
+        color: white;
+      }
+
+      /* Gallery Modal Styles */
+      .gallery-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .gallery-modal.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .modal-content {
+        position: relative;
+        max-width: 90%;
+        max-height: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal-image {
+        max-width: 100%;
+        max-height: 80vh;
+        object-fit: contain;
+        border-radius: 12px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      }
+
+      .modal-caption {
+        color: white;
+        text-align: center;
+        margin-top: 20px;
+        font-size: 1.2rem;
+        font-weight: 500;
+      }
+
+      .modal-close {
+        position: absolute;
+        top: -40px;
+        right: 0;
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1.5rem;
+      }
+
+      .modal-close:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: scale(1.1);
+      }
+
+      .modal-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        color: white;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1.5rem;
+      }
+
+      .modal-nav:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-50%) scale(1.1);
+      }
+
+      .modal-prev {
+        left: 20px;
+      }
+
+      .modal-next {
+        right: 20px;
+      }
+
+      @media (max-width: 768px) {
+        .modal-nav {
+          width: 40px;
+          height: 40px;
+          font-size: 1.2rem;
+        }
+
+        .modal-prev {
+          left: 10px;
+        }
+
+        .modal-next {
+          right: 10px;
+        }
+
+        .modal-caption {
+          font-size: 1rem;
+          margin-top: 15px;
+        }
+      }
     </style>
     <script>
       tailwind.config = {
         theme: {
           extend: {
-            fontFamily: {
-              inter: ["Inter", "sans-serif"],
-            },
             colors: {
-              primary: {
-                50: "#f0f9ff",
-                100: "#e0f2fe",
-                500: "#0ea5e9",
-                600: "#0284c7",
-                700: "#0369a1",
-                800: "#075985",
-                900: "#0c4a6e",
+              /* Primary UMKM Colors */
+              umkm: {
+                // Main brand colors for UMKM section
+                50: "#F0FDFA", // Light teal background
+                100: "#CCFBF1", // Very light teal
+                200: "#99F6E4", // Light teal
+                300: "#5EEAD4", // Teal
+                400: "#2DD4BF", // Medium teal
+                500: "#14B8A6", // Primary UMKM teal
+                600: "#0D9488", // Dark teal
+                700: "#0F766E", // Darker teal
+                800: "#115E59", // Very dark teal
+                900: "#134E4A", // Deep teal
+
+                // Accent colors for UMKM
+                accent: {
+                  50: "#F0FDFA", // Light teal
+                  100: "#CCFBF1", // Very light teal
+                  200: "#99F6E4", // Light teal
+                  300: "#5EEAD4", // Teal
+                  400: "#2DD4BF", // Medium teal
+                  500: "#14B8A6", // Teal accent
+                  600: "#0D9488", // Dark teal
+                  700: "#0F766E", // Darker teal
+                },
+
+                // Secondary colors
+                secondary: {
+                  50: "#FEF7FF", // Light purple
+                  100: "#F3E8FF", // Very light purple
+                  200: "#E9D5FF", // Light purple
+                  300: "#D8B4FE", // Purple
+                  400: "#C084FC", // Medium purple
+                  500: "#A855F7", // Purple accent
+                  600: "#9333EA", // Dark purple
+                },
+              },
+              // Legacy colors for compatibility
+              primary: "#0D9488", // UMKM Teal
+              accent: "#0F766E", // UMKM Dark Teal
+              secondary: "#A855F7", // UMKM Purple
+              success: "#10B981",
+              warning: "#F59E0B",
+              white: "#FFFFFF",
+              gray: {
+                50: "#F9FAFB",
+                100: "#F3F4F6",
+                200: "#E5E7EB",
+                300: "#D1D5DB",
+                400: "#9CA3AF",
+                500: "#6B7280",
+                600: "#4B5563",
+                700: "#374151",
+                800: "#1F2937",
+                900: "#111827",
+              },
+              slate: {
+                50: "#F8FAFC",
+                100: "#F1F5F9",
+                220: "#E2E8F0",
+                300: "#CBD5E1",
+                400: "#94A3B8",
+                500: "#64748B",
+                600: "#475569",
+                700: "#334155",
+                800: "#1E293B",
+                900: "#0F172A",
+              },
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+            animation: {
+              float: "float 6s ease-in-out infinite",
+              "fade-in": "fadeIn 0.8s ease-out forwards",
+              "slide-up": "slideUp 0.8s ease-out forwards",
+              "slide-down": "slideDown 0.5s ease-out forwards",
+              "pulse-soft": "pulseSoft 3s ease-in-out infinite",
+              "bounce-soft": "bounceSoft 2s ease-in-out infinite",
+              "scale-in": "scaleIn 0.5s ease-out forwards",
+            },
+            keyframes: {
+              float: {
+                "0%, 100%": { transform: "translateY(0px)" },
+                "50%": { transform: "translateY(-20px)" },
+              },
+              fadeIn: {
+                "0%": { opacity: "0" },
+                "100%": { opacity: "1" },
+              },
+              slideUp: {
+                "0%": {
+                  transform: "translateY(30px)",
+                  opacity: "0",
+                },
+                "100%": {
+                  transform: "translateY(0)",
+                  opacity: "1",
+                },
+              },
+              slideDown: {
+                "0%": {
+                  transform: "translateY(-20px)",
+                  opacity: "0",
+                },
+                "100%": {
+                  transform: "translateY(0)",
+                  opacity: "1",
+                },
+              },
+              pulseSoft: {
+                "0%, 100%": { opacity: "1" },
+                "50%": { opacity: "0.7" },
+              },
+              bounceSoft: {
+                "0%, 100%": { transform: "translateY(0)" },
+                "50%": { transform: "translateY(-10px)" },
+              },
+              scaleIn: {
+                "0%": {
+                  transform: "scale(0.95)",
+                  opacity: "0",
+                },
+                "100%": { transform: "scale(1)", opacity: "1" },
               },
             },
           },
@@ -419,6 +690,23 @@
       <div class="bg-shape"></div>
       <div class="bg-shape"></div>
       <div class="bg-shape"></div>
+    </div>
+
+    <!-- Gallery Modal -->
+    <div class="gallery-modal" id="galleryModal">
+      <div class="modal-content">
+        <button class="modal-close" id="modalClose">
+          <i data-lucide="x"></i>
+        </button>
+        <button class="modal-nav modal-prev" id="modalPrev">
+          <i data-lucide="chevron-left"></i>
+        </button>
+        <button class="modal-nav modal-next" id="modalNext">
+          <i data-lucide="chevron-right"></i>
+        </button>
+        <img class="modal-image" id="modalImage" src="" alt="" />
+        <div class="modal-caption" id="modalCaption"></div>
+      </div>
     </div>
 
     <!-- Floating Action Button -->
@@ -438,7 +726,7 @@
         class="bg-white/95 backdrop-blur-xl py-4 px-6 rounded-2xl mb-8 shadow-xl flex items-center gap-4"
       >
         <button
-          class="bg-gradient-to-br from-blue-700 to-teal-500 text-white border-none py-2.5 px-5 rounded-xl font-semibold cursor-pointer transition-all duration-300 text-sm flex items-center gap-2 hover:-translate-x-1 hover:shadow-2xl"
+          class="umkm-gradient text-white border-none py-2.5 px-5 rounded-xl font-semibold cursor-pointer transition-all duration-300 text-sm flex items-center gap-2 hover:-translate-x-1 hover:shadow-2xl"
           onclick="history.back()"
           aria-label="Kembali ke halaman sebelumnya"
         >
@@ -447,7 +735,7 @@
         </button>
         <div class="text-slate-500 text-sm">
           Beranda / UMKM /
-          <span class="text-blue-700 font-semibold">Detail</span>
+          <span class="text-umkm-600 font-semibold">Detail</span>
         </div>
       </div>
 
@@ -462,44 +750,44 @@
               class="sidebar-card bg-white/95 backdrop-blur-xl rounded-2xl p-6 shadow-xl transition-all duration-300"
             >
               <h3
-                class="text-lg font-bold text-blue-700 mb-4 flex items-center gap-2"
+                class="text-lg font-bold text-umkm-600 mb-4 flex items-center gap-2"
               >
                 <i data-lucide="folder-open"></i>
                 Kategori
               </h3>
               <div class="flex flex-col gap-2.5">
                 <div
-                  class="category-item bg-gradient-to-br from-slate-100 to-slate-200 py-3 px-4 rounded-xl text-blue-700 font-semibold text-sm cursor-pointer flex items-center gap-2 active"
+                  class="category-item umkm-gradient-card py-3 px-4 rounded-xl text-umkm-600 font-semibold text-sm cursor-pointer flex items-center gap-2 active"
                 >
                   <i data-lucide="coffee" class="category-icon"></i>
                   Kopi & Minuman
                 </div>
                 <div
-                  class="category-item bg-gradient-to-br from-slate-100 to-slate-200 py-3 px-4 rounded-xl text-blue-700 font-semibold text-sm cursor-pointer flex items-center gap-2"
+                  class="category-item umkm-gradient-card py-3 px-4 rounded-xl text-umkm-600 font-semibold text-sm cursor-pointer flex items-center gap-2"
                 >
                   <i data-lucide="croissant" class="category-icon"></i>
                   Makanan Ringan
                 </div>
                 <div
-                  class="category-item bg-gradient-to-br from-slate-100 to-slate-200 py-3 px-4 rounded-xl text-blue-700 font-semibold text-sm cursor-pointer flex items-center gap-2"
+                  class="category-item umkm-gradient-card py-3 px-4 rounded-xl text-umkm-600 font-semibold text-sm cursor-pointer flex items-center gap-2"
                 >
                   <i data-lucide="leaf" class="category-icon"></i>
                   Ramah Lingkungan
                 </div>
                 <div
-                  class="category-item bg-gradient-to-br from-slate-100 to-slate-200 py-3 px-4 rounded-xl text-blue-700 font-semibold text-sm cursor-pointer flex items-center gap-2"
+                  class="category-item umkm-gradient-card py-3 px-4 rounded-xl text-umkm-600 font-semibold text-sm cursor-pointer flex items-center gap-2"
                 >
                   <i data-lucide="award" class="category-icon"></i>
                   Terpopuler
                 </div>
                 <div
-                  class="category-item bg-gradient-to-br from-slate-100 to-slate-200 py-3 px-4 rounded-xl text-blue-700 font-semibold text-sm cursor-pointer flex items-center gap-2"
+                  class="category-item umkm-gradient-card py-3 px-4 rounded-xl text-umkm-600 font-semibold text-sm cursor-pointer flex items-center gap-2"
                 >
                   <i data-lucide="wifi" class="category-icon"></i>
                   Tempat Kerja
                 </div>
                 <div
-                  class="category-item bg-gradient-to-br from-slate-100 to-slate-200 py-3 px-4 rounded-xl text-blue-700 font-semibold text-sm cursor-pointer flex items-center gap-2"
+                  class="category-item umkm-gradient-card py-3 px-4 rounded-xl text-umkm-600 font-semibold text-sm cursor-pointer flex items-center gap-2"
                 >
                   <i data-lucide="users" class="category-icon"></i>
                   Pertemuan
@@ -513,85 +801,103 @@
               class="sidebar-card bg-white/95 backdrop-blur-xl rounded-2xl p-6 shadow-xl transition-all duration-300"
             >
               <h3
-                class="text-lg font-bold text-blue-700 mb-4 flex items-center gap-2"
+                class="text-lg font-bold text-umkm-600 mb-4 flex items-center gap-2"
               >
                 <i data-lucide="phone"></i>
                 Hubungi Kami
               </h3>
               <div
-                class="contact-item flex items-center gap-3 py-3.5 px-4 bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl mb-3 cursor-pointer"
+                class="contact-item flex items-center gap-3 py-3.5 px-4 umkm-gradient-card rounded-xl mb-3 cursor-pointer group"
               >
                 <div
-                  class="contact-icon w-10 h-10 bg-white rounded-xl flex items-center justify-center text-xl text-blue-700"
+                  class="contact-icon w-10 h-10 bg-white rounded-xl flex items-center justify-center text-xl text-umkm-600 transition-colors duration-200 group-hover:text-umkm-700"
                 >
-                  <i data-lucide="message-circle"></i>
+                  <i
+                    data-lucide="message-circle"
+                    class="!text-umkm-600 transition-colors duration-200 group-hover:!text-umkm-700"
+                  ></i>
                 </div>
                 <div class="contact-text flex-1">
-                  <div class="contact-label text-xs text-slate-500 font-medium">
+                  <div
+                    class="contact-label text-xs text-slate-500 font-medium transition-colors duration-200 group-hover:text-umkm-700 group-hover:text-white"
+                  >
                     WhatsApp
                   </div>
-                  <div
-                    class="contact-value text-sm text-blue-700 font-bold mt-0.5"
-                  >
-                    +62 812-3456-7890
-                  </div>
+                  <div class="contact-value text-sm text-umkm-600 font-bold
+                  mt-0.5 transition-colors duration-200 group-hover:text-white" >
+                  +62 812-3456-7890
                 </div>
               </div>
+            </div>
+            <div
+              class="contact-item flex items-center gap-3 py-3.5 px-4 umkm-gradient-card rounded-xl mb-3 cursor-pointer group"
+            >
               <div
-                class="contact-item flex items-center gap-3 py-3.5 px-4 bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl mb-3 cursor-pointer"
+                class="contact-icon w-10 h-10 bg-white rounded-xl flex items-center justify-center text-xl text-umkm-600 transition-colors duration-200 group-hover:text-umkm-700 group-hover:text-white"
               >
+                <i
+                  data-lucide="instagram"
+                  class="!text-umkm-600 transition-colors duration-200 group-hover:!text-umkm-700"
+                ></i>
+              </div>
+              <div class="contact-text flex-1">
                 <div
-                  class="contact-icon w-10 h-10 bg-white rounded-xl flex items-center justify-center text-xl text-blue-700"
+                  class="contact-label text-xs text-slate-500 font-medium transition-colors duration-200 group-hover:text-umkm-700 group-hover:text-white"
                 >
-                  <i data-lucide="instagram"></i>
+                  Instagram
                 </div>
-                <div class="contact-text flex-1">
-                  <div class="contact-label text-xs text-slate-500 font-medium">
-                    Instagram
-                  </div>
-                  <div
-                    class="contact-value text-sm text-blue-700 font-bold mt-0.5"
-                  >
-                    @warungkopinusantara
-                  </div>
+                <div
+                  class="contact-value text-sm text-umkm-600 font-bold mt-0.5 transition-colors duration-200 group-hover:text-pink-500 group-hover:text-white"
+                >
+                  @warungkopinusantara
                 </div>
               </div>
+            </div>
+            <div
+              class="contact-item flex items-center gap-3 py-3.5 px-4 umkm-gradient-card rounded-xl mb-3 cursor-pointer group"
+            >
               <div
-                class="contact-item flex items-center gap-3 py-3.5 px-4 bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl mb-3 cursor-pointer"
+                class="contact-icon w-10 h-10 bg-white rounded-xl flex items-center justify-center text-xl text-umkm-600 transition-colors duration-200 group-hover:text-umkm-700 group-hover:text-white"
               >
+                <i
+                  data-lucide="mail"
+                  class="!text-umkm-600 transition-colors duration-200 group-hover:!text-umkm-700"
+                ></i>
+              </div>
+              <div class="contact-text flex-1">
                 <div
-                  class="contact-icon w-10 h-10 bg-white rounded-xl flex items-center justify-center text-xl text-blue-700"
+                  class="contact-label text-xs text-slate-500 font-medium transition-colors duration-200 group-hover:text-umkm-700 group-hover:text-white"
                 >
-                  <i data-lucide="mail"></i>
+                  Email
                 </div>
-                <div class="contact-text flex-1">
-                  <div class="contact-label text-xs text-slate-500 font-medium">
-                    Email
-                  </div>
-                  <div
-                    class="contact-value text-sm text-blue-700 font-bold mt-0.5"
-                  >
-                    info@kopinusantara.id
-                  </div>
+                <div
+                  class="contact-value text-sm text-umkm-600 font-bold mt-0.5 transition-colors duration-200 group-hover:text-blue-500 group-hover:text-white"
+                >
+                  info@kopinusantara.id
                 </div>
               </div>
+            </div>
+            <div
+              class="contact-item flex items-center gap-3 py-3.5 px-4 umkm-gradient-card rounded-xl cursor-pointer group"
+            >
               <div
-                class="contact-item flex items-center gap-3 py-3.5 px-4 bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl cursor-pointer"
+                class="contact-icon w-10 h-10 bg-white rounded-xl flex items-center justify-center text-xl text-umkm-600 transition-colors duration-200 group-hover:text-umkm-700 group-hover:text-white"
               >
+                <i
+                  data-lucide="map-pin"
+                  class="!text-umkm-600 transition-colors duration-200 group-hover:!text-umkm-700"
+                ></i>
+              </div>
+              <div class="contact-text flex-1">
                 <div
-                  class="contact-icon w-10 h-10 bg-white rounded-xl flex items-center justify-center text-xl text-blue-700"
+                  class="contact-label text-xs text-slate-500 font-medium transition-colors duration-200 group-hover:text-umkm-700 group-hover:text-white"
                 >
-                  <i data-lucide="map-pin"></i>
+                  Alamat
                 </div>
-                <div class="contact-text flex-1">
-                  <div class="contact-label text-xs text-slate-500 font-medium">
-                    Alamat
-                  </div>
-                  <div
-                    class="contact-value text-sm text-blue-700 font-bold mt-0.5"
-                  >
-                    Jl. Merdeka No. 45, Surabaya
-                  </div>
+                <div
+                  class="contact-value text-sm text-umkm-600 font-bold mt-0.5 transition-colors duration-200 group-hover:text-orange-500 group-hover:text-white"
+                >
+                  Jl. Merdeka No. 45, Surabaya
                 </div>
               </div>
             </div>
@@ -606,7 +912,7 @@
             class="hero-container bg-white/95 backdrop-blur-xl rounded-3xl overflow-hidden shadow-2xl"
           >
             <div
-              class="hero-image w-full h-80 md:h-[400px] bg-gradient-to-br from-blue-700 to-teal-500 relative overflow-hidden"
+              class="hero-image w-full h-80 md:h-[400px] umkm-gradient relative overflow-hidden"
             >
               <i
                 data-lucide="coffee"
@@ -667,26 +973,26 @@
               class="info-card bg-white/95 backdrop-blur-xl rounded-xl p-6 shadow-lg transition-all duration-300 flex flex-col"
             >
               <div
-                class="info-icon w-12 h-12 bg-gradient-to-br from-blue-700 to-teal-500 rounded-xl flex items-center justify-center text-2xl text-white mb-4"
+                class="info-icon w-12 h-12 umkm-gradient rounded-xl flex items-center justify-center text-2xl text-white mb-4"
               >
                 <i data-lucide="clock"></i>
               </div>
               <h3 class="text-sm text-slate-500 font-semibold mb-2">
                 Jam Operasional
               </h3>
-              <p class="text-lg text-blue-700 font-bold">08:00 - 22:00 WIB</p>
+              <p class="text-lg text-umkm-600 font-bold">08:00 - 22:00 WIB</p>
               <p class="text-sm text-slate-500 mt-2">Setiap Hari</p>
             </div>
             <div
               class="info-card bg-white/95 backdrop-blur-xl rounded-xl p-6 shadow-lg transition-all duration-300 flex flex-col"
             >
               <div
-                class="info-icon w-12 h-12 bg-gradient-to-br from-blue-700 to-teal-500 rounded-xl flex items-center justify-center text-2xl text-white mb-4"
+                class="info-icon w-12 h-12 umkm-gradient rounded-xl flex items-center justify-center text-2xl text-white mb-4"
               >
                 <i data-lucide="map-pin"></i>
               </div>
               <h3 class="text-sm text-slate-500 font-semibold mb-2">Lokasi</h3>
-              <p class="text-lg text-blue-700 font-bold">
+              <p class="text-lg text-umkm-600 font-bold">
                 Jl. Merdeka No. 45, Surabaya
               </p>
               <p class="text-sm text-slate-500 mt-2">Dekat Stasiun Gubeng</p>
@@ -695,14 +1001,14 @@
               class="info-card bg-white/95 backdrop-blur-xl rounded-xl p-6 shadow-lg transition-all duration-300 flex flex-col"
             >
               <div
-                class="info-icon w-12 h-12 bg-gradient-to-br from-blue-700 to-teal-500 rounded-xl flex items-center justify-center text-2xl text-white mb-4"
+                class="info-icon w-12 h-12 umkm-gradient rounded-xl flex items-center justify-center text-2xl text-white mb-4"
               >
                 <i data-lucide="dollar-sign"></i>
               </div>
               <h3 class="text-sm text-slate-500 font-semibold mb-2">
                 Kisaran Harga
               </h3>
-              <p class="text-lg text-blue-700 font-bold">
+              <p class="text-lg text-umkm-600 font-bold">
                 Rp 15.000 - Rp 50.000
               </p>
               <p class="text-sm text-slate-500 mt-2">Minuman & Makanan</p>
@@ -711,12 +1017,12 @@
               class="info-card bg-white/95 backdrop-blur-xl rounded-xl p-6 shadow-lg transition-all duration-300 flex flex-col"
             >
               <div
-                class="info-icon w-12 h-12 bg-gradient-to-br from-blue-700 to-teal-500 rounded-xl flex items-center justify-center text-2xl text-white mb-4"
+                class="info-icon w-12 h-12 umkm-gradient rounded-xl flex items-center justify-center text-2xl text-white mb-4"
               >
                 <i data-lucide="car"></i>
               </div>
               <h3 class="text-sm text-slate-500 font-semibold mb-2">Parkir</h3>
-              <p class="text-lg text-blue-700 font-bold">Tersedia Gratis</p>
+              <p class="text-lg text-umkm-600 font-bold">Tersedia Gratis</p>
               <p class="text-sm text-slate-500 mt-2">Motor & Mobil</p>
             </div>
           </div>
@@ -727,21 +1033,21 @@
             class="features-card bg-white/95 backdrop-blur-xl rounded-2xl p-8 shadow-xl"
           >
             <h2
-              class="text-2xl font-extrabold text-blue-700 mb-6 flex items-center gap-3"
+              class="text-2xl font-extrabold text-umkm-600 mb-6 flex items-center gap-3"
             >
               <i data-lucide="zap"></i>
               Fasilitas & Layanan
             </h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <div
-                class="feature-item flex flex-col items-center text-center p-5 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl transition-all duration-300"
+                class="feature-item flex flex-col items-center text-center p-5 umkm-gradient-card rounded-xl transition-all duration-300"
               >
                 <div
-                  class="feature-icon w-15 h-15 bg-gradient-to-br from-blue-700 to-teal-500 rounded-xl flex items-center justify-center mb-4 text-white"
+                  class="feature-icon w-15 h-15 umkm-gradient rounded-xl flex items-center justify-center mb-4 text-white"
                 >
                   <i data-lucide="wifi"></i>
                 </div>
-                <h3 class="text-base font-bold text-blue-700 mb-2">
+                <h3 class="text-base font-bold text-umkm-600 mb-2">
                   WiFi Cepat
                 </h3>
                 <p class="text-sm text-slate-500 leading-relaxed">
@@ -750,14 +1056,14 @@
                 </p>
               </div>
               <div
-                class="feature-item flex flex-col items-center text-center p-5 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl transition-all duration-300"
+                class="feature-item flex flex-col items-center text-center p-5 umkm-gradient-card rounded-xl transition-all duration-300"
               >
                 <div
-                  class="feature-icon w-15 h-15 bg-gradient-to-br from-blue-700 to-teal-500 rounded-xl flex items-center justify-center mb-4 text-white"
+                  class="feature-icon w-15 h-15 umkm-gradient rounded-xl flex items-center justify-center mb-4 text-white"
                 >
                   <i data-lucide="plug"></i>
                 </div>
-                <h3 class="text-base font-bold text-blue-700 mb-2">
+                <h3 class="text-base font-bold text-umkm-600 mb-2">
                   Colokan Listrik
                 </h3>
                 <p class="text-sm text-slate-500 leading-relaxed">
@@ -766,14 +1072,14 @@
                 </p>
               </div>
               <div
-                class="feature-item flex flex-col items-center text-center p-5 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl transition-all duration-300"
+                class="feature-item flex flex-col items-center text-center p-5 umkm-gradient-card rounded-xl transition-all duration-300"
               >
                 <div
-                  class="feature-icon w-15 h-15 bg-gradient-to-br from-blue-700 to-teal-500 rounded-xl flex items-center justify-center mb-4 text-white"
+                  class="feature-icon w-15 h-15 umkm-gradient rounded-xl flex items-center justify-center mb-4 text-white"
                 >
                   <i data-lucide="users"></i>
                 </div>
-                <h3 class="text-base font-bold text-blue-700 mb-2">
+                <h3 class="text-base font-bold text-umkm-600 mb-2">
                   Ruang Pertemuan
                 </h3>
                 <p class="text-sm text-slate-500 leading-relaxed">
@@ -781,27 +1087,27 @@
                 </p>
               </div>
               <div
-                class="feature-item flex flex-col items-center text-center p-5 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl transition-all duration-300"
+                class="feature-item flex flex-col items-center text-center p-5 umkm-gradient-card rounded-xl transition-all duration-300"
               >
                 <div
-                  class="feature-icon w-15 h-15 bg-gradient-to-br from-blue-700 to-teal-500 rounded-xl flex items-center justify-center mb-4 text-white"
+                  class="feature-icon w-15 h-15 umkm-gradient rounded-xl flex items-center justify-center mb-4 text-white"
                 >
                   <i data-lucide="truck"></i>
                 </div>
-                <h3 class="text-base font-bold text-blue-700 mb-2">Delivery</h3>
+                <h3 class="text-base font-bold text-umkm-600 mb-2">Delivery</h3>
                 <p class="text-sm text-slate-500 leading-relaxed">
                   Layanan pesan antar untuk area sekitar dengan minimum order
                 </p>
               </div>
               <div
-                class="feature-item flex flex-col items-center text-center p-5 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl transition-all duration-300"
+                class="feature-item flex flex-col items-center text-center p-5 umkm-gradient-card rounded-xl transition-all duration-300"
               >
                 <div
-                  class="feature-icon w-15 h-15 bg-gradient-to-br from-blue-700 to-teal-500 rounded-xl flex items-center justify-center mb-4 text-white"
+                  class="feature-icon w-15 h-15 umkm-gradient rounded-xl flex items-center justify-center mb-4 text-white"
                 >
                   <i data-lucide="credit-card"></i>
                 </div>
-                <h3 class="text-base font-bold text-blue-700 mb-2">
+                <h3 class="text-base font-bold text-umkm-600 mb-2">
                   Pembayaran Digital
                 </h3>
                 <p class="text-sm text-slate-500 leading-relaxed">
@@ -809,14 +1115,14 @@
                 </p>
               </div>
               <div
-                class="feature-item flex flex-col items-center text-center p-5 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl transition-all duration-300"
+                class="feature-item flex flex-col items-center text-center p-5 umkm-gradient-card rounded-xl transition-all duration-300"
               >
                 <div
-                  class="feature-icon w-15 h-15 bg-gradient-to-br from-blue-700 to-teal-500 rounded-xl flex items-center justify-center mb-4 text-white"
+                  class="feature-icon w-15 h-15 umkm-gradient rounded-xl flex items-center justify-center mb-4 text-white"
                 >
                   <i data-lucide="shield"></i>
                 </div>
-                <h3 class="text-base font-bold text-blue-700 mb-2">
+                <h3 class="text-base font-bold text-umkm-600 mb-2">
                   Ramah Lingkungan
                 </h3>
                 <p class="text-sm text-slate-500 leading-relaxed">
@@ -833,91 +1139,91 @@
             class="menu-card bg-white/95 backdrop-blur-xl rounded-2xl p-8 shadow-xl"
           >
             <h2
-              class="text-2xl font-extrabold text-blue-700 mb-6 flex items-center gap-3"
+              class="text-2xl font-extrabold text-umkm-600 mb-6 flex items-center gap-3"
             >
               <i data-lucide="coffee"></i>
               Menu Rekomendasi
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div
-                class="menu-item flex gap-4 p-4 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl transition-all duration-300"
+                class="menu-item flex gap-4 p-4 umkm-gradient-card rounded-xl transition-all duration-300"
               >
                 <div
-                  class="menu-image w-20 h-20 bg-gradient-to-br from-blue-700 to-teal-500 rounded-xl flex items-center justify-center text-white text-2xl flex-shrink-0"
+                  class="menu-image w-20 h-20 umkm-gradient rounded-xl flex items-center justify-center text-white text-2xl flex-shrink-0"
                 >
                   <i data-lucide="coffee"></i>
                 </div>
                 <div class="menu-details flex-1">
-                  <h3 class="text-base font-bold text-blue-700 mb-1">
+                  <h3 class="text-base font-bold text-umkm-600 mb-1">
                     Kopi Tubruk Nusantara
                   </h3>
                   <p class="text-sm text-slate-500 mb-2 leading-relaxed">
                     Kopi tradisional dengan rasa kuat dan aroma khas biji kopi
                     pilihan
                   </p>
-                  <div class="menu-price text-base font-bold text-teal-500">
+                  <div class="menu-price text-base font-bold text-umkm-600">
                     Rp 18.000
                   </div>
                 </div>
               </div>
               <div
-                class="menu-item flex gap-4 p-4 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl transition-all duration-300"
+                class="menu-item flex gap-4 p-4 umkm-gradient-card rounded-xl transition-all duration-300"
               >
                 <div
-                  class="menu-image w-20 h-20 bg-gradient-to-br from-blue-700 to-teal-500 rounded-xl flex items-center justify-center text-white text-2xl flex-shrink-0"
+                  class="menu-image w-20 h-20 umkm-gradient rounded-xl flex items-center justify-center text-white text-2xl flex-shrink-0"
                 >
                   <i data-lucide="coffee"></i>
                 </div>
                 <div class="menu-details flex-1">
-                  <h3 class="text-base font-bold text-blue-700 mb-1">
+                  <h3 class="text-base font-bold text-umkm-600 mb-1">
                     Espresso Arabica
                   </h3>
                   <p class="text-sm text-slate-500 mb-2 leading-relaxed">
                     Espresso dengan biji kopi Arabica dari dataran tinggi Gayo
                   </p>
-                  <div class="menu-price text-base font-bold text-teal-500">
+                  <div class="menu-price text-base font-bold text-umkm-600">
                     Rp 22.000
                   </div>
                 </div>
               </div>
               <div
-                class="menu-item flex gap-4 p-4 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl transition-all duration-300"
+                class="menu-item flex gap-4 p-4 umkm-gradient-card rounded-xl transition-all duration-300"
               >
                 <div
-                  class="menu-image w-20 h-20 bg-gradient-to-br from-blue-700 to-teal-500 rounded-xl flex items-center justify-center text-white text-2xl flex-shrink-0"
+                  class="menu-image w-20 h-20 umkm-gradient rounded-xl flex items-center justify-center text-white text-2xl flex-shrink-0"
                 >
                   <i data-lucide="croissant"></i>
                 </div>
                 <div class="menu-details flex-1">
-                  <h3 class="text-base font-bold text-blue-700 mb-1">
+                  <h3 class="text-base font-bold text-umkm-600 mb-1">
                     Klepon Keju
                   </h3>
                   <p class="text-sm text-slate-500 mb-2 leading-relaxed">
                     Klepon tradisional dengan isian gula merah dan taburan keju
                     parut
                   </p>
-                  <div class="menu-price text-base font-bold text-teal-500">
+                  <div class="menu-price text-base font-bold text-umkm-600">
                     Rp 15.000
                   </div>
                 </div>
               </div>
               <div
-                class="menu-item flex gap-4 p-4 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl transition-all duration-300"
+                class="menu-item flex gap-4 p-4 umkm-gradient-card rounded-xl transition-all duration-300"
               >
                 <div
-                  class="menu-image w-20 h-20 bg-gradient-to-br from-blue-700 to-teal-500 rounded-xl flex items-center justify-center text-white text-2xl flex-shrink-0"
+                  class="menu-image w-20 h-20 umkm-gradient rounded-xl flex items-center justify-center text-white text-2xl flex-shrink-0"
                 >
                   <i data-lucide="croissant"></i>
                 </div>
                 <div class="menu-details flex-1">
-                  <h3 class="text-base font-bold text-blue-700 mb-1">
+                  <h3 class="text-base font-bold text-umkm-600 mb-1">
                     Roti Bakar Coklat Keju
                   </h3>
                   <p class="text-sm text-slate-500 mb-2 leading-relaxed">
                     Roti bakar dengan olesan coklat dan keju mozarella yang
                     lumer
                   </p>
-                  <div class="menu-price text-base font-bold text-teal-500">
+                  <div class="menu-price text-base font-bold text-umkm-600">
                     Rp 25.000
                   </div>
                 </div>
@@ -931,51 +1237,73 @@
             class="gallery-card bg-white/95 backdrop-blur-xl rounded-2xl p-8 shadow-xl"
           >
             <h2
-              class="text-2xl font-extrabold text-blue-700 mb-6 flex items-center gap-3"
+              class="text-2xl font-extrabold text-umkm-600 mb-6 flex items-center gap-3"
             >
               <i data-lucide="image"></i>
               Galeri Foto
             </h2>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
               <div
-                class="gallery-item aspect-square bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 relative overflow-hidden"
+                class="gallery-item aspect-square umkm-gradient-card rounded-xl flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 relative overflow-hidden"
+                data-image="coffee"
+                data-caption="Kopi Tubruk Nusantara - Minuman andalan kami"
               >
-                <i data-lucide="coffee" class="gallery-icon"></i>
+                <i data-lucide="coffee" class="gallery-icon text-umkm-600"></i>
               </div>
               <div
-                class="gallery-item aspect-square bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 relative overflow-hidden"
+                class="gallery-item aspect-square umkm-gradient-card rounded-xl flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 relative overflow-hidden"
+                data-image="croissant"
+                data-caption="Klepon Keju - Camilan tradisional dengan sentuhan modern"
               >
-                <i data-lucide="croissant" class="gallery-icon"></i>
+                <i
+                  data-lucide="croissant"
+                  class="gallery-icon text-umkm-600"
+                ></i>
               </div>
               <div
-                class="gallery-item aspect-square bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 relative overflow-hidden"
+                class="gallery-item aspect-square umkm-gradient-card rounded-xl flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 relative overflow-hidden"
+                data-image="home"
+                data-caption="Interior Warung Kopi Nusantara - Suasana hangat dan nyaman"
               >
-                <i data-lucide="home" class="gallery-icon"></i>
+                <i data-lucide="home" class="gallery-icon text-umkm-600"></i>
               </div>
               <div
-                class="gallery-item aspect-square bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 relative overflow-hidden"
+                class="gallery-item aspect-square umkm-gradient-card rounded-xl flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 relative overflow-hidden"
+                data-image="leaf"
+                data-caption="Bahan-bahan Organik - Komitmen kami terhadap lingkungan"
               >
-                <i data-lucide="leaf" class="gallery-icon"></i>
+                <i data-lucide="leaf" class="gallery-icon text-umkm-600"></i>
               </div>
               <div
-                class="gallery-item aspect-square bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 relative overflow-hidden"
+                class="gallery-item aspect-square umkm-gradient-card rounded-xl flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 relative overflow-hidden"
+                data-image="users"
+                data-caption="Ruang Pertemuan - Tempat yang sempurna untuk diskusi"
               >
-                <i data-lucide="users" class="gallery-icon"></i>
+                <i data-lucide="users" class="gallery-icon text-umkm-600"></i>
               </div>
               <div
-                class="gallery-item aspect-square bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 relative overflow-hidden"
+                class="gallery-item aspect-square umkm-gradient-card rounded-xl flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 relative overflow-hidden"
+                data-image="palette"
+                data-caption="Seni Latte - Kreasi barista kami yang unik"
               >
-                <i data-lucide="palette" class="gallery-icon"></i>
+                <i data-lucide="palette" class="gallery-icon text-umkm-600"></i>
               </div>
               <div
-                class="gallery-item aspect-square bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 relative overflow-hidden"
+                class="gallery-item aspect-square umkm-gradient-card rounded-xl flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 relative overflow-hidden"
+                data-image="cookie"
+                data-caption="Roti Bakar Spesial - Menu favorit pelanggan"
               >
-                <i data-lucide="cookie" class="gallery-icon"></i>
+                <i data-lucide="cookie" class="gallery-icon text-umkm-600"></i>
               </div>
               <div
-                class="gallery-item aspect-square bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 relative overflow-hidden"
+                class="gallery-item aspect-square umkm-gradient-card rounded-xl flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 relative overflow-hidden"
+                data-image="lightbulb"
+                data-caption="Workshop Kopi - Acara rutin untuk pecinta kopi"
               >
-                <i data-lucide="lightbulb" class="gallery-icon"></i>
+                <i
+                  data-lucide="lightbulb"
+                  class="gallery-icon text-umkm-600"
+                ></i>
               </div>
             </div>
           </div>
@@ -986,6 +1314,98 @@
     <script>
       // Initialize Lucide icons
       lucide.createIcons();
+
+      // Gallery Modal Functionality
+      const galleryModal = document.getElementById("galleryModal");
+      const modalImage = document.getElementById("modalImage");
+      const modalCaption = document.getElementById("modalCaption");
+      const modalClose = document.getElementById("modalClose");
+      const modalPrev = document.getElementById("modalPrev");
+      const modalNext = document.getElementById("modalNext");
+
+      // Gallery data
+      const galleryItems = document.querySelectorAll(".gallery-item");
+      let currentIndex = 0;
+
+      // Open modal when gallery item is clicked
+      galleryItems.forEach((item, index) => {
+        item.addEventListener("click", () => {
+          openModal(index);
+        });
+      });
+
+      // Open modal function
+      function openModal(index) {
+        currentIndex = index;
+        const item = galleryItems[index];
+        const imageType = item.getAttribute("data-image");
+        const caption = item.getAttribute("data-caption");
+
+        // Set image based on data attribute (in a real app, this would be actual image URLs)
+        modalImage.src = `https://picsum.photos/800/600?random=${index + 1}`;
+        modalCaption.textContent = caption;
+
+        // Show modal with animation
+        galleryModal.classList.add("active");
+        document.body.style.overflow = "hidden";
+
+        // Animate modal content
+        motion.animate(
+          ".modal-content",
+          {
+            opacity: [0, 1],
+            scale: [0.9, 1],
+          },
+          {
+            duration: 0.3,
+            easing: "ease-out",
+          }
+        );
+      }
+
+      // Close modal function
+      function closeModal() {
+        galleryModal.classList.remove("active");
+        document.body.style.overflow = "auto";
+      }
+
+      // Navigate to previous image
+      function prevImage() {
+        currentIndex =
+          (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+        openModal(currentIndex);
+      }
+
+      // Navigate to next image
+      function nextImage() {
+        currentIndex = (currentIndex + 1) % galleryItems.length;
+        openModal(currentIndex);
+      }
+
+      // Event listeners for modal controls
+      modalClose.addEventListener("click", closeModal);
+      modalPrev.addEventListener("click", prevImage);
+      modalNext.addEventListener("click", nextImage);
+
+      // Close modal when clicking outside the image
+      galleryModal.addEventListener("click", (e) => {
+        if (e.target === galleryModal) {
+          closeModal();
+        }
+      });
+
+      // Keyboard navigation
+      document.addEventListener("keydown", (e) => {
+        if (galleryModal.classList.contains("active")) {
+          if (e.key === "Escape") {
+            closeModal();
+          } else if (e.key === "ArrowLeft") {
+            prevImage();
+          } else if (e.key === "ArrowRight") {
+            nextImage();
+          }
+        }
+      });
 
       // Add active class to clicked category items
       document.querySelectorAll(".category-item").forEach((item) => {
