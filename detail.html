@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detail UMKM - Warung Kopi Nusantara</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    />
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+      /* Custom styles for animations and effects not available in Tailwind */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        min-height: 100vh;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+      }
+
+      /* Motion Background Elements */
+      .bg-motion {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+      }
+
+      .bg-shape {
+        position: absolute;
+        border-radius: 50%;
+        background: linear-gradient(
+          135deg,
+          rgba(30, 64, 175, 0.05) 0%,
+          rgba(20, 184, 166, 0.03) 100%
+        );
+        animation: float 15s infinite ease-in-out;
+      }
+
+      .bg-shape:nth-child(1) {
+        width: 300px;
+        height: 300px;
+        top: 10%;
+        left: 5%;
+        animation-delay: 0s;
+      }
+
+      .bg-shape:nth-child(2) {
+        width: 200px;
+        height: 200px;
+        top: 60%;
+        right: 10%;
+        animation-delay: -5s;
+      }
+
+      .bg-shape:nth-child(3) {
+        width: 150px;
+        height: 150px;
+        bottom: 10%;
+        left: 20%;
+        animation-delay: -10s;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        33% {
+          transform: translateY(-20px) rotate(120deg);
+        }
+        66% {
+          transform: translateY(10px) rotate(240deg);
+        }
+      }
+
+      /* Custom animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideDown {
+        from {
+          transform: translateY(-100px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideRight {
+        from {
+          transform: translateX(-50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideUp {
+        from {
+          transform: translateY(50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      /* Hero image animation */
+      .hero-image {
+        animation: float 6s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .hero-image::before {
+        content: "";
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.1) 0%,
+          transparent 70%
+        );
+        animation: rotate 20s linear infinite;
+      }
+
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Custom hover effects */
+      .category-item {
+        transition: all 0.3s ease;
+      }
+
+      .category-item:hover {
+        background: linear-gradient(135deg, #1e40af 0%, #14b8a6 100%);
+        color: white;
+        transform: translateX(8px);
+      }
+
+      .category-item.active {
+        background: linear-gradient(135deg, #1e40af 0%, #14b8a6 100%);
+        color: white;
+        transform: translateX(8px);
+      }
+
+      .contact-item {
+        transition: all 0.3s ease;
+      }
+
+      .contact-item:hover {
+        background: linear-gradient(135deg, #1e40af 0%, #14b8a6 100%);
+        transform: scale(1.03);
+      }
+
+      .contact-item:hover .contact-icon,
+      .contact-item:hover .contact-text {
+        color: white;
+      }
+
+      .gallery-item {
+        transition: all 0.3s ease;
+      }
+
+      .gallery-item::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(30, 64, 175, 0) 0%,
+          rgba(20, 184, 166, 0.1) 100%
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .gallery-item:hover {
+        transform: scale(1.05) rotate(2deg);
+      }
+
+      .gallery-item:hover::before {
+        opacity: 1;
+      }
+
+      .sidebar-card {
+        transition: all 0.3s ease;
+      }
+
+      .sidebar-card:hover {
+        transform: translateY(-4px);
+      }
+
+      .info-card {
+        transition: all 0.3s ease;
+      }
+
+      .info-card:hover {
+        transform: translateY(-6px);
+      }
+
+      .feature-item {
+        transition: all 0.3s ease;
+      }
+
+      .feature-item:hover {
+        transform: translateY(-4px);
+      }
+
+      .menu-item {
+        transition: all 0.3s ease;
+      }
+
+      .menu-item:hover {
+        transform: translateY(-4px);
+      }
+
+      /* Sticky sidebar with parallax effect */
+      .sidebar-sticky {
+        position: sticky;
+        top: 20px;
+        transition: transform 0.2s ease-out;
+      }
+
+      .parallax-sidebar {
+        transform: translateY(var(--scroll-offset));
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              inter: ["Inter", "sans-serif"],
+            },
+            colors: {
+              primary: {
+                50: "#f0f9ff",
+                100: "#e0f2fe",
+                500: "#0ea5e9",
+                600: "#0284c7",
+                700: "#0369a1",
+                800: "#075985",
+                900: "#0c4a6e",
+              },
+            },
+            animation: {
+              "fade-in": "fadeIn 0.8s ease",
+              "slide-down": "slideDown 0.6s ease",
+              "slide-right": "slideRight 0.6s ease",
+              "slide-up": "slideUp 0.8s ease",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="p-5">
+    <!-- Motion Background Elements -->
+    <div class="bg-motion">
+      <div class="bg-shape"></div>
+      <div class="bg-shape"></div>
+      <div class="bg-shape"></div>
+    </div>
+
+    <div class="max-w-[1400px] mx-auto animate-fade-in">
+      <!-- Navbar (not sticky) -->
+      <div
+        class="bg-white/95 backdrop-blur-xl py-4 px-6 rounded-2xl mb-8 shadow-xl animate-slide-down flex items-center gap-4"
+      >
+        <button
+          class="bg-gradient-to-br from-blue-700 to-teal-500 text-white border-none py-2.5 px-5 rounded-xl font-semibold cursor-pointer transition-all duration-300 text-sm flex items-center gap-2 hover:-translate-x-1 hover:shadow-2xl"
+          onclick="history.back()"
+          aria-label="Kembali ke halaman sebelumnya"
+        >
+          <i data-lucide="arrow-left"></i>
+          Kembali
+        </button>
+        <div class="text-slate-500 text-sm">
+          Beranda / UMKM /
+          <span class="text-blue-700 font-semibold">Detail</span>
+        </div>
+      </div>
+
+      <!-- Content Grid -->
+      <div
+        class="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-6 animate-fade-in animation-delay-200"
+      >
+        <!-- Sidebar -->
+        <aside class="flex flex-col gap-5 order-2 lg:order-1">
+          <div class="sidebar-sticky flex flex-col gap-5">
+            <!-- Category Card -->
+            <div
+              class="bg-white/95 backdrop-blur-xl rounded-2xl p-6 shadow-xl transition-all duration-300 animate-slide-right hover:shadow-2xl"
+            >
+              <h3
+                class="text-lg font-bold text-blue-700 mb-4 flex items-center gap-2"
+              >
+                <i data-lucide="folder-open"></i>
+                Kategori
+              </h3>
+              <div class="flex flex-col gap-2.5">
+                <div
+                  class="category-item bg-gradient-to-br from-slate-100 to-slate-200 py-3 px-4 rounded-xl text-blue-700 font-semibold text-sm cursor-pointer flex items-center gap-2 active"
+                >
+                  <i data-lucide="coffee"></i>
+                  Kopi & Minuman
+                </div>
+                <div
+                  class="category-item bg-gradient-to-br from-slate-100 to-slate-200 py-3 px-4 rounded-xl text-blue-700 font-semibold text-sm cursor-pointer flex items-center gap-2"
+                >
+                  <i data-lucide="croissant"></i>
+                  Makanan Ringan
+                </div>
+                <div
+                  class="category-item bg-gradient-to-br from-slate-100 to-slate-200 py-3 px-4 rounded-xl text-blue-700 font-semibold text-sm cursor-pointer flex items-center gap-2"
+                >
+                  <i data-lucide="leaf"></i>
+                  Ramah Lingkungan
+                </div>
+                <div
+                  class="category-item bg-gradient-to-br from-slate-100 to-slate-200 py-3 px-4 rounded-xl text-blue-700 font-semibold text-sm cursor-pointer flex items-center gap-2"
+                >
+                  <i data-lucide="award"></i>
+                  Terpopuler
+                </div>
+                <div
+                  class="category-item bg-gradient-to-br from-slate-100 to-slate-200 py-3 px-4 rounded-xl text-blue-700 font-semibold text-sm cursor-pointer flex items-center gap-2"
+                >
+                  <i data-lucide="wifi"></i>
+                  Tempat Kerja
+                </div>
+                <div
+                  class="category-item bg-gradient-to-br from-slate-100 to-slate-200 py-3 px-4 rounded-xl text-blue-700 font-semibold text-sm cursor-pointer flex items-center gap-2"
+                >
+                  <i data-lucide="users"></i>
+                  Pertemuan
+                </div>
+              </div>
+            </div>
+
+            <!-- Contact Card -->
+            <div
+              class="bg-white/95 backdrop-blur-xl rounded-2xl p-6 shadow-xl transition-all duration-300 animate-slide-right hover:shadow-2xl"
+            >
+              <h3
+                class="text-lg font-bold text-blue-700 mb-4 flex items-center gap-2"
+              >
+                <i data-lucide="phone"></i>
+                Hubungi Kami
+              </h3>
+              <div
+                class="contact-item flex items-center gap-3 py-3.5 px-4 bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl mb-3 cursor-pointer"
+              >
+                <div
+                  class="contact-icon w-10 h-10 bg-white rounded-xl flex items-center justify-center text-xl text-blue-700"
+                >
+                  <i data-lucide="message-circle"></i>
+                </div>
+                <div class="contact-text flex-1">
+                  <div class="contact-label text-xs text-slate-500 font-medium">
+                    WhatsApp
+                  </div>
+                  <div
+                    class="contact-value text-sm text-blue-700 font-bold mt-0.5"
+                  >
+                    +62 812-3456-7890
+                  </div>
+                </div>
+              </div>
+              <div
+                class="contact-item flex items-center gap-3 py-3.5 px-4 bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl mb-3 cursor-pointer"
+              >
+                <div
+                  class="contact-icon w-10 h-10 bg-white rounded-xl flex items-center justify-center text-xl text-blue-700"
+                >
+                  <i data-lucide="instagram"></i>
+                </div>
+                <div class="contact-text flex-1">
+                  <div class="contact-label text-xs text-slate-500 font-medium">
+                    Instagram
+                  </div>
+                  <div
+                    class="contact-value text-sm text-blue-700 font-bold mt-0.5"
+                  >
+                    @warungkopinusantara
+                  </div>
+                </div>
+              </div>
+              <div
+                class="contact-item flex items-center gap-3 py-3.5 px-4 bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl mb-3 cursor-pointer"
+              >
+                <div
+                  class="contact-icon w-10 h-10 bg-white rounded-xl flex items-center justify-center text-xl text-blue-700"
+                >
+                  <i data-lucide="mail"></i>
+                </div>
+                <div class="contact-text flex-1">
+                  <div class="contact-label text-xs text-slate-500 font-medium">
+                    Email
+                  </div>
+                  <div
+                    class="contact-value text-sm text-blue-700 font-bold mt-0.5"
+                  >
+                    info@kopinusantara.id
+                  </div>
+                </div>
+              </div>
+              <div
+                class="contact-item flex items-center gap-3 py-3.5 px-4 bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl cursor-pointer"
+              >
+                <div
+                  class="contact-icon w-10 h-10 bg-white rounded-xl flex items-center justify-center text-xl text-blue-700"
+                >
+                  <i data-lucide="map-pin"></i>
+                </div>
+                <div class="contact-text flex-1">
+                  <div class="contact-label text-xs text-slate-500 font-medium">
+                    Alamat
+                  </div>
+                  <div
+                    class="contact-value text-sm text-blue-700 font-bold mt-0.5"
+                  >
+                    Jl. Merdeka No. 45, Surabaya
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex flex-col gap-6 order-1 lg:order-2">
+          <!-- Hero Card -->
+          <div
+            class="bg-white/95 backdrop-blur-xl rounded-3xl overflow-hidden shadow-2xl animate-slide-up"
+          >
+            <div
+              class="hero-image w-full h-80 md:h-[400px] bg-gradient-to-br from-blue-700 to-teal-500 flex items-center justify-center text-6xl md:text-8xl text-white relative overflow-hidden"
+            >
+              <i
+                data-lucide="coffee"
+                class="text-6xl md:text-8xl text-white"
+              ></i>
+            </div>
+            <div class="p-8 md:p-10">
+              <h1
+                class="text-3xl md:text-4xl font-black bg-gradient-to-br from-blue-700 to-teal-500 bg-clip-text text-transparent mb-4 leading-tight"
+              >
+                Warung Kopi Nusantara
+              </h1>
+              <div class="rating flex items-center gap-2 mb-6">
+                <span class="stars text-yellow-400 text-xl tracking-widest"
+                  >★★★★★</span
+                >
+                <span class="rating-text text-slate-500 font-semibold text-sm"
+                  >4.9 (2,847 ulasan)</span
+                >
+              </div>
+              <p
+                class="description text-slate-600 leading-relaxed text-base font-normal"
+              >
+                Warung Kopi Nusantara adalah destinasi kopi artisan terbaik di
+                kota dengan suasana tradisional Indonesia yang hangat. Kami
+                menyajikan berbagai pilihan kopi lokal berkualitas tinggi yang
+                dipilih langsung dari petani lokal di berbagai daerah di
+                Indonesia. Setiap cangkir kopi diseduh dengan penuh perhatian
+                oleh barista profesional kami yang berpengalaman lebih dari 10
+                tahun di industri kopi.
+                <br /><br />
+                Tempat kami dirancang untuk memberikan pengalaman yang nyaman
+                baik untuk bekerja, bersantai, atau mengadakan pertemuan
+                informal. Dengan WiFi cepat, colokan listrik di setiap meja, dan
+                playlist musik yang dipilih dengan cermat, kami menciptakan
+                atmosfer yang sempurna untuk produktivitas dan relaksasi.
+                <br /><br />
+                Kami juga menyediakan berbagai makanan ringan tradisional dan
+                modern yang sempurna menemani kopi Anda. Komitmen kami adalah
+                mendukung ekonomi lokal dengan bermitra langsung dengan petani
+                kopi dan pengrajin makanan lokal.
+              </p>
+            </div>
+          </div>
+
+          <!-- Info Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div
+              class="info-card bg-white/95 backdrop-blur-xl rounded-xl p-6 shadow-lg transition-all duration-300 flex flex-col animate-fade-in animation-delay-600"
+            >
+              <div
+                class="icon w-12 h-12 bg-gradient-to-br from-blue-700 to-teal-500 rounded-xl flex items-center justify-center text-2xl text-white mb-4"
+              >
+                <i data-lucide="clock"></i>
+              </div>
+              <h3 class="text-sm text-slate-500 font-semibold mb-2">
+                Jam Operasional
+              </h3>
+              <p class="text-lg text-blue-700 font-bold">08:00 - 22:00 WIB</p>
+              <p class="text-sm text-slate-500 mt-2">Setiap Hari</p>
+            </div>
+            <div
+              class="info-card bg-white/95 backdrop-blur-xl rounded-xl p-6 shadow-lg transition-all duration-300 flex flex-col animate-fade-in animation-delay-700"
+            >
+              <div
+                class="icon w-12 h-12 bg-gradient-to-br from-blue-700 to-teal-500 rounded-xl flex items-center justify-center text-2xl text-white mb-4"
+              >
+                <i data-lucide="map-pin"></i>
+              </div>
+              <h3 class="text-sm text-slate-500 font-semibold mb-2">Lokasi</h3>
+              <p class="text-lg text-blue-700 font-bold">
+                Jl. Merdeka No. 45, Surabaya
+              </p>
+              <p class="text-sm text-slate-500 mt-2">Dekat Stasiun Gubeng</p>
+            </div>
+            <div
+              class="info-card bg-white/95 backdrop-blur-xl rounded-xl p-6 shadow-lg transition-all duration-300 flex flex-col animate-fade-in animation-delay-800"
+            >
+              <div
+                class="icon w-12 h-12 bg-gradient-to-br from-blue-700 to-teal-500 rounded-xl flex items-center justify-center text-2xl text-white mb-4"
+              >
+                <i data-lucide="dollar-sign"></i>
+              </div>
+              <h3 class="text-sm text-slate-500 font-semibold mb-2">
+                Kisaran Harga
+              </h3>
+              <p class="text-lg text-blue-700 font-bold">
+                Rp 15.000 - Rp 50.000
+              </p>
+              <p class="text-sm text-slate-500 mt-2">Minuman & Makanan</p>
+            </div>
+            <div
+              class="info-card bg-white/95 backdrop-blur-xl rounded-xl p-6 shadow-lg transition-all duration-300 flex flex-col animate-fade-in animation-delay-900"
+            >
+              <div
+                class="icon w-12 h-12 bg-gradient-to-br from-blue-700 to-teal-500 rounded-xl flex items-center justify-center text-2xl text-white mb-4"
+              >
+                <i data-lucide="car"></i>
+              </div>
+              <h3 class="text-sm text-slate-500 font-semibold mb-2">Parkir</h3>
+              <p class="text-lg text-blue-700 font-bold">Tersedia Gratis</p>
+              <p class="text-sm text-slate-500 mt-2">Motor & Mobil</p>
+            </div>
+          </div>
+
+          <!-- Features Section -->
+          <div
+            class="features-card bg-white/95 backdrop-blur-xl rounded-2xl p-8 shadow-xl animate-fade-in animation-delay-500"
+          >
+            <h2
+              class="text-2xl font-extrabold text-blue-700 mb-6 flex items-center gap-3"
+            >
+              <i data-lucide="zap"></i>
+              Fasilitas & Layanan
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div
+                class="feature-item flex flex-col items-center text-center p-5 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl transition-all duration-300"
+              >
+                <div
+                  class="feature-icon w-15 h-15 bg-gradient-to-br from-blue-700 to-teal-500 rounded-xl flex items-center justify-center mb-4 text-white"
+                >
+                  <i data-lucide="wifi"></i>
+                </div>
+                <h3 class="text-base font-bold text-blue-700 mb-2">
+                  WiFi Cepat
+                </h3>
+                <p class="text-sm text-slate-500 leading-relaxed">
+                  Akses internet gratis dengan kecepatan tinggi untuk bekerja
+                  atau bersantai
+                </p>
+              </div>
+              <div
+                class="feature-item flex flex-col items-center text-center p-5 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl transition-all duration-300"
+              >
+                <div
+                  class="feature-icon w-15 h-15 bg-gradient-to-br from-blue-700 to-teal-500 rounded-xl flex items-center justify-center mb-4 text-white"
+                >
+                  <i data-lucide="plug"></i>
+                </div>
+                <h3 class="text-base font-bold text-blue-700 mb-2">
+                  Colokan Listrik
+                </h3>
+                <p class="text-sm text-slate-500 leading-relaxed">
+                  Tersedia colokan di setiap meja untuk mengisi daya perangkat
+                  Anda
+                </p>
+              </div>
+              <div
+                class="feature-item flex flex-col items-center text-center p-5 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl transition-all duration-300"
+              >
+                <div
+                  class="feature-icon w-15 h-15 bg-gradient-to-br from-blue-700 to-teal-500 rounded-xl flex items-center justify-center mb-4 text-white"
+                >
+                  <i data-lucide="users"></i>
+                </div>
+                <h3 class="text-base font-bold text-blue-700 mb-2">
+                  Ruang Pertemuan
+                </h3>
+                <p class="text-sm text-slate-500 leading-relaxed">
+                  Area khusus untuk pertemuan dengan kapasitas hingga 10 orang
+                </p>
+              </div>
+              <div
+                class="feature-item flex flex-col items-center text-center p-5 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl transition-all duration-300"
+              >
+                <div
+                  class="feature-icon w-15 h-15 bg-gradient-to-br from-blue-700 to-teal-500 rounded-xl flex items-center justify-center mb-4 text-white"
+                >
+                  <i data-lucide="truck"></i>
+                </div>
+                <h3 class="text-base font-bold text-blue-700 mb-2">Delivery</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">
+                  Layanan pesan antar untuk area sekitar dengan minimum order
+                </p>
+              </div>
+              <div
+                class="feature-item flex flex-col items-center text-center p-5 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl transition-all duration-300"
+              >
+                <div
+                  class="feature-icon w-15 h-15 bg-gradient-to-br from-blue-700 to-teal-500 rounded-xl flex items-center justify-center mb-4 text-white"
+                >
+                  <i data-lucide="credit-card"></i>
+                </div>
+                <h3 class="text-base font-bold text-blue-700 mb-2">
+                  Pembayaran Digital
+                </h3>
+                <p class="text-sm text-slate-500 leading-relaxed">
+                  Menerima berbagai metode pembayaran digital dan kartu
+                </p>
+              </div>
+              <div
+                class="feature-item flex flex-col items-center text-center p-5 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl transition-all duration-300"
+              >
+                <div
+                  class="feature-icon w-15 h-15 bg-gradient-to-br from-blue-700 to-teal-500 rounded-xl flex items-center justify-center mb-4 text-white"
+                >
+                  <i data-lucide="shield"></i>
+                </div>
+                <h3 class="text-base font-bold text-blue-700 mb-2">
+                  Ramah Lingkungan
+                </h3>
+                <p class="text-sm text-slate-500 leading-relaxed">
+                  Menggunakan bahan ramah lingkungan dan mengurangi sampah
+                  plastik
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Menu Section -->
+          <div
+            class="menu-card bg-white/95 backdrop-blur-xl rounded-2xl p-8 shadow-xl animate-fade-in animation-delay-600"
+          >
+            <h2
+              class="text-2xl font-extrabold text-blue-700 mb-6 flex items-center gap-3"
+            >
+              <i data-lucide="coffee"></i>
+              Menu Rekomendasi
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div
+                class="menu-item flex gap-4 p-4 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl transition-all duration-300"
+              >
+                <div
+                  class="menu-image w-20 h-20 bg-gradient-to-br from-blue-700 to-teal-500 rounded-xl flex items-center justify-center text-white text-2xl flex-shrink-0"
+                >
+                  <i data-lucide="coffee"></i>
+                </div>
+                <div class="menu-details flex-1">
+                  <h3 class="text-base font-bold text-blue-700 mb-1">
+                    Kopi Tubruk Nusantara
+                  </h3>
+                  <p class="text-sm text-slate-500 mb-2 leading-relaxed">
+                    Kopi tradisional dengan rasa kuat dan aroma khas biji kopi
+                    pilihan
+                  </p>
+                  <div class="menu-price text-base font-bold text-teal-500">
+                    Rp 18.000
+                  </div>
+                </div>
+              </div>
+              <div
+                class="menu-item flex gap-4 p-4 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl transition-all duration-300"
+              >
+                <div
+                  class="menu-image w-20 h-20 bg-gradient-to-br from-blue-700 to-teal-500 rounded-xl flex items-center justify-center text-white text-2xl flex-shrink-0"
+                >
+                  <i data-lucide="coffee"></i>
+                </div>
+                <div class="menu-details flex-1">
+                  <h3 class="text-base font-bold text-blue-700 mb-1">
+                    Espresso Arabica
+                  </h3>
+                  <p class="text-sm text-slate-500 mb-2 leading-relaxed">
+                    Espresso dengan biji kopi Arabica dari dataran tinggi Gayo
+                  </p>
+                  <div class="menu-price text-base font-bold text-teal-500">
+                    Rp 22.000
+                  </div>
+                </div>
+              </div>
+              <div
+                class="menu-item flex gap-4 p-4 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl transition-all duration-300"
+              >
+                <div
+                  class="menu-image w-20 h-20 bg-gradient-to-br from-blue-700 to-teal-500 rounded-xl flex items-center justify-center text-white text-2xl flex-shrink-0"
+                >
+                  <i data-lucide="croissant"></i>
+                </div>
+                <div class="menu-details flex-1">
+                  <h3 class="text-base font-bold text-blue-700 mb-1">
+                    Klepon Keju
+                  </h3>
+                  <p class="text-sm text-slate-500 mb-2 leading-relaxed">
+                    Klepon tradisional dengan isian gula merah dan taburan keju
+                    parut
+                  </p>
+                  <div class="menu-price text-base font-bold text-teal-500">
+                    Rp 15.000
+                  </div>
+                </div>
+              </div>
+              <div
+                class="menu-item flex gap-4 p-4 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl transition-all duration-300"
+              >
+                <div
+                  class="menu-image w-20 h-20 bg-gradient-to-br from-blue-700 to-teal-500 rounded-xl flex items-center justify-center text-white text-2xl flex-shrink-0"
+                >
+                  <i data-lucide="croissant"></i>
+                </div>
+                <div class="menu-details flex-1">
+                  <h3 class="text-base font-bold text-blue-700 mb-1">
+                    Roti Bakar Coklat Keju
+                  </h3>
+                  <p class="text-sm text-slate-500 mb-2 leading-relaxed">
+                    Roti bakar dengan olesan coklat dan keju mozarella yang
+                    lumer
+                  </p>
+                  <div class="menu-price text-base font-bold text-teal-500">
+                    Rp 25.000
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Gallery -->
+          <div
+            class="gallery-card bg-white/95 backdrop-blur-xl rounded-2xl p-8 shadow-xl animate-fade-in animation-delay-400"
+          >
+            <h2
+              class="text-2xl font-extrabold text-blue-700 mb-6 flex items-center gap-3"
+            >
+              <i data-lucide="image"></i>
+              Galeri Foto
+            </h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+              <div
+                class="gallery-item aspect-square bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 relative overflow-hidden"
+              >
+                <i data-lucide="coffee"></i>
+              </div>
+              <div
+                class="gallery-item aspect-square bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 relative overflow-hidden"
+              >
+                <i data-lucide="croissant"></i>
+              </div>
+              <div
+                class="gallery-item aspect-square bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 relative overflow-hidden"
+              >
+                <i data-lucide="home"></i>
+              </div>
+              <div
+                class="gallery-item aspect-square bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 relative overflow-hidden"
+              >
+                <i data-lucide="leaf"></i>
+              </div>
+              <div
+                class="gallery-item aspect-square bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 relative overflow-hidden"
+              >
+                <i data-lucide="users"></i>
+              </div>
+              <div
+                class="gallery-item aspect-square bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 relative overflow-hidden"
+              >
+                <i data-lucide="palette"></i>
+              </div>
+              <div
+                class="gallery-item aspect-square bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 relative overflow-hidden"
+              >
+                <i data-lucide="cookie"></i>
+              </div>
+              <div
+                class="gallery-item aspect-square bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl flex items-center justify-center text-5xl cursor-pointer transition-all duration-300 relative overflow-hidden"
+              >
+                <i data-lucide="lightbulb"></i>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script>
+      // Initialize Lucide icons
+      lucide.createIcons();
+
+      // Add active class to clicked category items
+      document.querySelectorAll(".category-item").forEach((item) => {
+        item.addEventListener("click", function () {
+          document.querySelectorAll(".category-item").forEach((i) => {
+            i.classList.remove("active");
+          });
+          this.classList.add("active");
+        });
+      });
+    </script>
+
+    <style>
+      /* Hilangkan scrollbar di berbagai browser */
+      html,
+      body {
+        /* Untuk Chrome, Safari, dan Opera */
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* Internet Explorer and Edge */
+      }
+      html::-webkit-scrollbar,
+      body::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+  </body>
+</html>
