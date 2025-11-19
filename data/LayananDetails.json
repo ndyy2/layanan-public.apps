@@ -11,7 +11,7 @@
         "Tempat kami dirancang untuk kenyamanan publik, dilengkapi dengan ruang tunggu yang layak, sistem antrian digital, dan staf yang siap membantu. Tujuan kami adalah mewujudkan birokrasi yang cepat, mudah, dan melayani."
       ],
       "image": {
-        "hero": "https://wp.mokapos.com/wp-content/uploads/2023/02/mudahnya-mengecek-stok-inventaris-melalui-aplikasi-gudang.jpg",
+        "hero": "../asset/Image/layanan/Pusat-Layanan-Masyarakat-Kota-SBY/thumbnail.jpg",
         "thumbnail": "gambar.jpg"
       },
       "badge": {
@@ -128,33 +128,33 @@
       "gallery": [
         {
           "id": 1,
-          "src": "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
-          "alt": "Layanan Administrasi"
+          "src": "../asset/Image/layanan/Pusat-Layanan-Masyarakat-Kota-SBY/P-Pelayanan-1.jpg",
+          "alt": "Layanan Administrasi 1"
         },
         {
           "id": 2,
-          "src": "https://cdn.antaranews.com/cache/1200x800/2021/07/02/antarafoto-vaksinasi-ewer-02072021-pus-1.jpg",
-          "alt": "Layanan Kesehatan"
+          "src": "../asset/Image/layanan/Pusat-Layanan-Masyarakat-Kota-SBY/P-Pelayanan-2.jpg",
+          "alt": "Layanan Administrasi 2"
         },
         {
           "id": 3,
-          "src": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
-          "alt": "Layanan Pendidikan"
+          "src": "../asset/Image/layanan/Pusat-Layanan-Masyarakat-Kota-SBY/P-Pelayanan-3.jpg",
+          "alt": "Layanan Administrasi 3"
         },
         {
           "id": 4,
-          "src": "https://images.unsplash.com/photo-1551836026-d5c2e3145b7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
-          "alt": "Ruang Tunggu"
+          "src": "../asset/Image/layanan/Pusat-Layanan-Masyarakat-Kota-SBY/P-Pelayanan-4.jpg",
+          "alt": "Layanan Administrasi 4"
         },
         {
           "id": 5,
-          "src": "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
-          "alt": "Fasilitas Digital"
+          "src": "../asset/Image/layanan/Pusat-Layanan-Masyarakat-Kota-SBY/P-Pelayanan-5.jpg",
+          "alt": "Layanan Administrasi 5"
         },
         {
           "id": 6,
-          "src": "https://images.unsplash.com/photo-1581092160607-ee22731c7d5c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
-          "alt": "Akses Difabel"
+          "src": "../asset/Image/layanan/Pusat-Layanan-Masyarakat-Kota-SBY/P-Pelayanan-6.jpg",
+          "alt": "Layanan Administrasi 6"
         }
       ]
     },
@@ -169,7 +169,7 @@
         "Dilengkapi dengan laboratorium lengkap, apotek, dan ruang perawatan yang nyaman untuk memberikan pelayanan terbaik bagi kesehatan masyarakat."
       ],
       "image": {
-        "hero": "https://cdn.antaranews.com/cache/1200x800/2021/07/02/antarafoto-vaksinasi-ewer-02072021-pus-1.jpg",
+        "hero": "../asset/Image/layanan/puskesmas-surabaya-pst/thumbnail.jpg",
         "thumbnail": "puskesmas.jpg"
       },
       "badge": {
@@ -281,18 +281,33 @@
       "gallery": [
         {
           "id": 1,
-          "src": "https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+          "src": "../asset/Image/layanan/puskesmas-surabaya-pst/puskesmas-1.jpg",
           "alt": "Ruang Periksa"
         },
         {
           "id": 2,
-          "src": "https://images.unsplash.com/photo-1551076805-e1869033e561?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
-          "alt": "Laboratorium"
+          "src": "../asset/Image/layanan/puskesmas-surabaya-pst/puskesmas-2.jpg",
+          "alt": "Pintu Masuk"
         },
         {
           "id": 3,
-          "src": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
-          "alt": "Apotek"
+          "src": "../asset/Image/layanan/puskesmas-surabaya-pst/puskesmas-3.jpg",
+          "alt": "Loket Pendaftaran"
+        },
+        {
+          "id": 4,
+          "src": "../asset/Image/layanan/puskesmas-surabaya-pst/puskesmas-4.jpg",
+          "alt": "Ruang Tunggu"
+        },
+        {
+          "id": 5,
+          "src": "../asset/Image/layanan/puskesmas-surabaya-pst/puskesmas-5.jpg",
+          "alt": "Petugas dan Pasien"
+        },
+        {
+          "id": 6,
+          "src": "../asset/Image/layanan/puskesmas-surabaya-pst/puskesmas-6.jpg",
+          "alt": "IGD 24 Jam"
         }
       ]
     },
@@ -307,7 +322,7 @@
         "Dengan sistem terintegrasi, kami memastikan setiap anak mendapatkan pendidikan yang berkualitas dan merata di seluruh wilayah Surabaya."
       ],
       "image": {
-        "hero": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+        "hero": "../asset/Image/layanan/Dinas-Pendidikan/thumbnail.jpg",
         "thumbnail": "diknas.jpg"
       },
       "badge": {
@@ -424,18 +439,33 @@
       "gallery": [
         {
           "id": 1,
-          "src": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+          "src": "../asset/Image/layanan/Dinas-Pendidikan/Din-Pendidikan-1.jpg",
           "alt": "Layanan Pendaftaran"
         },
         {
           "id": 2,
-          "src": "https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
-          "alt": "Konsultasi Pendidikan"
+          "src": "../asset/Image/layanan/Dinas-Pendidikan/Din-Pendidikan-2.jpg",
+          "alt": "Ruang Konsultasi Pendidikan"
         },
         {
           "id": 3,
-          "src": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
-          "alt": "Perpustakaan Mini"
+          "src": "../asset/Image/layanan/Dinas-Pendidikan/Din-Pendidikan-3.jpg",
+          "alt": "Fasilitas Perpustakaan Mini"
+        },
+        {
+          "id": 4,
+          "src": "../asset/Image/layanan/Dinas-Pendidikan/Din-Pendidikan-4.jpg",
+          "alt": "Proses Administrasi Siswa"
+        },
+        {
+          "id": 5,
+          "src": "../asset/Image/layanan/Dinas-Pendidikan/Din-Pendidikan-5.jpg",
+          "alt": "Antrian Digital"
+        },
+        {
+          "id": 6,
+          "src": "../asset/Image/layanan/Dinas-Pendidikan/Din-Pendidikan-6.jpg",
+          "alt": "Petugas Memberi Layanan Informasi"
         }
       ]
     },
@@ -450,7 +480,7 @@
         "Dengan inovasi layanan digital 'Klampid Surabaya', kami berupaya meminimalisir antrian dan memberikan kepastian waktu layanan."
       ],
       "image": {
-        "hero": "https://images.unsplash.com/photo-1573497491208-6b1acb260507?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+        "hero": "../asset/Image/layanan/dinas-kependudukan/thumnail.jpg",
         "thumbnail": "disdukcapil.jpg"
       },
       "badge": {
@@ -567,18 +597,33 @@
       "gallery": [
         {
           "id": 1,
-          "src": "https://images.unsplash.com/photo-1556761175-59736f823f83?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+          "src": "../asset/Image/layanan/dinas-kependudukan/Din-Kedudukan-1.jpg",
           "alt": "Loket Layanan"
         },
         {
           "id": 2,
-          "src": "https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
-          "alt": "Ruang Konsultasi"
+          "src": "../asset/Image/layanan/dinas-kependudukan/Din-Kedudukan-2.jpg",
+          "alt": "Ruang Tunggu Layanan"
         },
         {
           "id": 3,
-          "src": "https://images.unsplash.com/photo-1620042220448-c3736511e9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
-          "alt": "Contoh KTP"
+          "src": "../asset/Image/layanan/dinas-kependudukan/Din-Kedudukan-3.jpg",
+          "alt": "Petugas Melayani Warga"
+        },
+        {
+          "id": 4,
+          "src": "../asset/Image/layanan/dinas-kependudukan/Din-Kedudukan-4.jpg",
+          "alt": "Pengisian Formulir"
+        },
+        {
+          "id": 5,
+          "src": "../asset/Image/layanan/dinas-kependudukan/Din-Kedudukan-5.jpg",
+          "alt": "Loket Konsultasi"
+        },
+        {
+          "id": 6,
+          "src": "../asset/Image/layanan/dinas-kependudukan/Din-Kedudukan-6.jpg",
+          "alt": "Pojok Baca"
         }
       ]
     },
@@ -593,7 +638,7 @@
         "Dengan pendekatan yang humanis dan profesional, kami siap melayani pengaduan masyarakat 24 jam terkait gangguan ketertiban umum."
       ],
       "image": {
-        "hero": "https://images.unsplash.com/photo-1563206767-1096b0201383?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+        "hero": "../asset/Image/layanan/satunan-polisi-pamong/thumbnail.jpg",
         "thumbnail": "satpolpp.jpg"
       },
       "badge": {
@@ -710,18 +755,33 @@
       "gallery": [
         {
           "id": 1,
-          "src": "https://images.unsplash.com/photo-1580643729868-b72d0e74e64f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+          "src": "../asset/Image/layanan/satunan-polisi-pamong/polisi-1.jpg",
           "alt": "Briefing Petugas"
         },
         {
           "id": 2,
-          "src": "https://images.unsplash.com/photo-1570876456431-bfea7605e94f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
-          "alt": "Mobil Patroli"
+          "src": "../asset/Image/layanan/satunan-polisi-pamong/polisi-2.jpg",
+          "alt": "Personel Siaga di Lapangan"
         },
         {
           "id": 3,
-          "src": "https://images.unsplash.com/photo-1551836026-d5c2e3145b7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
-          "alt": "Melayani Warga"
+          "src": "../asset/Image/layanan/satunan-polisi-pamong/polisi-3.jpg",
+          "alt": "Armada Patroli Satpol PP"
+        },
+        {
+          "id": 4,
+          "src": "../asset/Image/layanan/satunan-polisi-pamong/polisi-4.jpg",
+          "alt": "Pengaduan Warga"
+        },
+        {
+          "id": 5,
+          "src": "../asset/Image/layanan/satunan-polisi-pamong/polisi-5.jpg",
+          "alt": "Ruang Komando Satpol PP"
+        },
+        {
+          "id": 6,
+          "src": "../asset/Image/layanan/satunan-polisi-pamong/polisi-6.jpg",
+          "alt": "Sosialisasi Penertiban Perda"
         }
       ]
     },
@@ -736,7 +796,7 @@
         "Kami berkomitmen untuk mewujudkan lingkungan perumahan yang sehat, aman, dan terjangkau bagi seluruh warga Surabaya."
       ],
       "image": {
-        "hero": "https://images.unsplash.com/photo-1599661448693-6e3e1100f73f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+        "hero": "../asset/Image/layanan/Dinas-Perumahan-Rakyat",
         "thumbnail": "dprkp.jpg"
       },
       "badge": {
@@ -853,18 +913,33 @@
       "gallery": [
         {
           "id": 1,
-          "src": "https://images.unsplash.com/photo-1515263487990-61b07816b324?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+          "src": "../asset/Image/layanan/Dinas-Perumahan-Rakyat/perumahan-1.jpg",
           "alt": "Gedung Rusunawa"
         },
         {
           "id": 2,
-          "src": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
-          "alt": "Interior Hunian"
+          "src": "../asset/Image/layanan/Dinas-Perumahan-Rakyat/perumahan-2.jpg",
+          "alt": "Layanan Konsultasi Permukiman"
         },
         {
           "id": 3,
-          "src": "https://images.unsplash.com/photo-1613904622254-10651811e9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
-          "alt": "Kawasan Permukiman"
+          "src": "../asset/Image/layanan/Dinas-Perumahan-Rakyat/perumahan-3.jpg",
+          "alt": "Area Informasi Program"
+        },
+        {
+          "id": 4,
+          "src": "../asset/Image/layanan/Dinas-Perumahan-Rakyat/perumahan-4.jpg",
+          "alt": "Proses Pendaftaran di Loket"
+        },
+        {
+          "id": 5,
+          "src": "../asset/Image/layanan/Dinas-Perumahan-Rakyat/perumahan-5.jpg",
+          "alt": "Ruangan Tunggu Rusunawa"
+        },
+        {
+          "id": 6,
+          "src": "../asset/Image/layanan/Dinas-Perumahan-Rakyat/perumahan-6.jpg",
+          "alt": "Galeri Foto Program Bantuan"
         }
       ]
     }
