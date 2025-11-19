@@ -1,0 +1,2291 @@
+<!DOCTYPE html>
+<html lang="id" style="scroll-behavior: smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Direktori Layanan Publik & UMKM Lokal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+      // Check authentication before page loads
+      (function () {
+        const session = localStorage.getItem("currentSession");
+        if (!session) {
+          window.location.href = "index.html";
+        }
+      })();
+
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: { DEFAULT: "#1E40AF", dark: "#1e3a8a" },
+              secondary: "#FCD34D",
+              accent: { DEFAULT: "#14B8A6", dark: "#0f766e" },
+              dark: { DEFAULT: "#0F172A", lighter: "#1E293B" },
+            },
+            fontFamily: { sans: ["Inter", "sans-serif"] },
+            animation: {
+              float: "float 6s ease-in-out infinite",
+              "fade-in": "fadeIn 0.8s ease-out forwards",
+              "slide-up": "slideUp 0.8s ease-out forwards",
+              "pulse-soft": "pulseSoft 3s ease-in-out infinite",
+              "scale-in": "scaleIn 0.5s ease-out forwards",
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Enhanced Glass Morphism */
+      .glass {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      .dark .glass {
+        background: rgba(30, 41, 59, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .glass-sidebar {
+        background: linear-gradient(
+          135deg,
+          rgba(30, 41, 59, 0.95) 0%,
+          rgba(15, 23, 42, 0.98) 100%
+        );
+        backdrop-filter: blur(20px);
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .dark .glass-sidebar {
+        background: linear-gradient(
+          135deg,
+          rgba(15, 23, 42, 0.98) 0%,
+          rgba(0, 0, 0, 0.95) 100%
+        );
+      }
+
+      /* Animations */
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      @keyframes slideUp {
+        0% {
+          transform: translateY(30px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      @keyframes pulseSoft {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.7;
+        }
+      }
+      @keyframes scaleIn {
+        0% {
+          transform: scale(0.95);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      /* Scroll Reveal */
+      .reveal {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Enhanced Cards */
+      .card-enhanced {
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        position: relative;
+        overflow: hidden;
+      }
+      .card-enhanced::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        transition: left 0.6s;
+      }
+      .card-enhanced:hover::before {
+        left: 100%;
+      }
+      .card-enhanced:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+      }
+      .dark .card-enhanced:hover {
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f5f9;
+        border-radius: 10px;
+      }
+      .dark ::-webkit-scrollbar-track {
+        background: #1e293b;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, #1e40af, #14b8a6);
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(180deg, #1e3a8a, #0f766e);
+      }
+
+      /* Enhanced Card Styles */
+      .enhanced-card {
+        background: white;
+        border-radius: 1.5rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        overflow: hidden;
+        position: relative;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      .dark .enhanced-card {
+        background: #1e293b;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      }
+      .enhanced-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #1e40af, #14b8a6);
+        transform: scaleX(0);
+        transition: transform 0.4s ease;
+      }
+      .enhanced-card:hover::before {
+        transform: scaleX(1);
+      }
+      .enhanced-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+      .dark .enhanced-card:hover {
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      }
+
+      .category-badge {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        padding: 0.5rem 1rem;
+        border-radius: 2rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+      }
+      .card-image {
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+      }
+      .card-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+        padding: 1rem;
+        color: white;
+      }
+
+      /* Navigation */
+      .nav-link {
+        position: relative;
+        transition: all 0.3s ease;
+      }
+      .nav-link::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 4px;
+        background: linear-gradient(180deg, #1e40af, #14b8a6);
+        transform: scaleY(0);
+        transition: transform 0.3s ease;
+      }
+      .nav-link.active::before {
+        transform: scaleY(1);
+      }
+      .nav-link:hover {
+        background: rgba(30, 64, 175, 0.1);
+        transform: translateX(8px);
+      }
+      .nav-link.active {
+        background: rgba(30, 64, 175, 0.15);
+        color: #ffffff;
+        font-weight: 600;
+      }
+
+      /* Form Styles */
+      .form-input {
+        transition: all 0.3s ease;
+        border: 2px solid #e5e7eb;
+      }
+      .dark .form-input {
+        background: #1e293b;
+        border-color: #374151;
+        color: white;
+      }
+      .form-input:focus {
+        border-color: #1e40af;
+        box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+        transform: translateY(-2px);
+      }
+
+      /* Loading Spinner */
+      .spinner {
+        border: 4px solid rgba(30, 64, 175, 0.1);
+        border-radius: 50%;
+        border-top: 4px solid #1e40af;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s ease-in-out infinite;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Filter Button */
+      .filter-btn {
+        transition: all 0.3s ease;
+        position: relative;
+      }
+      .filter-btn.active {
+        background: linear-gradient(135deg, #14b8a6, #0d9488);
+        color: white;
+        transform: scale(1.05);
+      }
+      .filter-btn.active::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60%;
+        height: 3px;
+        background: #fcd34d;
+        border-radius: 2px;
+      }
+
+      /* Notification Badge */
+      .notification-badge {
+        animation: pulseSoft 2s ease-in-out infinite;
+      }
+
+      /* Star Rating */
+      .star {
+        color: #d1d5db;
+        transition: color 0.2s ease;
+      }
+      .star.filled {
+        color: #fbbf24;
+      }
+
+      /* Floating Action Button */
+      .fab {
+        box-shadow: 0 10px 25px rgba(30, 64, 175, 0.3);
+        transition: all 0.3s ease;
+      }
+      .fab:hover {
+        box-shadow: 0 15px 35px rgba(30, 64, 175, 0.4);
+        transform: translateY(-3px);
+      }
+
+      /* Line Clamp */
+      .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      /* Modal Overlay */
+      .modal-overlay {
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+      }
+      .dark .modal-overlay {
+        background: rgba(0, 0, 0, 0.7);
+      }
+
+      /* Add/Edit Form Card */
+      .form-card {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.95) 0%,
+          rgba(249, 250, 251, 0.95) 100%
+        );
+        border: 2px solid rgba(30, 64, 175, 0.1);
+      }
+      .dark .form-card {
+        background: linear-gradient(
+          135deg,
+          rgba(30, 41, 59, 0.95) 0%,
+          rgba(15, 23, 42, 0.95) 100%
+        );
+        border-color: rgba(20, 184, 166, 0.2);
+      }
+
+      /* Success/Error Messages */
+      .toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 1rem 1.5rem;
+        border-radius: 0.75rem;
+        font-weight: 600;
+        z-index: 9999;
+        animation: slideDown 0.3s ease-out;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      }
+      .toast.success {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: white;
+      }
+      .toast.error {
+        background: linear-gradient(135deg, #ef4444, #dc2626);
+        color: white;
+      }
+      @keyframes slideDown {
+        from {
+          transform: translateY(-100px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+
+  <body
+    class="bg-gradient-to-br from-blue-50 via-white to-teal-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 font-sans antialiased flex h-screen overflow-hidden transition-colors duration-300"
+  >
+    <!-- Sidebar Navigation -->
+    <nav class="glass-sidebar w-80 flex-shrink-0 h-full overflow-y-auto z-50">
+      <div class="p-6">
+        <!-- Logo -->
+        <div class="flex items-center space-x-3 mb-8">
+          <div
+            class="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center shadow-lg animate-float"
+          >
+            <i data-lucide="building-2" class="w-7 h-7 text-white"></i>
+          </div>
+          <div>
+            <h1 class="text-xl font-black text-white">Direktori Layanan</h1>
+            <p class="text-xs text-gray-300">Publik & UMKM Lokal</p>
+          </div>
+        </div>
+
+        <!-- User Profile -->
+        <div class="glass rounded-2xl p-4 mb-6 dark:bg-gray-800/50">
+          <div class="flex items-center space-x-3">
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center"
+              id="sidebar-avatar"
+            >
+              <span class="text-white font-bold text-sm" id="sidebar-initials"
+                >AD</span
+              >
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-white font-semibold truncate" id="sidebar-name">
+                Admin Direktori
+              </p>
+              <p class="text-gray-400 text-sm truncate" id="sidebar-position">
+                Administrator
+              </p>
+            </div>
+            <div class="relative">
+              <i
+                data-lucide="bell"
+                class="w-5 h-5 text-gray-400 cursor-pointer hover:text-white transition-colors"
+                onclick="toggleNotifications()"
+              ></i>
+              <span
+                class="notification-badge absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"
+              ></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation Links -->
+        <nav class="space-y-2">
+          <a
+            href="#dashboard"
+            class="nav-link active flex items-center space-x-3 p-3 rounded-xl text-white hover:text-white transition-all duration-300"
+            onclick="switchPage('dashboard')"
+          >
+            <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+            <span class="font-medium">Dashboard</span>
+          </a>
+          <a
+            href="#layanan"
+            class="nav-link flex items-center space-x-3 p-3 rounded-xl text-gray-300 hover:text-white transition-all duration-300"
+            onclick="switchPage('layanan')"
+          >
+            <i data-lucide="building-2" class="w-5 h-5"></i>
+            <span class="font-medium">Layanan Publik</span>
+          </a>
+          <a
+            href="#umkm"
+            class="nav-link flex items-center space-x-3 p-3 rounded-xl text-gray-300 hover:text-white transition-all duration-300"
+            onclick="switchPage('umkm')"
+          >
+            <i data-lucide="shopping-basket" class="w-5 h-5"></i>
+            <span class="font-medium">UMKM Lokal</span>
+          </a>
+          <a
+            href="#peta"
+            class="nav-link flex items-center space-x-3 p-3 rounded-xl text-gray-300 hover:text-white transition-all duration-300"
+            onclick="switchPage('peta')"
+          >
+            <i data-lucide="map" class="w-5 h-5"></i>
+            <span class="font-medium">Peta Interaktif</span>
+          </a>
+          <a
+            href="#testimoni"
+            class="nav-link flex items-center space-x-3 p-3 rounded-xl text-gray-300 hover:text-white transition-all duration-300"
+            onclick="switchPage('testimoni')"
+          >
+            <i data-lucide="message-square" class="w-5 h-5"></i>
+            <span class="font-medium">Testimoni</span>
+          </a>
+          <a
+            href="#penilaian"
+            class="nav-link flex items-center space-x-3 p-3 rounded-xl text-gray-300 hover:text-white transition-all duration-300"
+            onclick="switchPage('penilaian')"
+          >
+            <i data-lucide="star" class="w-5 h-5"></i>
+            <span class="font-medium">Penilaian</span>
+          </a>
+          <a
+            href="#profil"
+            class="nav-link flex items-center space-x-3 p-3 rounded-xl text-gray-300 hover:text-white transition-all duration-300"
+            onclick="switchPage('profil')"
+          >
+            <i data-lucide="user" class="w-5 h-5"></i>
+            <span class="font-medium">Profil</span>
+          </a>
+          <a
+            href="#kontak"
+            class="nav-link flex items-center space-x-3 p-3 rounded-xl text-gray-300 hover:text-white transition-all duration-300"
+            onclick="switchPage('kontak')"
+          >
+            <i data-lucide="phone" class="w-5 h-5"></i>
+            <span class="font-medium">Kontak</span>
+          </a>
+        </nav>
+
+        <!-- Quick Actions -->
+        <div class="mt-8 pt-6 border-t border-gray-700">
+          <h3
+            class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4"
+          >
+            Quick Actions
+          </h3>
+          <div class="space-y-2">
+            <button
+              class="w-full flex items-center space-x-3 p-3 rounded-xl bg-primary/20 text-primary hover:bg-primary/30 transition-all duration-300"
+              onclick="showAddModal('layanan')"
+            >
+              <i data-lucide="plus-circle" class="w-5 h-5"></i>
+              <span class="font-medium">Tambah Layanan</span>
+            </button>
+            <button
+              class="w-full flex items-center space-x-3 p-3 rounded-xl bg-accent/20 text-accent hover:bg-accent/30 transition-all duration-300"
+              onclick="showAddModal('umkm')"
+            >
+              <i data-lucide="store" class="w-5 h-5"></i>
+              <span class="font-medium">Daftar UMKM</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="mt-8 pt-6 border-t border-gray-700">
+          <div class="flex items-center justify-between text-gray-400">
+            <span class="text-sm">© 2025 Direktori</span>
+            <div class="flex space-x-2">
+              <button
+                class="p-1 hover:text-white transition-colors"
+                onclick="switchPage('profil')"
+                title="Pengaturan"
+              >
+                <i data-lucide="settings" class="w-4 h-4"></i>
+              </button>
+              <button
+                class="p-1 hover:text-white transition-colors"
+                onclick="logout()"
+                title="Keluar"
+              >
+                <i data-lucide="log-out" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col overflow-hidden">
+      <!-- Top Header -->
+      <header class="glass border-b border-gray-200 dark:border-gray-700 z-40">
+        <div class="flex items-center justify-between p-6">
+          <!-- Search Bar -->
+          <div class="flex-1 max-w-2xl">
+            <div class="relative">
+              <i
+                data-lucide="search"
+                class="w-5 h-5 text-gray-400 absolute left-4 top-1/2 transform -translate-y-1/2"
+              ></i>
+              <input
+                type="text"
+                id="search"
+                placeholder="Cari layanan, UMKM, atau lokasi..."
+                class="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:outline-none focus:border-primary dark:text-white transition-all duration-300"
+                oninput="handleSearch()"
+              />
+            </div>
+          </div>
+
+          <!-- Header Actions -->
+          <div class="flex items-center space-x-4 ml-6">
+            <!-- Theme Toggle -->
+            <button
+              class="p-2 text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-accent transition-colors duration-300"
+              onclick="toggleTheme()"
+              title="Toggle Theme"
+            >
+              <i data-lucide="moon" class="w-5 h-5" id="theme-icon"></i>
+            </button>
+
+            <!-- Notifications -->
+            <div class="relative">
+              <button
+                class="p-2 text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-accent transition-colors duration-300"
+                onclick="toggleNotifications()"
+                title="Notifikasi"
+              >
+                <i data-lucide="bell" class="w-5 h-5"></i>
+              </button>
+              <span
+                class="notification-badge absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"
+              ></span>
+            </div>
+
+            <!-- User Menu -->
+            <div class="flex items-center space-x-3">
+              <div class="text-right hidden md:block">
+                <p
+                  class="text-sm font-semibold text-gray-900 dark:text-white"
+                  id="header-name"
+                >
+                  Admin Direktori
+                </p>
+                <p
+                  class="text-xs text-gray-500 dark:text-gray-400"
+                  id="header-position"
+                >
+                  Administrator
+                </p>
+              </div>
+              <div
+                class="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center cursor-pointer"
+                onclick="switchPage('profil')"
+                id="header-avatar"
+              >
+                <span class="text-white font-bold text-sm" id="header-initials"
+                  >AD</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content Pages -->
+      <div
+        class="flex-1 overflow-y-auto content-area bg-gray-50/50 dark:bg-gray-900/50"
+      >
+        <!-- Dashboard Page -->
+        <section id="dashboard-page" class="page-content active p-6">
+          <div class="mb-8 reveal">
+            <h1 class="text-3xl font-black text-gray-900 dark:text-white mb-2">
+              Selamat Datang, <span id="dashboard-username">User</span>! 👋
+            </h1>
+            <p class="text-gray-600 dark:text-gray-400">
+              Kelola dan pantau layanan publik & UMKM lokal dalam satu platform
+            </p>
+          </div>
+
+          <!-- Stats Grid -->
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
+          >
+            <div class="glass rounded-2xl p-6 card-enhanced reveal">
+              <div class="flex items-center justify-between mb-4">
+                <div
+                  class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center"
+                >
+                  <i data-lucide="building-2" class="w-6 h-6 text-primary"></i>
+                </div>
+                <span
+                  class="text-sm font-semibold text-green-600 dark:text-green-400"
+                  >+12%</span
+                >
+              </div>
+              <h3
+                class="text-2xl font-black text-gray-900 dark:text-white mb-1"
+                id="layanan-count"
+              >
+                0
+              </h3>
+              <p class="text-gray-600 dark:text-gray-400 font-medium">
+                Layanan Publik
+              </p>
+            </div>
+
+            <div
+              class="glass rounded-2xl p-6 card-enhanced reveal"
+              style="animation-delay: 0.1s"
+            >
+              <div class="flex items-center justify-between mb-4">
+                <div
+                  class="w-12 h-12 bg-teal-100 dark:bg-teal-900/30 rounded-xl flex items-center justify-center"
+                >
+                  <i
+                    data-lucide="shopping-basket"
+                    class="w-6 h-6 text-accent"
+                  ></i>
+                </div>
+                <span
+                  class="text-sm font-semibold text-green-600 dark:text-green-400"
+                  >+18%</span
+                >
+              </div>
+              <h3
+                class="text-2xl font-black text-gray-900 dark:text-white mb-1"
+                id="umkm-count"
+              >
+                0
+              </h3>
+              <p class="text-gray-600 dark:text-gray-400 font-medium">
+                UMKM Terdaftar
+              </p>
+            </div>
+
+            <div
+              class="glass rounded-2xl p-6 card-enhanced reveal"
+              style="animation-delay: 0.2s"
+            >
+              <div class="flex items-center justify-between mb-4">
+                <div
+                  class="w-12 h-12 bg-amber-100 dark:bg-amber-900/30 rounded-xl flex items-center justify-center"
+                >
+                  <i data-lucide="users" class="w-6 h-6 text-amber-600"></i>
+                </div>
+                <span
+                  class="text-sm font-semibold text-green-600 dark:text-green-400"
+                  >+24%</span
+                >
+              </div>
+              <h3
+                class="text-2xl font-black text-gray-900 dark:text-white mb-1"
+              >
+                1,254
+              </h3>
+              <p class="text-gray-600 dark:text-gray-400 font-medium">
+                Pengguna Aktif
+              </p>
+            </div>
+
+            <div
+              class="glass rounded-2xl p-6 card-enhanced reveal"
+              style="animation-delay: 0.3s"
+            >
+              <div class="flex items-center justify-between mb-4">
+                <div
+                  class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center"
+                >
+                  <i data-lucide="eye" class="w-6 h-6 text-green-600"></i>
+                </div>
+                <span
+                  class="text-sm font-semibold text-green-600 dark:text-green-400"
+                  >+8%</span
+                >
+              </div>
+              <h3
+                class="text-2xl font-black text-gray-900 dark:text-white mb-1"
+              >
+                5,678
+              </h3>
+              <p class="text-gray-600 dark:text-gray-400 font-medium">
+                Total Kunjungan
+              </p>
+            </div>
+          </div>
+
+          <!-- Quick Actions & Activity -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="glass rounded-2xl p-6 reveal">
+              <h3 class="text-xl font-black text-gray-900 dark:text-white mb-6">
+                Aktivitas Terbaru
+              </h3>
+              <div class="space-y-4" id="recent-activities">
+                <!-- Will be populated by JavaScript -->
+              </div>
+            </div>
+
+            <div
+              class="glass rounded-2xl p-6 reveal"
+              style="animation-delay: 0.2s"
+            >
+              <h3 class="text-xl font-black text-gray-900 dark:text-white mb-6">
+                Kategori Populer
+              </h3>
+              <div class="space-y-3" id="popular-categories">
+                <!-- Will be populated by JavaScript -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Layanan Publik Page -->
+        <section id="layanan-page" class="page-content p-6 hidden">
+          <div class="mb-8 reveal">
+            <h1 class="text-3xl font-black text-gray-900 dark:text-white mb-2">
+              Layanan Publik
+            </h1>
+            <p class="text-gray-600 dark:text-gray-400">
+              Kelola semua layanan publik yang tersedia untuk masyarakat
+            </p>
+          </div>
+
+          <div class="glass rounded-2xl p-6 text-center">
+            <i
+              data-lucide="building-2"
+              class="w-16 h-16 text-gray-400 mx-auto mb-4"
+            ></i>
+            <p class="text-gray-500 dark:text-gray-400 text-lg mb-4">
+              Halaman Layanan Publik
+            </p>
+            <p class="text-gray-400 text-sm">
+              Fitur ini sedang dalam pengembangan
+            </p>
+          </div>
+        </section>
+
+        <!-- UMKM Lokal Page -->
+        <section id="umkm-page" class="page-content p-6 hidden">
+          <div class="mb-8 reveal">
+            <h1 class="text-3xl font-black text-gray-900 dark:text-white mb-2">
+              UMKM Lokal
+            </h1>
+            <p class="text-gray-600 dark:text-gray-400">
+              Kelola dan pantau UMKM lokal yang terdaftar dalam platform
+            </p>
+          </div>
+
+          <div class="glass rounded-2xl p-6 text-center">
+            <i
+              data-lucide="shopping-basket"
+              class="w-16 h-16 text-gray-400 mx-auto mb-4"
+            ></i>
+            <p class="text-gray-500 dark:text-gray-400 text-lg mb-4">
+              Halaman UMKM Lokal
+            </p>
+            <p class="text-gray-400 text-sm">
+              Fitur ini sedang dalam pengembangan
+            </p>
+          </div>
+        </section>
+
+        <!-- Peta Interaktif Page -->
+        <section id="peta-page" class="page-content p-6 hidden">
+          <div class="mb-8 reveal">
+            <h1 class="text-3xl font-black text-gray-900 dark:text-white mb-2">
+              Peta Interaktif
+            </h1>
+            <p class="text-gray-600 dark:text-gray-400">
+              Lihat lokasi layanan publik dan UMKM dalam peta interaktif
+            </p>
+          </div>
+
+          <div
+            class="glass rounded-2xl p-6 reveal"
+            style="animation-delay: 0.2s"
+          >
+            <div class="rounded-2xl overflow-hidden shadow-2xl">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.5285423097947!2d112.73137631477497!3d-7.289169394718896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fbf8381ac47f%3A0x3027a76e352be40!2sSurabaya%2C%20Kota%20SBY%2C%20Jawa%20Timur!5e0!3m2!1sid!2sid!4v1620000000000!5m2!1sid!2sid"
+                width="100%"
+                height="500"
+                style="border: 0"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+              <div
+                class="flex items-center space-x-3 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg"
+              >
+                <div class="w-4 h-4 bg-primary rounded-full"></div>
+                <span
+                  class="text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >Layanan Publik</span
+                >
+              </div>
+              <div
+                class="flex items-center space-x-3 p-3 bg-teal-50 dark:bg-teal-900/20 rounded-lg"
+              >
+                <div class="w-4 h-4 bg-accent rounded-full"></div>
+                <span
+                  class="text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >UMKM Lokal</span
+                >
+              </div>
+              <div
+                class="flex items-center space-x-3 p-3 bg-amber-50 dark:bg-amber-900/20 rounded-lg"
+              >
+                <div class="w-4 h-4 bg-yellow-500 rounded-full"></div>
+                <span
+                  class="text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >Lokasi Anda</span
+                >
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Testimoni Page -->
+        <section id="testimoni-page" class="page-content p-6 hidden">
+          <div class="mb-8 reveal">
+            <h1 class="text-3xl font-black text-gray-900 dark:text-white mb-2">
+              Testimoni Pengguna
+            </h1>
+            <p class="text-gray-600 dark:text-gray-400">
+              Lihat apa kata pengguna tentang platform kami
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="glass rounded-2xl p-6 card-enhanced reveal">
+              <div class="flex items-center space-x-3 mb-4">
+                <div
+                  class="w-12 h-12 bg-gradient-to-br from-primary to-blue-600 rounded-full flex items-center justify-center"
+                >
+                  <span class="text-white font-bold">AS</span>
+                </div>
+                <div>
+                  <h4 class="font-bold text-gray-900 dark:text-white">
+                    Ahmad Santoso
+                  </h4>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">
+                    Pemilik Toko Kerajinan
+                  </p>
+                </div>
+              </div>
+              <div class="flex mb-3">
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+              </div>
+              <p
+                class="text-gray-700 dark:text-gray-300 text-sm leading-relaxed"
+              >
+                "Platform ini sangat membantu UMKM seperti saya. Prosesnya cepat
+                dan mudah dipahami."
+              </p>
+            </div>
+
+            <div
+              class="glass rounded-2xl p-6 card-enhanced reveal"
+              style="animation-delay: 0.1s"
+            >
+              <div class="flex items-center space-x-3 mb-4">
+                <div
+                  class="w-12 h-12 bg-gradient-to-br from-accent to-teal-600 rounded-full flex items-center justify-center"
+                >
+                  <span class="text-white font-bold">SD</span>
+                </div>
+                <div>
+                  <h4 class="font-bold text-gray-900 dark:text-white">
+                    Sari Dewi
+                  </h4>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">
+                    Pemilik Katering
+                  </p>
+                </div>
+              </div>
+              <div class="flex mb-3">
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star">★</span>
+              </div>
+              <p
+                class="text-gray-700 dark:text-gray-300 text-sm leading-relaxed"
+              >
+                "Dengan bantuan platform ini, omzet bisnis saya meningkat 40%
+                dalam 3 bulan terakhir."
+              </p>
+            </div>
+
+            <div
+              class="glass rounded-2xl p-6 card-enhanced reveal"
+              style="animation-delay: 0.2s"
+            >
+              <div class="flex items-center space-x-3 mb-4">
+                <div
+                  class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-full flex items-center justify-center"
+                >
+                  <span class="text-white font-bold">BW</span>
+                </div>
+                <div>
+                  <h4 class="font-bold text-gray-900 dark:text-white">
+                    Budi Wibowo
+                  </h4>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">
+                    Pemilik Bengkel
+                  </p>
+                </div>
+              </div>
+              <div class="flex mb-3">
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+              </div>
+              <p
+                class="text-gray-700 dark:text-gray-300 text-sm leading-relaxed"
+              >
+                "Tim support sangat responsif dan membantu menyelesaikan masalah
+                dengan cepat."
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Penilaian Page -->
+        <section id="penilaian-page" class="page-content p-6 hidden">
+          <div class="mb-8 reveal">
+            <h1 class="text-3xl font-black text-gray-900 dark:text-white mb-2">
+              Sistem Penilaian
+            </h1>
+            <p class="text-gray-600 dark:text-gray-400">
+              Kelola dan pantau penilaian pengguna terhadap layanan dan UMKM
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="glass rounded-2xl p-6 reveal">
+              <h3 class="text-xl font-black text-gray-900 dark:text-white mb-6">
+                Ringkasan Penilaian
+              </h3>
+              <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                  <span
+                    class="text-lg font-semibold text-gray-700 dark:text-gray-300"
+                    >Rating Rata-rata</span
+                  >
+                  <div class="text-right">
+                    <span class="text-3xl font-black text-primary">4.7</span>
+                    <span class="text-gray-600 dark:text-gray-400">/5.0</span>
+                  </div>
+                </div>
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                      <span class="text-sm text-gray-600 dark:text-gray-400"
+                        >5 bintang</span
+                      >
+                      <div class="flex">
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                      </div>
+                    </div>
+                    <span
+                      class="text-sm font-semibold text-gray-700 dark:text-gray-300"
+                      >128</span
+                    >
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                      <span class="text-sm text-gray-600 dark:text-gray-400"
+                        >4 bintang</span
+                      >
+                      <div class="flex">
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star">★</span>
+                      </div>
+                    </div>
+                    <span
+                      class="text-sm font-semibold text-gray-700 dark:text-gray-300"
+                      >45</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="glass rounded-2xl p-6 reveal"
+              style="animation-delay: 0.2s"
+            >
+              <h3 class="text-xl font-black text-gray-900 dark:text-white mb-6">
+                Penilaian Terbaru
+              </h3>
+              <div class="space-y-4">
+                <div
+                  class="flex items-start space-x-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+                >
+                  <div class="flex-1">
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="font-semibold text-gray-900 dark:text-white"
+                        >Puskesmas Sehat Sentosa</span
+                      >
+                      <div class="flex">
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                      </div>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">
+                      "Pelayanan sangat memuaskan dan cepat"
+                    </p>
+                    <span class="text-xs text-gray-500"
+                      >- Sari, 2 jam lalu</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Kontak Page -->
+        <section id="kontak-page" class="page-content p-6 hidden">
+          <div class="mb-8 reveal">
+            <h1 class="text-3xl font-black text-gray-900 dark:text-white mb-2">
+              Hubungi Kami
+            </h1>
+            <p class="text-gray-600 dark:text-gray-400">
+              Hubungi tim support untuk bantuan dan informasi lebih lanjut
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-1">
+              <div class="glass rounded-2xl p-6 reveal">
+                <h3
+                  class="text-xl font-black text-gray-900 dark:text-white mb-6"
+                >
+                  Informasi Kontak
+                </h3>
+                <div class="space-y-4">
+                  <div
+                    class="flex items-start space-x-3 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg"
+                  >
+                    <i
+                      data-lucide="phone"
+                      class="w-5 h-5 text-primary mt-1 flex-shrink-0"
+                    ></i>
+                    <div>
+                      <h4 class="font-semibold text-gray-900 dark:text-white">
+                        Telepon
+                      </h4>
+                      <p class="text-gray-600 dark:text-gray-400">
+                        +62 21 1234 5678
+                      </p>
+                      <p class="text-sm text-gray-500 dark:text-gray-500">
+                        Senin - Jumat, 08:00 - 17:00
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-start space-x-3 p-4 bg-teal-50 dark:bg-teal-900/20 rounded-lg"
+                  >
+                    <i
+                      data-lucide="mail"
+                      class="w-5 h-5 text-accent mt-1 flex-shrink-0"
+                    ></i>
+                    <div>
+                      <h4 class="font-semibold text-gray-900 dark:text-white">
+                        Email
+                      </h4>
+                      <p class="text-gray-600 dark:text-gray-400">
+                        support@direktorilayanan.id
+                      </p>
+                      <p class="text-sm text-gray-500 dark:text-gray-500">
+                        Respon dalam 24 jam
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-start space-x-3 p-4 bg-amber-50 dark:bg-amber-900/20 rounded-lg"
+                  >
+                    <i
+                      data-lucide="map-pin"
+                      class="w-5 h-5 text-amber-600 mt-1 flex-shrink-0"
+                    ></i>
+                    <div>
+                      <h4 class="font-semibold text-gray-900 dark:text-white">
+                        Alamat Kantor
+                      </h4>
+                      <p class="text-gray-600 dark:text-gray-400">
+                        Jl. Inovasi Digital No. 123<br />Jakarta Pusat, 10110
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lg:col-span-2">
+              <div
+                class="glass rounded-2xl p-6 reveal"
+                style="animation-delay: 0.2s"
+              >
+                <h3
+                  class="text-xl font-black text-gray-900 dark:text-white mb-6"
+                >
+                  Kirim Pesan
+                </h3>
+                <form class="space-y-4" onsubmit="handleContactSubmit(event)">
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label
+                        class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
+                        >Nama Lengkap</label
+                      >
+                      <input
+                        type="text"
+                        class="w-full px-4 py-3 form-input rounded-lg"
+                        placeholder="Masukkan nama lengkap"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label
+                        class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
+                        >Email</label
+                      >
+                      <input
+                        type="email"
+                        class="w-full px-4 py-3 form-input rounded-lg"
+                        placeholder="nama@email.com"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label
+                      class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
+                      >Subjek</label
+                    >
+                    <input
+                      type="text"
+                      class="w-full px-4 py-3 form-input rounded-lg"
+                      placeholder="Subjek pesan"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label
+                      class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
+                      >Pesan</label
+                    >
+                    <textarea
+                      rows="5"
+                      class="w-full px-4 py-3 form-input rounded-lg"
+                      placeholder="Tulis pesan Anda di sini..."
+                      required
+                    ></textarea>
+                  </div>
+                  <button
+                    type="submit"
+                    class="w-full px-8 py-3 bg-gradient-to-r from-primary to-accent text-white font-semibold rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center"
+                  >
+                    <i data-lucide="send" class="w-4 h-4 mr-2"></i>Kirim Pesan
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Profil Page -->
+        <section id="profil-page" class="page-content p-6 hidden">
+          <div class="mb-8 reveal">
+            <h1 class="text-3xl font-black text-gray-900 dark:text-white mb-2">
+              Profil Pengguna
+            </h1>
+            <p class="text-gray-600 dark:text-gray-400">
+              Kelola informasi profil dan pengaturan akun Anda
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-1">
+              <div class="glass rounded-2xl p-6 text-center reveal">
+                <div
+                  class="profile-photo-container mb-4 inline-block relative cursor-pointer"
+                  onclick="document.getElementById('photo-upload').click()"
+                >
+                  <div
+                    id="profile-photo"
+                    class="w-32 h-32 rounded-full mx-auto flex items-center justify-center text-white text-4xl font-bold bg-gradient-to-br from-primary to-accent"
+                  >
+                    AD
+                  </div>
+                  <div
+                    class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-full opacity-0 hover:opacity-100 transition-opacity duration-300"
+                  >
+                    <i data-lucide="camera" class="w-6 h-6 text-white"></i>
+                  </div>
+                  <input
+                    type="file"
+                    id="photo-upload"
+                    accept="image/*"
+                    class="hidden"
+                    onchange="handlePhotoUpload(event)"
+                  />
+                </div>
+                <h3
+                  class="text-xl font-black text-gray-900 dark:text-white mb-2"
+                  id="profile-name"
+                >
+                  Admin Direktori
+                </h3>
+                <p class="text-accent font-semibold mb-4" id="profile-position">
+                  Administrator
+                </p>
+                <div class="flex justify-center space-x-2 mb-6">
+                  <span
+                    class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-primary text-xs font-semibold rounded-full"
+                    >Pengguna</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 text-xs font-semibold rounded-full"
+                    >Aktif</span
+                  >
+                </div>
+                <button
+                  class="w-full px-4 py-2 bg-primary text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 mb-3"
+                  onclick="openEditProfileModal()"
+                >
+                  <i data-lucide="edit" class="w-4 h-4 inline mr-2"></i>Edit
+                  Profil
+                </button>
+                <button
+                  class="w-full px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-semibold rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300"
+                  onclick="document.getElementById('photo-upload').click()"
+                >
+                  <i data-lucide="camera" class="w-4 h-4 inline mr-2"></i>Ubah
+                  Foto
+                </button>
+              </div>
+
+              <div
+                class="glass rounded-2xl p-6 mt-6 reveal"
+                style="animation-delay: 0.2s"
+              >
+                <h4 class="font-semibold text-gray-900 dark:text-white mb-4">
+                  Statistik Akun
+                </h4>
+                <div class="space-y-3">
+                  <div class="flex justify-between items-center">
+                    <span class="text-gray-600 dark:text-gray-400"
+                      >Bergabung</span
+                    >
+                    <span
+                      class="font-semibold text-gray-900 dark:text-white"
+                      id="profile-joined"
+                      >-</span
+                    >
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-gray-600 dark:text-gray-400"
+                      >Layanan Ditambahkan</span
+                    >
+                    <span class="font-semibold text-primary">0</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-gray-600 dark:text-gray-400"
+                      >UMKM Diverifikasi</span
+                    >
+                    <span class="font-semibold text-accent">0</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-gray-600 dark:text-gray-400"
+                      >Aktivitas Bulan Ini</span
+                    >
+                    <span class="font-semibold text-amber-600">0</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lg:col-span-2">
+              <div class="glass rounded-2xl p-6 reveal">
+                <h3
+                  class="text-xl font-black text-gray-900 dark:text-white mb-6"
+                >
+                  Informasi Profil
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <div>
+                    <label
+                      class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
+                      >Nama Lengkap</label
+                    >
+                    <div
+                      class="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+                    >
+                      <span
+                        class="text-gray-900 dark:text-white"
+                        id="display-nama"
+                        >Admin Direktori</span
+                      >
+                    </div>
+                  </div>
+                  <div>
+                    <label
+                      class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
+                      >Email</label
+                    >
+                    <div
+                      class="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+                    >
+                      <span
+                        class="text-gray-900 dark:text-white"
+                        id="display-email"
+                        >admin@direktorilayanan.id</span
+                      >
+                    </div>
+                  </div>
+                  <div>
+                    <label
+                      class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
+                      >Telepon</label
+                    >
+                    <div
+                      class="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+                    >
+                      <span
+                        class="text-gray-900 dark:text-white"
+                        id="display-telepon"
+                        >+62 812-3456-7890</span
+                      >
+                    </div>
+                  </div>
+                  <div>
+                    <label
+                      class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
+                      >Jabatan</label
+                    >
+                    <div
+                      class="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+                    >
+                      <span
+                        class="text-gray-900 dark:text-white"
+                        id="display-jabatan"
+                        >Pengguna</span
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mb-6">
+                  <label
+                    class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
+                    >Alamat</label
+                  >
+                  <div
+                    class="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+                  >
+                    <span
+                      class="text-gray-900 dark:text-white"
+                      id="display-alamat"
+                      >-</span
+                    >
+                  </div>
+                </div>
+
+                <div class="mb-6">
+                  <label
+                    class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
+                    >Tentang Saya</label
+                  >
+                  <div
+                    class="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+                  >
+                    <span
+                      class="text-gray-900 dark:text-white"
+                      id="display-tentang"
+                      >-</span
+                    >
+                  </div>
+                </div>
+
+                <div class="flex space-x-3">
+                  <button
+                    class="px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 flex items-center"
+                    onclick="openEditProfileModal()"
+                  >
+                    <i data-lucide="edit" class="w-4 h-4 mr-2"></i>Edit Profil
+                  </button>
+                  <button
+                    class="px-6 py-3 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-semibold rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 flex items-center"
+                    onclick="openChangePasswordModal()"
+                  >
+                    <i data-lucide="key" class="w-4 h-4 mr-2"></i>Ubah Password
+                  </button>
+                </div>
+              </div>
+
+              <div
+                class="glass rounded-2xl p-6 mt-6 reveal"
+                style="animation-delay: 0.2s"
+              >
+                <h3
+                  class="text-xl font-black text-gray-900 dark:text-white mb-6"
+                >
+                  Pengaturan Keamanan
+                </h3>
+                <div class="space-y-4">
+                  <div
+                    class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-800 rounded-lg"
+                  >
+                    <div>
+                      <h4 class="font-semibold text-gray-900 dark:text-white">
+                        Verifikasi 2 Faktor
+                      </h4>
+                      <p class="text-sm text-gray-600 dark:text-gray-400">
+                        Tambah lapisan keamanan ekstra untuk akun Anda
+                      </p>
+                    </div>
+                    <button
+                      class="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300"
+                      onclick="enable2FA()"
+                    >
+                      Aktifkan
+                    </button>
+                  </div>
+                  <div
+                    class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-800 rounded-lg"
+                  >
+                    <div>
+                      <h4 class="font-semibold text-gray-900 dark:text-white">
+                        Sesi Aktif
+                      </h4>
+                      <p class="text-sm text-gray-600 dark:text-gray-400">
+                        1 perangkat aktif
+                      </p>
+                    </div>
+                    <button
+                      class="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm font-semibold rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300"
+                      onclick="manageSessions()"
+                    >
+                      Kelola
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Edit Profile Modal -->
+    <div
+      id="edit-profile-modal"
+      class="fixed inset-0 modal-overlay flex items-center justify-center z-50 hidden"
+    >
+      <div
+        class="form-card rounded-2xl p-8 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto shadow-2xl"
+      >
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-2xl font-black text-gray-900 dark:text-white">
+            Edit Profil
+          </h3>
+          <button
+            onclick="closeEditProfileModal()"
+            class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+          >
+            <i data-lucide="x" class="w-6 h-6"></i>
+          </button>
+        </div>
+        <form
+          id="edit-profile-form"
+          class="space-y-6"
+          onsubmit="handleEditProfileSubmit(event)"
+        >
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label
+                class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
+                >Nama Lengkap</label
+              >
+              <input
+                type="text"
+                id="edit-nama"
+                class="w-full px-4 py-3 form-input rounded-lg"
+                required
+              />
+            </div>
+            <div>
+              <label
+                class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
+                >Telepon</label
+              >
+              <input
+                type="tel"
+                id="edit-telepon"
+                class="w-full px-4 py-3 form-input rounded-lg"
+                required
+              />
+            </div>
+            <div class="md:col-span-2">
+              <label
+                class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
+                >Jabatan</label
+              >
+              <input
+                type="text"
+                id="edit-jabatan"
+                class="w-full px-4 py-3 form-input rounded-lg"
+                required
+              />
+            </div>
+          </div>
+          <div>
+            <label
+              class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
+              >Alamat</label
+            >
+            <textarea
+              id="edit-alamat"
+              class="w-full px-4 py-3 form-input rounded-lg"
+              rows="3"
+              required
+            ></textarea>
+          </div>
+          <div>
+            <label
+              class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
+              >Tentang Saya</label
+            >
+            <textarea
+              id="edit-tentang"
+              class="w-full px-4 py-3 form-input rounded-lg"
+              rows="4"
+            ></textarea>
+          </div>
+          <div class="flex space-x-3 pt-4">
+            <button
+              type="button"
+              onclick="closeEditProfileModal()"
+              class="flex-1 px-6 py-3 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-semibold rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300"
+            >
+              Batal
+            </button>
+            <button
+              type="submit"
+              class="flex-1 px-6 py-3 bg-gradient-to-r from-primary to-accent text-white font-semibold rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+            >
+              <i data-lucide="save" class="w-4 h-4 inline mr-2"></i>Simpan
+              Perubahan
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div
+      id="change-password-modal"
+      class="fixed inset-0 modal-overlay flex items-center justify-center z-50 hidden"
+    >
+      <div class="form-card rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl">
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-2xl font-black text-gray-900 dark:text-white">
+            Ubah Password
+          </h3>
+          <button
+            onclick="closeChangePasswordModal()"
+            class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+          >
+            <i data-lucide="x" class="w-6 h-6"></i>
+          </button>
+        </div>
+        <form
+          id="change-password-form"
+          class="space-y-4"
+          onsubmit="handleChangePasswordSubmit(event)"
+        >
+          <div>
+            <label
+              class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
+              >Password Saat Ini</label
+            >
+            <input
+              type="password"
+              id="current-password"
+              class="w-full px-4 py-3 form-input rounded-lg"
+              required
+            />
+          </div>
+          <div>
+            <label
+              class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
+              >Password Baru</label
+            >
+            <input
+              type="password"
+              id="new-password"
+              class="w-full px-4 py-3 form-input rounded-lg"
+              minlength="6"
+              required
+            />
+          </div>
+          <div>
+            <label
+              class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2"
+              >Konfirmasi Password Baru</label
+            >
+            <input
+              type="password"
+              id="confirm-password"
+              class="w-full px-4 py-3 form-input rounded-lg"
+              minlength="6"
+              required
+            />
+          </div>
+          <div class="flex space-x-3 pt-4">
+            <button
+              type="button"
+              onclick="closeChangePasswordModal()"
+              class="flex-1 px-6 py-3 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-semibold rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300"
+            >
+              Batal
+            </button>
+            <button
+              type="submit"
+              class="flex-1 px-6 py-3 bg-gradient-to-r from-primary to-accent text-white font-semibold rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+            >
+              Ubah Password
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      // ========================
+      // USER DATABASE MANAGER
+      // ========================
+      const UserDB = {
+        getAllUsers() {
+          return JSON.parse(localStorage.getItem("usersDB") || "[]");
+        },
+
+        findUserById(userId) {
+          const users = this.getAllUsers();
+          return users.find((user) => user.id === userId);
+        },
+
+        updateUser(userId, updates) {
+          const users = this.getAllUsers();
+          const userIndex = users.findIndex((u) => u.id === userId);
+          if (userIndex !== -1) {
+            users[userIndex] = { ...users[userIndex], ...updates };
+            localStorage.setItem("usersDB", JSON.stringify(users));
+            return users[userIndex];
+          }
+          return null;
+        },
+
+        updateUserProfile(userId, profileUpdates) {
+          const users = this.getAllUsers();
+          const userIndex = users.findIndex((u) => u.id === userId);
+          if (userIndex !== -1) {
+            users[userIndex].profile = {
+              ...users[userIndex].profile,
+              ...profileUpdates,
+            };
+            localStorage.setItem("usersDB", JSON.stringify(users));
+            return users[userIndex];
+          }
+          return null;
+        },
+
+        updateUserPassword(userId, newPassword) {
+          const users = this.getAllUsers();
+          const userIndex = users.findIndex((u) => u.id === userId);
+          if (userIndex !== -1) {
+            users[userIndex].password = newPassword;
+            localStorage.setItem("usersDB", JSON.stringify(users));
+            return true;
+          }
+          return false;
+        },
+      };
+
+      // ========================
+      // SESSION MANAGER
+      // ========================
+      const SessionManager = {
+        getSession() {
+          const session = localStorage.getItem("currentSession");
+          return session ? JSON.parse(session) : null;
+        },
+
+        clearSession() {
+          localStorage.removeItem("currentSession");
+        },
+
+        getCurrentUser() {
+          const session = this.getSession();
+          if (!session) return null;
+          return UserDB.findUserById(session.userId);
+        },
+      };
+
+      // ========================
+      // APPLICATION STATE
+      // ========================
+      const APP_STATE = {
+        currentPage: "dashboard",
+        theme: localStorage.getItem("theme") || "light",
+        currentUser: null,
+      };
+
+      // ========================
+      // INITIALIZATION
+      // ========================
+      document.addEventListener("DOMContentLoaded", function () {
+        initializeApp();
+      });
+
+      function initializeApp() {
+        // Load current user
+        APP_STATE.currentUser = SessionManager.getCurrentUser();
+
+        if (!APP_STATE.currentUser) {
+          window.location.href = "index.html";
+          return;
+        }
+
+        lucide.createIcons();
+        initTheme();
+        loadUserProfile();
+        initScrollAnimations();
+        updateCounts();
+        loadDashboard();
+      }
+
+      function initTheme() {
+        if (APP_STATE.theme === "dark") {
+          document.documentElement.classList.add("dark");
+          document
+            .getElementById("theme-icon")
+            .setAttribute("data-lucide", "sun");
+        } else {
+          document.documentElement.classList.remove("dark");
+          document
+            .getElementById("theme-icon")
+            .setAttribute("data-lucide", "moon");
+        }
+        lucide.createIcons();
+      }
+
+      // ========================
+      // USER PROFILE FUNCTIONS
+      // ========================
+      function loadUserProfile() {
+        const user = APP_STATE.currentUser;
+        if (!user) return;
+
+        // Get initials
+        const initials = user.name
+          .split(" ")
+          .map((n) => n[0])
+          .join("")
+          .toUpperCase()
+          .slice(0, 2);
+
+        // Update all user name displays
+        document.getElementById("sidebar-name").textContent = user.name;
+        document.getElementById("sidebar-initials").textContent = initials;
+        document.getElementById("sidebar-position").textContent =
+          user.profile.position || "Pengguna";
+        document.getElementById("header-name").textContent = user.name;
+        document.getElementById("header-initials").textContent = initials;
+        document.getElementById("header-position").textContent =
+          user.profile.position || "Pengguna";
+        document.getElementById("dashboard-username").textContent =
+          user.name.split(" ")[0];
+
+        // Profile page
+        document.getElementById("profile-name").textContent = user.name;
+        document.getElementById("profile-position").textContent =
+          user.profile.position || "Pengguna";
+        document.getElementById("profile-photo").textContent = initials;
+
+        // Display fields
+        document.getElementById("display-nama").textContent = user.name;
+        document.getElementById("display-email").textContent = user.email;
+        document.getElementById("display-telepon").textContent = user.phone;
+        document.getElementById("display-jabatan").textContent =
+          user.profile.position || "Pengguna";
+        document.getElementById("display-alamat").textContent =
+          user.profile.address || "-";
+        document.getElementById("display-tentang").textContent =
+          user.profile.about || "-";
+
+        // Join date
+        const joinDate = new Date(user.registeredAt).toLocaleDateString(
+          "id-ID",
+          {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+          }
+        );
+        document.getElementById("profile-joined").textContent = joinDate;
+
+        // Load photo if exists
+        if (user.profile.photo) {
+          const photoElements = [
+            document.getElementById("profile-photo"),
+            document.getElementById("sidebar-avatar").querySelector("span"),
+            document.getElementById("header-avatar").querySelector("span"),
+          ];
+
+          photoElements.forEach((el) => {
+            if (el && el.parentElement) {
+              el.parentElement.style.backgroundImage = `url(${user.profile.photo})`;
+              el.parentElement.style.backgroundSize = "cover";
+              el.parentElement.style.backgroundPosition = "center";
+              el.style.display = "none";
+            }
+          });
+        }
+      }
+
+      function openEditProfileModal() {
+        const user = APP_STATE.currentUser;
+        if (!user) return;
+
+        document.getElementById("edit-nama").value = user.name;
+        document.getElementById("edit-telepon").value = user.phone;
+        document.getElementById("edit-jabatan").value =
+          user.profile.position || "";
+        document.getElementById("edit-alamat").value =
+          user.profile.address || "";
+        document.getElementById("edit-tentang").value =
+          user.profile.about || "";
+
+        document
+          .getElementById("edit-profile-modal")
+          .classList.remove("hidden");
+        lucide.createIcons();
+      }
+
+      function closeEditProfileModal() {
+        document.getElementById("edit-profile-modal").classList.add("hidden");
+      }
+
+      function handleEditProfileSubmit(event) {
+        event.preventDefault();
+
+        const updatedUser = UserDB.updateUser(APP_STATE.currentUser.id, {
+          name: document.getElementById("edit-nama").value,
+          phone: document.getElementById("edit-telepon").value,
+        });
+
+        UserDB.updateUserProfile(APP_STATE.currentUser.id, {
+          position: document.getElementById("edit-jabatan").value,
+          address: document.getElementById("edit-alamat").value,
+          about: document.getElementById("edit-tentang").value,
+        });
+
+        APP_STATE.currentUser = UserDB.findUserById(APP_STATE.currentUser.id);
+        loadUserProfile();
+        closeEditProfileModal();
+        showToast("success", "Profil berhasil diperbarui!");
+      }
+
+      function handlePhotoUpload(event) {
+        const file = event.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            const photoData = e.target.result;
+
+            UserDB.updateUserProfile(APP_STATE.currentUser.id, {
+              photo: photoData,
+            });
+
+            APP_STATE.currentUser = UserDB.findUserById(
+              APP_STATE.currentUser.id
+            );
+
+            const photoElements = [
+              document.getElementById("profile-photo"),
+              document.getElementById("sidebar-avatar").querySelector("span"),
+              document.getElementById("header-avatar").querySelector("span"),
+            ];
+
+            photoElements.forEach((el) => {
+              if (el && el.parentElement) {
+                el.parentElement.style.backgroundImage = `url(${photoData})`;
+                el.parentElement.style.backgroundSize = "cover";
+                el.parentElement.style.backgroundPosition = "center";
+                el.style.display = "none";
+              }
+            });
+
+            showToast("success", "Foto profil berhasil diubah!");
+          };
+          reader.readAsDataURL(file);
+        }
+      }
+
+      function openChangePasswordModal() {
+        document
+          .getElementById("change-password-modal")
+          .classList.remove("hidden");
+      }
+
+      function closeChangePasswordModal() {
+        document
+          .getElementById("change-password-modal")
+          .classList.add("hidden");
+        document.getElementById("change-password-form").reset();
+      }
+
+      function handleChangePasswordSubmit(event) {
+        event.preventDefault();
+
+        const currentPassword =
+          document.getElementById("current-password").value;
+        const newPassword = document.getElementById("new-password").value;
+        const confirmPassword =
+          document.getElementById("confirm-password").value;
+
+        if (APP_STATE.currentUser.password !== currentPassword) {
+          showToast("error", "Password saat ini salah!");
+          return;
+        }
+
+        if (newPassword !== confirmPassword) {
+          showToast("error", "Konfirmasi password tidak cocok!");
+          return;
+        }
+
+        if (newPassword.length < 6) {
+          showToast("error", "Password harus minimal 6 karakter!");
+          return;
+        }
+
+        UserDB.updateUserPassword(APP_STATE.currentUser.id, newPassword);
+        APP_STATE.currentUser = UserDB.findUserById(APP_STATE.currentUser.id);
+
+        closeChangePasswordModal();
+        showToast("success", "Password berhasil diubah!");
+      }
+
+      // ========================
+      // NAVIGATION
+      // ========================
+      function switchPage(pageId) {
+        document
+          .querySelectorAll(".nav-link")
+          .forEach((link) => link.classList.remove("active"));
+        const activeLink = document.querySelector(`a[href="#${pageId}"]`);
+        if (activeLink) activeLink.classList.add("active");
+
+        document.querySelectorAll(".page-content").forEach((page) => {
+          page.classList.add("hidden");
+          page.classList.remove("active");
+        });
+
+        const targetPage = document.getElementById(`${pageId}-page`);
+        if (targetPage) {
+          targetPage.classList.remove("hidden");
+          targetPage.classList.add("active");
+          APP_STATE.currentPage = pageId;
+        }
+
+        setTimeout(() => initScrollAnimations(), 100);
+      }
+
+      // ========================
+      // UTILITY FUNCTIONS
+      // ========================
+      function toggleTheme() {
+        APP_STATE.theme = APP_STATE.theme === "light" ? "dark" : "light";
+        localStorage.setItem("theme", APP_STATE.theme);
+
+        if (APP_STATE.theme === "dark") {
+          document.documentElement.classList.add("dark");
+          document
+            .getElementById("theme-icon")
+            .setAttribute("data-lucide", "sun");
+        } else {
+          document.documentElement.classList.remove("dark");
+          document
+            .getElementById("theme-icon")
+            .setAttribute("data-lucide", "moon");
+        }
+        lucide.createIcons();
+      }
+
+      function toggleNotifications() {
+        showToast("success", "Anda memiliki 3 notifikasi baru!");
+      }
+
+      function enable2FA() {
+        showToast("success", "Verifikasi 2 faktor berhasil diaktifkan!");
+      }
+
+      function manageSessions() {
+        showToast("success", "Anda sedang mengelola sesi aktif.");
+      }
+
+      function logout() {
+        if (confirm("Apakah Anda yakin ingin keluar?")) {
+          SessionManager.clearSession();
+          showToast("success", "Anda telah berhasil keluar.");
+          setTimeout(() => {
+            window.location.href = "index.html";
+          }, 1000);
+        }
+      }
+
+      function updateCounts() {
+        document.getElementById("layanan-count").textContent = 6;
+        document.getElementById("umkm-count").textContent = 6;
+      }
+
+      function loadDashboard() {
+        const activities = document.getElementById("recent-activities");
+        activities.innerHTML = `
+          <div class="flex items-center space-x-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-xl">
+            <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+              <i data-lucide="user-check" class="w-5 h-5 text-white"></i>
+            </div>
+            <div class="flex-1">
+              <p class="font-semibold text-gray-900 dark:text-white">Anda berhasil login</p>
+              <p class="text-sm text-gray-600 dark:text-gray-400">Selamat datang kembali!</p>
+            </div>
+            <span class="text-xs text-gray-500">Baru saja</span>
+          </div>
+          <div class="flex items-center space-x-4 p-3 bg-teal-50 dark:bg-teal-900/20 rounded-xl">
+            <div class="w-10 h-10 bg-accent rounded-full flex items-center justify-center">
+              <i data-lucide="shield-check" class="w-5 h-5 text-white"></i>
+            </div>
+            <div class="flex-1">
+              <p class="font-semibold text-gray-900 dark:text-white">Akun terverifikasi</p>
+              <p class="text-sm text-gray-600 dark:text-gray-400">Sistem keamanan aktif</p>
+            </div>
+            <span class="text-xs text-gray-500">1 menit lalu</span>
+          </div>
+        `;
+
+        const categories = document.getElementById("popular-categories");
+        categories.innerHTML = `
+          <div class="flex items-center justify-between p-3 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors cursor-pointer">
+            <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                <i data-lucide="heart-pulse" class="w-4 h-4 text-blue-600"></i>
+              </div>
+              <span class="font-medium text-gray-900 dark:text-white">Kesehatan</span>
+            </div>
+            <span class="text-sm text-gray-600 dark:text-gray-400">3 items</span>
+          </div>
+          <div class="flex items-center justify-between p-3 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors cursor-pointer">
+            <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg flex items-center justify-center">
+                <i data-lucide="utensils" class="w-4 h-4 text-yellow-600"></i>
+              </div>
+              <span class="font-medium text-gray-900 dark:text-white">Makanan</span>
+            </div>
+            <span class="text-sm text-gray-600 dark:text-gray-400">4 items</span>
+          </div>
+          <div class="flex items-center justify-between p-3 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors cursor-pointer">
+            <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center">
+                <i data-lucide="palette" class="w-4 h-4 text-purple-600"></i>
+              </div>
+              <span class="font-medium text-gray-900 dark:text-white">Kerajinan</span>
+            </div>
+            <span class="text-sm text-gray-600 dark:text-gray-400">2 items</span>
+          </div>
+        `;
+
+        lucide.createIcons();
+      }
+
+      function initScrollAnimations() {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("active");
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+        );
+
+        document
+          .querySelectorAll(".reveal")
+          .forEach((el) => observer.observe(el));
+      }
+
+      function handleSearch() {
+        const searchTerm = document
+          .getElementById("search")
+          .value.toLowerCase();
+        if (searchTerm) {
+          showToast("success", `Mencari: "${searchTerm}"`);
+        }
+      }
+
+      function handleContactSubmit(event) {
+        event.preventDefault();
+        event.target.reset();
+        showToast("success", "Pesan Anda telah berhasil dikirim!");
+      }
+
+      function showAddModal(type) {
+        showToast("success", `Fitur tambah ${type} sedang dalam pengembangan`);
+      }
+
+      function showToast(type, message) {
+        const toast = document.createElement("div");
+        toast.className = `toast ${type}`;
+        toast.innerHTML = `
+          <div class="flex items-center space-x-3">
+            <i data-lucide="${
+              type === "success" ? "check-circle" : "alert-circle"
+            }" class="w-5 h-5"></i>
+            <span>${message}</span>
+          </div>
+        `;
+        document.body.appendChild(toast);
+        lucide.createIcons();
+
+        setTimeout(() => {
+          toast.style.animation = "slideUp 0.3s ease-out reverse";
+          setTimeout(() => toast.remove(), 300);
+        }, 3000);
+      }
+
+      // Console branding
+      console.log(
+        "%c🚀 Direktori Layanan - Dashboard",
+        "color: #1E40AF; font-size: 24px; font-weight: bold;"
+      );
+      console.log(
+        "%c✨ Platform Terpadu untuk Layanan Publik & UMKM Lokal",
+        "color: #14B8A6; font-size: 14px;"
+      );
+      console.log(
+        "%c🔐 User Authenticated:",
+        "color: #059669; font-size: 12px;"
+      );
+      console.log(APP_STATE.currentUser);
+    </script>
+  </body>
+</html>
